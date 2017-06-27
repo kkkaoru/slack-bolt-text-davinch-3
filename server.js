@@ -57,7 +57,7 @@ app.get('/auth/slack', passport.authenticate('slack', {
 app.get('/auth/slack/callback',
   passport.authenticate('slack', { session: false }),
   (req, res) => {
-    res.send('<p>Greet and React was successfully installed on your team.</p>');
+    res.sendFile('views/auth.html', {root: __dirname });
   },
   (err, req, res, next) => {
     res.status(500).send(`<p>Greet and React failed to install</p> <pre>${err}</pre>`);
