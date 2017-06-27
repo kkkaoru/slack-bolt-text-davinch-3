@@ -1,9 +1,21 @@
-// server.js
-// where your node app starts
+// Load environment variables from `.env` file (optional)
+require('dotenv').config();
+
+const slackEventsApi = require('@slack/events-api');
+const SlackClient = require('@slack/client').WebClient;
+const passport = require('passport');
+const SlackStrategy = require('@aoberoi/passport-slack').default.Strategy;
+const http = require('http');
+const express = require('express');
+const bodyParser = require('body-parser');
 
 // init project
-var express = require('express');
 var app = express();
+
+// *** Initialize event adapter using verification token from environment variables ***
+const slackEvents = slackEventsApi.createSlackEventAdapter(process.env.SLACK_VERIFICATION_TOKEN, {
+  includeBody: true
+});
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
