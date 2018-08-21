@@ -7,10 +7,9 @@ const passport = require('passport');
 const SlackStrategy = require('@aoberoi/passport-slack').default.Strategy;
 const http = require('http');
 const express = require('express');
-const bodyParser = require('body-parser');
 
-// *** Initialize event adapter using verification token from environment variables ***
-const slackEvents = slackEventsApi.createSlackEventAdapter(process.env.SLACK_VERIFICATION_TOKEN, {
+// *** Initialize event adapter using signing secret from environment variables ***
+const slackEvents = slackEventsApi.createEventAdapter(process.env.SIGNING_SECRET, {
   includeBody: true
 });
 
@@ -44,7 +43,6 @@ passport.use(new SlackStrategy({
 
 // Initialize an Express application
 const app = express();
-app.use(bodyParser.json());
 
 // Plug the Add to Slack (OAuth) helpers into the express app
 app.use(passport.initialize());
@@ -57,7 +55,7 @@ app.get('/auth/slack', passport.authenticate('slack', {
 app.get('/auth/slack/callback',
   passport.authenticate('slack', { session: false }),
   (req, res) => {
-    res.sendFile('views/auth.html', {root: __dirname });
+    res.send('<p>Greet and React was successfully installed on your team.</p>');
   },
   (err, req, res, next) => {
     res.status(500).send(`<p>Greet and React failed to install</p> <pre>${err}</pre>`);
@@ -80,7 +78,7 @@ slackEvents.on('message', (message, body) => {
       return console.error('No authorization found for this team. Did you install this app again after restarting?');
     }
     // Respond to the message back in the same channel
-    slack.chat.postMessage(message.channel, `Hello <@${message.user}>! :tada:`)
+    slack.chat.postMessage({ channel: message.channel, text: `Hello <@${message.user}>! :tada:` })
       .catch(console.error);
   }
 });
