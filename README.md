@@ -18,6 +18,7 @@ changes
 	[glitch.com/edit/#!/remix/slack-greet-and-react-example](https://glitch.com/edit/#!/remix/slack-greet-and-react-example)
 2. Set the environment variables (all available on the *Basic Information* page) to `.env` 
 	- `SLACK_SIGNING_SECRET`: Your app's _Signing Secret_
+  - `SLACK_ACCESS_TOKEN` : Your bot token (Install app once to get an access token, `-xoxb-`)
 
 
 ### Enable Events
@@ -27,7 +28,7 @@ changes
 3. After you set up the _Request URL_, you should add event subscriptions under the "Bot Events" category. Add `message.channels` and `reaction_added`. Then Save.
 
 
-## Installation and Usage
+## (Re)installation and Usage
 1. Go to **Install App** and click _Install App to Workspace_ button
 3. You can invite the Bot User into a channel (e.g. `/invite @greetandreact`), and say "hi" in the
 channel. It should respond to you. You can also add reactions to messages and the Bot User will send
