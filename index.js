@@ -36,7 +36,7 @@ slackEvents.on('message', (message) => {
 slackEvents.on('reaction_added', (event) => {
   console.log(event);
   // Respond to the reaction back with the same emoji
-  slack.chat.postMessage(event.item.channel, `:${event.reaction}:`)
+  slack.chat.postMessage({ channel: event.item.channel, text: `:${event.reaction}:` })
     .then((res) => {
       console.log('Message sent: ', res.ts);
     })
