@@ -21,7 +21,7 @@ app.use('/slack/events', slackEvents.expressMiddleware());
 // *** Attach listeners to the event adapter ***
 
 // *** Greeting any user that says "hi" ***
-slackEvents.on('message', (message) => {
+slackEvents.on('app_mention', (message) => {
   console.log(message);
   // Only deal with messages that have no subtype (plain messages) and contain 'hi'
   if (!message.subtype && message.text.indexOf('hi') >= 0) {
@@ -36,7 +36,7 @@ slackEvents.on('message', (message) => {
 slackEvents.on('reaction_added', (event) => {
   console.log(event);
   // Respond to the reaction back with the same emoji
-  slack.chat.postMessage({ channel: event.item.channel, text: `:${event.reaction}:` })
+  slack.chat.postMessage({ channel: event.event_ts, text: `:${event.reaction}:` })
     .then((res) => {
       console.log('Message sent: ', res.ts);
     })
