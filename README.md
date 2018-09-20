@@ -18,8 +18,7 @@ changes
 ### Run locally or [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/slack-greet-and-react-example)
 
 1. Get the code
-  - "Remix" the code to your Glitch repo:
-	[glitch.com/edit/#!/remix/slack-greet-and-react-example](https://glitch.com/edit/#!/remix/slack-greet-and-react-example)
+  
 2. Set the environment variables (all available on the *Basic Information* page) to `.env` 
 	- `SLACK_SIGNING_SECRET`: Your app's _Signing Secret_
   - `SLACK_ACCESS_TOKEN` : Your bot token (Install app once to get an access token, `-xoxb-`)
