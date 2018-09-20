@@ -12,9 +12,7 @@ const app = express();
 const slack = new SlackClient(process.env.SLACK_ACCESS_TOKEN);
 
 // *** Initialize event adapter using signing secret from environment variables ***
-const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET, {
-  includeBody: true
-});
+const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
 
 // *** Plug the event adapter into the express app as middleware ***
@@ -23,7 +21,7 @@ app.use('/slack/events', slackEvents.expressMiddleware());
 // *** Attach listeners to the event adapter ***
 
 // *** Greeting any user that says "hi" ***
-slackEvents.on('message', (message, body) => {
+slackEvents.on('message', (message) => {
   console.log(message);
   // Only deal with messages that have no subtype (plain messages) and contain 'hi'
   if (!message.subtype && message.text.indexOf('hi') >= 0) {
@@ -35,7 +33,8 @@ slackEvents.on('message', (message, body) => {
 });
 
 // *** Responding to reactions with the same emoji ***
-slackEvents.on('reaction_added', (event, body) => {
+slackEvents.on('reaction_added', (event) => {
+  console.log(event);
   // Respond to the reaction back with the same emoji
   slack.chat.postMessage(event.item.channel, `:${event.reaction}:`)
     .then((res) => {
