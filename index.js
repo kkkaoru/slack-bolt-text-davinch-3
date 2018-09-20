@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const slackEventsApi = require('@slack/events-api');
 const SlackClient = require('@slack/client').WebClient;
-const http = require('http');
 const express = require('express');
 
 // *** Initialize an Express application
@@ -58,6 +57,6 @@ ${JSON.stringify(error.body)}`);
 
 // Start the express application
 const port = process.env.PORT || 3000;
-http.createServer(app).listen(port, () => {
+app.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });
