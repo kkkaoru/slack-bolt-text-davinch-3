@@ -28,7 +28,7 @@ changes
 1. Go back to the app settings and click on **Event Subscriptions** on the left side navigation
 2. Enable events and enter your _Request URL_:
 	- Glitch URL (sould look something like `https://my-stuff.glitch.me/`) + `/slack/events`
-3. After you set up the _Request URL_, you should add event subscriptions under the "Bot Events" category. Add `message.channels` and `reaction_added`. Then Save.
+3. After you set up the _Request URL_, you should add event subscriptions under the "Bot Events" category. Add `` and `reaction_added`. Then Save.
 
 
 ## (Re)installation and Usage
