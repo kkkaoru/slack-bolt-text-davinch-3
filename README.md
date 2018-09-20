@@ -5,6 +5,8 @@ This example shows a fully functioning but very simple application using the
 
 ![GIF](https://cdn.glitch.com/da97701b-09c2-4736-8e53-5d178a5de7b6%2Fgreet_react.gif?1537477948199)
 
+First, "remix" this 
+
 ## Setup
 
 ### Create a Slack app
