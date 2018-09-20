@@ -11,11 +11,23 @@ const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_
   includeBody: true
 });
 
-
+// Helpers to cache and lookup appropriate client
+// NOTE: Not enterprise-ready. if the event was triggered inside a shared channel, this lookup
+// could fail but there might be a suitable client from one of the other teams that is within that
+// shared channel.
+// const clients = {};
+// function getClientByTeamId(teamId) {
+//   if (!clients[teamId] && botAuthorizations[teamId]) {
+//     clients[teamId] = new SlackClient(botAuthorizations[teamId]);
+//   }
+//   if (clients[teamId]) {
+//     return clients[teamId];
+//   }
+//   return null;
+// }
 
 // Initialize an Express application
 const app = express();
-
 
 
 // *** Plug the event adapter into the express app as middleware ***
@@ -27,12 +39,10 @@ app.use('/slack/events', slackEvents.expressMiddleware());
 slackEvents.on('message', (message, body) => {
   // Only deal with messages that have no subtype (plain messages) and contain 'hi'
   if (!message.subtype && message.text.indexOf('hi') >= 0) {
+    
     // Initialize a client
-    const slack = getClientByTeamId(body.team_id);
-    // Handle initialization failure
-    if (!slack) {
-      return console.error('No authorization found for this team. Did you install this app again after restarting?');
-    }
+    const slack = body.team_id;
+
     // Respond to the message back in the same channel
     slack.chat.postMessage({ channel: message.channel, text: `Hello <@${message.user}>! :tada:` })
       .catch(console.error);
@@ -42,11 +52,8 @@ slackEvents.on('message', (message, body) => {
 // *** Responding to reactions with the same emoji ***
 slackEvents.on('reaction_added', (event, body) => {
   // Initialize a client
-  const slack = getClientByTeamId(body.team_id);
-  // Handle initialization failure
-  if (!slack) {
-    return console.error('No authorization found for this team. Did you install this app again after restarting?');
-  }
+  const slack = body.team_id;
+
   // Respond to the reaction back with the same emoji
   slack.chat.postMessage(event.item.channel, `:${event.reaction}:`)
     .catch(console.error);
