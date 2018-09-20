@@ -15,11 +15,10 @@ First, "Remix" (like fork, in GitHub) this repo so you can have your own version
 3. Give your bot user a name (e.g. "@greetandreact"), turn _Always Show My Bot as Online_ on, and save your
 changes
 
-### Run locally or [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/slack-greet-and-react-example)
-
+### Remix this porject
 1. Get the code
   - "Remix" the code to your Glitch repo:
-	[glitch.com/edit/#!/remix/slack-greet-and-react-example](https://glitch.com/edit/#!/remix/slack-greet-and-react-example)
+	[glitch.com/edit/#!/remix/greet-bot](https://glitch.com/edit/#!/remix/slack-greet-and-react-example)
 2. Set the environment variables (all available on the *Basic Information* page) to `.env` 
 	- `SLACK_SIGNING_SECRET`: Your app's _Signing Secret_
   - `SLACK_ACCESS_TOKEN` : Your bot token (Install app once to get an access token, `-xoxb-`)
