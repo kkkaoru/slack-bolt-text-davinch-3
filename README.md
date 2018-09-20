@@ -21,12 +21,11 @@ changes
 
 
 ### Enable Events
-1. Go back to the app settings and click on `Event Subscriptions` on the left side navigation
+1. Go back to the app settings and click on **Event Subscriptions** on the left side navigation
 2. Enable events and enter your _Request URL_:
 	- Glitch URL (sould look something like `https://my-stuff.glitch.me/`) + `/slack/events`
-3. After you set up the _Request URL_, you should add event subscriptions under the "Bot Events" category. Add `message.channels` and `reaction_added`.
-4. Go to `OAuth & Permissions` item on the left side navigation, and input the _Redirect URL_:
-	- Glitch URL + `/auth/slack/callback`
+3. After you set up the _Request URL_, you should add event subscriptions under the "Bot Events" category. Add `message.channels` and `reaction_added`. Then Save.
+
 
 ## Installation and Usage
 1. Go to **Install App** and click _Install App to Workspace_ button
