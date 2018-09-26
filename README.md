@@ -3,7 +3,7 @@
 This example shows a fully functioning but very simple application using the
 [Slack Event Adapter](https://github.com/slackapi/node-slack-events-api).
 
-![GIF](https://cdn.glitch.com/da97701b-09c2-4736-8e53-5d178a5de7b6%2Fgreet_react.gif?1537477948199)
+![GIF](https://cdn.glitch.com/da97701b-09c2-4736-8e53-5d178a5de7b6%2Fgreet-bot.gif?1538001872223)
 
 First, "Remix" (like fork, in GitHub) this repo so you can have your own version of this project.
 
