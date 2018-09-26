@@ -24,7 +24,7 @@ app.use('/slack/events', slackEvents.expressMiddleware());
 slackEvents.on('app_mention', (message) => {
   console.log(message);
   // Only deal with messages that have no subtype (plain messages) and contain 'hi'
-  if (!message.subtype && message.text.indexOf('hi') >= 0) {
+  if (!message.subtype && /hi/i.test(message.text)) {
     
     // Respond to the message back in the same channel
     slack.chat.postMessage({ channel: message.channel, text: `Hello <@${message.user}>! :tada:` })
