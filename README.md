@@ -1,4 +1,4 @@
-# Greet and React Example
+# Simple Slack Bot Tutorial: "Greet & React" 
 
 This example shows a fully functioning but very simple application using the
 [Slack Event Adapter](https://github.com/slackapi/node-slack-events-api).
@@ -12,7 +12,7 @@ First, "Remix" (like fork, in GitHub) this repo so you can have your own version
 ### Create a Slack app
 1. Create an app at [api.slack.com/apps](https://api.slack.com/apps)
 2. Click on `Bot Users` on the left side navigation
-3. Give your bot user a name (e.g. "@greetandreact"), turn _Always Show My Bot as Online_ on, and save your
+3. Give your bot user a name (e.g. "@greet_bot"), turn _Always Show My Bot as Online_ on, and save your
 changes
 
 ### Remix this porject
@@ -28,9 +28,9 @@ changes
 1. Go back to the app settings and click on **Event Subscriptions** on the left side navigation
 2. Enable events and enter your _Request URL_:
 	- Glitch URL (sould look something like `https://my-stuff.glitch.me/`) + `/slack/events`
-3. After you set up the _Request URL_, you should add event subscriptions under the **Subscribe to Bot Events**. Add `` and `reaction_added`. Then Save.
+3. After you set up the _Request URL_, you should add event subscriptions under the **Subscribe to Bot Events**. Add `app_mention` and `reaction_added`. Then Save.
 
 
 ## (Re)installation and Usage
 1. Go to **Install App** and click _Install App to Workspace_ button
-3. You can invite the Bot User into a channel (e.g. `/invite @greetandreact`), and say "hi, @greetandreact" in the channel. It should respond to you. You can also add reactions to messages and the Bot User will send a message using the same emoji.
+2. You can invite the Bot User into a channel (e.g. `/invite @greet_bot`), and post a message like `hi, @greet_bot` in the channel. It should respond to you. You can also add reactions to messages and the Bot User will send a message using the same emoji.
