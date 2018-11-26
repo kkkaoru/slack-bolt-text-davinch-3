@@ -33,6 +33,4 @@ changes
 
 ## (Re)installation and Usage
 1. Go to **Install App** and click _Install App to Workspace_ button
-3. You can invite the Bot User into a channel (e.g. `/invite @greetandreact`), and say "hi" in the
-channel. It should respond to you. You can also add reactions to messages and the Bot User will send
-a message using the same emoji.
+3. You can invite the Bot User into a channel (e.g. `/invite @greetandreact`), and say "hi, @greetandreact" in the channel. It should respond to you. You can also add reactions to messages and the Bot User will send a message using the same emoji.
