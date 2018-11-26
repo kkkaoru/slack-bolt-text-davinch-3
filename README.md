@@ -22,9 +22,6 @@ changes
 3. After you set up the _Request URL_, you should add event subscriptions under the **Subscribe to Bot Events**. Add `app_mention` and `reaction_added`. Then Save.
 
 
-## (Re)installation and Usage
-1. Go to **Install App** and click _Install App to Workspace_ button
-2. You can invite the Bot User into a channel (e.g. `/invite @greet_bot`), and post a message like `hi, @greet_bot` in the channel. It should respond to you. You can also add reactions to messages and the Bot User will send a message using the same emoji.
 
 ## Run this App
 
@@ -38,3 +35,9 @@ changes
   - `SLACK_ACCESS_TOKEN` : Your bot token (Install app once to get an access token, `-xoxb-`)
 
 The Node app should run on glitch automatically.
+
+
+### (Re)install & Try the bot
+
+1. Go to **Install App** and click _Install App to Workspace_ button
+2. You can invite the Bot User into a channel (e.g. `/invite @greet_bot`), and post a message like `hi, @greet_bot` in the channel. It should respond to you. You can also add reactions to messages and the Bot User will send a message using the same emoji.
