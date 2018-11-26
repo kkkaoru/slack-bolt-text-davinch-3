@@ -1,4 +1,4 @@
-# Simple Slack Bot Tutorial: "Greet & React" 
+# Node SDK Tutorial: "Greet & React" 
 
 This example shows a fully functioning but very simple application using the
 [Slack Event Adapter](https://github.com/slackapi/node-slack-events-api).
