@@ -38,7 +38,7 @@ slackEvents.on('reaction_added', (event) => {
   // Respond to the reaction back with the same emoji
   if(event.reaction === 'exclamation') {
     slack.chat.getPermalink({channel: event.item.channel, message_ts: event.item.ts})
-      .then((res) => slack.chat.postMessage({ channel: '#important-messages', text: res.permalink, parse: 'full' }))
+      .then((res) => slack.chat.postMessage({ channel: '#important-messages', text: res.permalink, unfurl_links: true }))
       .then((res) => {
         console.log('Message sent: ', res.ts);
       })
