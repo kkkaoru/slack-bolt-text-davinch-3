@@ -21,10 +21,13 @@ app.use('/slack/events', slackEvents.expressMiddleware());
 slackEvents.on('app_mention', (message) => {
   console.log(message);
   // Only deal with messages that have no subtype (plain messages) and contain 'hi'
+  let threadId
   if (!message.subtype && /hi/i.test(message.text)) {
-    
+    if(message.thread_ts) {
+      threadId = message.thread_ts
+    }
     // Respond to the message back in the same channel
-    slack.chat.postMessage({ channel: message.channel, text: `Hello <@${message.user}>! :tada:` })
+    slack.chat.postMessage({ channel: message.channel, text: `Hello <@${message.user}>! :tada:`, thread_ts: threadId })
       .catch(console.error);
   }
 });
