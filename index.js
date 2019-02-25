@@ -6,12 +6,14 @@ const app = express();
 const slack = new SlackClient(process.env.SLACK_ACCESS_TOKEN);
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
+const blocks = require('./blocks')
+
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 
 app.get('/slack/start/approval-notice', (req, res) => {
   let channel = ''
   slack.chat.postMessage({
-      blocks: 
+      blocks: []
   })
 })
 
