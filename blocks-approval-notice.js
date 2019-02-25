@@ -1,6 +1,3 @@
-
-
-
 const request = [
   {
     "type": "section",
@@ -57,7 +54,7 @@ const request = [
       }
     ]
   }
-];
+]
 
 const confirmation = [
   {
@@ -159,4 +156,7 @@ const denial = [
   }
 ]
 
-export {request, confirmation, denial}
+module.exports = { request, confirmation, denial }
+  
+
+

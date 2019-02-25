@@ -10,10 +10,11 @@ const blocks = require('./blocks')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 
-app.get('/slack/start/approval-notice', (req, res) => {
-  let channel = ''
+app.get('/start/approval-notice', (req, res) => {
+  console.log(blocks);
   slack.chat.postMessage({
-      blocks: []
+      channel: 'DGGD1E5RA',
+      blocks: blocks.approvalNotice.request
   })
 })
 
