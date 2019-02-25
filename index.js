@@ -2,22 +2,19 @@ const slackEventsApi = require('@slack/events-api');
 const SlackClient = require('@slack/client').WebClient;
 const express = require('express');
 
-// *** Initialize an Express application
 const app = express();
-
-// *** Initialize a client with your access token
 const slack = new SlackClient(process.env.SLACK_ACCESS_TOKEN);
-
-// *** Initialize event adapter using signing secret from environment variables ***
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
+app.use('/slack/onEvent', slackEvents.expressMiddleware());
 
-// *** Plug the event adapter into the express app as middleware ***
-app.use('/slack/events', slackEvents.expressMiddleware());
+app.get('/slack/start/approval-notice', (req, res) => {
+  let channel = ''
+  slack.chat.postMessage({
+      blocks: 
+  })
+})
 
-// *** Attach listeners to the event adapter ***
-
-// *** Greeting any user that says "hi" ***
 slackEvents.on('app_mention', (message) => {
   console.log(message);
   // Only deal with messages that have no subtype (plain messages) and contain 'hi'
@@ -32,25 +29,6 @@ slackEvents.on('app_mention', (message) => {
   }
 });
 
-// *** Responding to reactions with the same emoji ***
-slackEvents.on('reaction_added', (event) => {
-  console.log(event);
-  // Respond to the reaction back with the same emoji
-  if(event.reaction === 'exclamation') {
-    slack.chat.getPermalink({channel: event.item.channel, message_ts: event.item.ts})
-      .then((res) => slack.chat.postMessage({ channel: '#important-messages', text: res.permalink, unfurl_links: true }))
-      .then((res) => {
-        console.log('Message sent: ', res.ts);
-      })
-      .catch(console.error);  
-  }
-  
-  slack.chat.postMessage({ channel: event.item.channel, thread_ts:event.item.ts, text: `:${event.reaction}:` })
-    .then((res) => {
-      console.log('Message sent: ', res.ts);
-    })
-    .catch(console.error);
-});
 
 // *** Handle errors ***
 slackEvents.on('error', (error) => {
