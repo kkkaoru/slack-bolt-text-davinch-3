@@ -11,26 +11,22 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blocks = require('./blocks')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
-// app.use('/slack/onAction', slackInteractions.expressMiddleware());
+app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
 app.get('/start/approval-notice', (req, res) => {
-  console.log(blocks);
   slack.chat.postMessage({
       channel: 'DGGD1E5RA',
       blocks: blocks.approvalNotice.request
   })
+  return res.send('started')
 })
 
-app.post('/slack/onAction', (req, res) => {
-    console.log(req.body)
-})
-
-// slackInteractions.action({ type: 'button' }, (action) => {
-//   console.log(action)
-//   let message = action.message
-//   message.blocks = blocks.approvalNotice.confirmation
-//   return message
-// });
+slackInteractions.action({ type: 'button' }, (action, respond) => {
+  console.log(action)
+  return respond({
+    blocks: blocks.approvalNotice.confirmation
+  });
+});
 
 slackEvents.on('app_mention', (message) => {
   console.log(message);
