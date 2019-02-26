@@ -1,14 +1,17 @@
 const slackEventsApi = require('@slack/events-api');
+const { createMessageAdapter } = require('@slack/interactive-messages');
 const SlackClient = require('@slack/client').WebClient;
 const express = require('express');
 
 const app = express();
 const slack = new SlackClient(process.env.SLACK_ACCESS_TOKEN);
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET);
+const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET);
 
 const blocks = require('./blocks')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
+app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
 app.get('/start/approval-notice', (req, res) => {
   console.log(blocks);
@@ -17,6 +20,10 @@ app.get('/start/approval-notice', (req, res) => {
       blocks: blocks.approvalNotice.request
   })
 })
+
+slackInteractions.action({ type: 'button' }, (action) => {
+  console.log(action)
+});
 
 slackEvents.on('app_mention', (message) => {
   console.log(message);
