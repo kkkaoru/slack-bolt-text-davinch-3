@@ -33,11 +33,8 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
         blocks: blocks[action.blueprint][action.value]
       })
     case 'dialog':  
-      slackBot.dialog.open({
+      return slackBot.dialog.open({
         
-      })
-      return respond({
-        blocks: blocks[action.blueprint][action.value]
       })
   }
 });
