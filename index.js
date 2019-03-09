@@ -15,14 +15,15 @@ app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
 app.get('/start', (req, res) => {
   slack.chat.postMessage({
-      channel: 'DGGD1E5RA',
+      channel: process.env.SLACK_CHANNEL,
       blocks: blocks.approvalNotice.request
   })
-  return res.send('started')
+  return res.send('interactive demo started.')
 })
 
 slackInteractions.action({ type: 'button' }, (action, respond) => {
   console.log(action)
+  
   return respond({
     blocks: blocks.approvalNotice.confirmation
   });

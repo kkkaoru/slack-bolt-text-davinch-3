@@ -118,7 +118,7 @@ module.exports = {
           },
           {
             "type": "mrkdwn",
-            "text": "*When:*\nSubmitted Aut 10"
+            "text": "*When:*\nSubmitted Mar 14"
           },
           {
             "type": "mrkdwn",
@@ -150,6 +150,16 @@ module.exports = {
           {
             "type": "plain_text",
             "text": ":information_source: Reason: Out of Policy",
+            "emoji": true
+          }
+        ]
+      },
+        {
+        "type": "context",
+        "elements": [
+          {
+            "type": "plain_text",
+            "text": ":memo: Comment: We don't approve this kind of device.",
             "emoji": true
           }
         ]
