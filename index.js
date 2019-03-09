@@ -22,19 +22,20 @@ app.get('/start/approval-notice', (req, res) => {
 })
 
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
-  let execAction = payload.actions[0].value.split(':')
+  let action = JSON.parse(payload.actions[0].value)
   
-  let blueprint = execAction[0]
-  let action = execAction[1]
+  console.log(action) 
   
-  
-  
-  console.log(blueprint)
-  console.log(action)
-  
-  return respond({
-    blocks: blocks[blueprint][action]
-  });
+  switch(action.type) {
+    case 'response':
+      return respond({
+        blocks: blocks[action.blueprint][action.value]
+      })
+    case 'dialog':  
+      return respond({
+        blocks: blocks[action.blueprint][action.value]
+      })
+  }
 });
 
 

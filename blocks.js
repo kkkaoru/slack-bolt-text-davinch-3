@@ -43,7 +43,7 @@ module.exports = {
               "emoji": true,
               "text": "Approve"
             },
-            "value": "approvalNotice:confirmation"
+            "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"response\",\"value\":\"confirmation\"}"
           },
           {
             "type": "button",
@@ -52,7 +52,7 @@ module.exports = {
               "emoji": true,
               "text": "Deny"
             },
-            "value": "approvalNotice:denial"
+            "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"dialog\",\"value\":\"confirmation\"}"
           }
         ]
       }
