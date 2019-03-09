@@ -4,7 +4,8 @@ const SlackClient = require('@slack/client').WebClient;
 const express = require('express');
 
 const app = express();
-const slack = new SlackClient(process.env.SLACK_ACCESS_TOKEN);
+const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN);
+const slackBot = new SlackClient(process.env.SLACK_ACCESS_TOKEN);
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET);
 
@@ -14,7 +15,7 @@ app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
 app.get('/start/approval-notice', (req, res) => {
-  slack.chat.postMessage({
+  slackBot.chat.postMessage({
       channel: process.env.SLACK_CHANNEL,
       blocks: blocks.approvalNotice.request
   })
@@ -27,11 +28,14 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
   console.log(action) 
   
   switch(action.type) {
-    case 'response':
+    case 'message':
       return respond({
         blocks: blocks[action.blueprint][action.value]
       })
     case 'dialog':  
+      slackBot.dialog.open({
+        
+      })
       return respond({
         blocks: blocks[action.blueprint][action.value]
       })
