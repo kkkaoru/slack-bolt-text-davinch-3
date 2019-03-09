@@ -13,19 +13,27 @@ const blocks = require('./blocks')
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
-app.get('/start', (req, res) => {
+app.get('/start/approval-notice', (req, res) => {
   slack.chat.postMessage({
       channel: process.env.SLACK_CHANNEL,
       blocks: blocks.approvalNotice.request
   })
-  return res.send('interactive demo started.')
+  return res.send('starting interactive demo: approval notice')
 })
 
-slackInteractions.action({ type: 'button' }, (action, respond) => {
+slackInteractions.action({ type: 'button' }, (payload, respond) => {
+  let execAction = payload.actions[0].value.split(':')
+  
+  let blueprint = execAction[0]
+  let action = execAction[1]
+  
+  
+  
+  console.log(blueprint)
   console.log(action)
   
   return respond({
-    blocks: blocks.approvalNotice.confirmation
+    blocks: blocks[blueprint][action]
   });
 });
 

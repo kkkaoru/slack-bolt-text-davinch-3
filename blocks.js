@@ -43,7 +43,7 @@ module.exports = {
               "emoji": true,
               "text": "Approve"
             },
-            "value": "request:approve"
+            "value": "approvalNotice:confirmation"
           },
           {
             "type": "button",
@@ -52,7 +52,7 @@ module.exports = {
               "emoji": true,
               "text": "Deny"
             },
-            "value": "request:deny"
+            "value": "approvalNotice:denial"
           }
         ]
       }
