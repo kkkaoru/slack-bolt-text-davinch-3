@@ -76,7 +76,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "This is a reply to a message "
+            "text": "This is a reply to a message :tada:"
           }
         }
       ]
