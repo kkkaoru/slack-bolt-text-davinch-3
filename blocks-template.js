@@ -1,6 +1,6 @@
 module.exports = {
   message: {
-    start: {
+    demo: {
       channel: "DGGD1E5RA",
       blocks: [
         {

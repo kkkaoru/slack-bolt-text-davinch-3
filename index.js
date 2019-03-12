@@ -14,63 +14,33 @@ const blocks = require('./blocks')
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
-app.get('/install', (req, res) => {
-  let scopes = ['bot', 'chat:write:bot']
+// need a way to store access tokens for the install. firebase?
+// app.get('/install', (req, res) => {
+//   let scopes = ['bot', 'chat:write:bot']
 
-  let params = {
-    client_id: process.env.SLACK_CIENT_ID,
-    scope: scopes.join(' '),
-    redirect_uri: process.env.SLACK_REDIRECT_URL
-  }
+//   let params = {
+//     client_id: process.env.SLACK_CIENT_ID,
+//     scope: scopes.join(' '),
+//     redirect_uri: process.env.SLACK_REDIRECT_URL
+//   }
   
-  let url = getUrlWithParams('https://slack.com/oauth/authorize', params)
-  return res.redirect(url)
-})
-
-app.get('/redirectFromSlack', (req, res) => {
-  let opt = {
-    client_id: process.env.SLACK_CIENT_ID,
-    client_secret: process.env.SLACK_CIENT_SECRET,
-    code: req.query.code
-  }
-    let url = SLACK_API+'oauth.access'+'?'+Object.keys(opt).map((key) => key+'='+opt[key]).join('&')
-
-	let options = {
-		url: url,
-		method: 'GET'
-	}
-
-    let slackData
-    return firestore.collection('states').doc(req.query.state).get()
-        .then(doc => {
-            if(!doc || !doc.exists) throw new Error('invalid_state')
-            return firestore.collection('states').doc(req.query.state).delete()
-        })
-        .then(() => {
-            return rp(options)
-        })
-		.then(result => {
-			slackData = JSON.parse(result)
-			if(!slackData) throw new Error('no_slack_api_data_received')
-            if(!slackData.ok) throw new Error(slackData.error)
-            let teamId = slackData.team_id
-            return firestore.collection('teams').doc(teamId).set(slackData)
-        })
-        .then(result => {
-            return res.send('ois ok')
-        })
-		.catch(err => {
-			console.log(err)
-			return res.send({error: err.message})
-		})
-})
+//   let url = getUrlWithParams('https://slack.com/oauth/authorize', params)
+//   return res.redirect(url)
+// })
 
 // this starts the flow
 app.get('/start/:flow/:start', (req, res) => {
   let flow = req.params.flow
   let start = req.params.start
+    
+  let payload = blocks[flow].message[start]
+  // ATTENTION: req.query seems to be cached by glitch when a query parameter is removed
+  // e.g. if this url is called with a `channel` parameter first
+  // and another call without this parameter is done, the req.query.channel parameter is still set
+  payload.channel = req.query.channel || payload.channel
+  console.log(payload)
   
-  slackBot.chat.postMessage(blocks[flow].message[start])
+  // slackBot.chat.postMessage(payload)
   return res.send('starting interactive demo: '+flow)
 })
 
