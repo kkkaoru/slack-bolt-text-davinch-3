@@ -14,7 +14,7 @@ const blocks = require('./blocks')
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
-// this starts the flow with
+// this starts the flow
 app.get('/start/:flow/:start', (req, res) => {
   let flow = req.params.flow
   let start = req.params.start
@@ -26,19 +26,19 @@ app.get('/start/:flow/:start', (req, res) => {
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
   
-  console.log(payload)
-  console.log(action) 
+  // console.log(payload)
+  // console.log(action) 
   
   switch(action.type) {
-    case 'update':
-      // return respond(blocks[action.blueprint].message[action.value])
-      let update = blocks[action.blueprint].update[action.value]
-      update.channel = payload.channel.id
-      return slackBot.chat.postMessage(update)
     case 'message':
       let message = blocks[action.blueprint].message[action.value]
       message.channel = payload.channel.id
       return slackBot.chat.postMessage(message)
+    case 'update':
+      let update = blocks[action.blueprint].update[action.value]
+      update.channel = payload.channel.id
+      update.ts = payload.message.ts
+      return slackBot.chat.update(update)  
     case 'thread':
       let thread = blocks[action.blueprint].thread[action.value]
       thread.channel = payload.channel.id
@@ -57,6 +57,13 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
 });
 
 slackEvents.on('app_mention', (message) => {
+  let channel = message.channel
+  let user = message.user
+  
+  console.log({channel: channel, user: user})
+});
+
+slackEvents.on('message', (message) => {
   let channel = message.channel
   let user = message.user
   

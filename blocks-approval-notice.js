@@ -1,33 +1,4 @@
 module.exports = {
-  channels: {
-    dm : "DGGD1E5RA"
-  },
-  update: {
-    confirmation: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "You have a new request:\n*<fakeLink.toEmployeeProfile.com|Fred Enriquez - New device request>*"
-          }
-        }
-      ]
-    }
-  },
-  ephemeral: {
-    confirmation: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "You have a new request:\n*<fakeLink.toEmployeeProfile.com|Fred Enriquez - New device request>*"
-          }
-        }
-      ]
-    }
-  },
   message: {
     start: {
       channel: "DGGD1E5RA",
@@ -83,12 +54,14 @@ module.exports = {
                 "emoji": true,
                 "text": "Deny"
               },
-              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"update\",\"value\":\"confirmation\"}"
+              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"update\",\"value\":\"denial\"}"
             }
           ]
         }
       ]
-    },
+    }
+  },
+  update: {
     confirmation: {
       blocks: [
         {
