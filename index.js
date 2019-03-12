@@ -34,21 +34,22 @@ app.get('/start/:flow/:start', (req, res) => {
   let start = req.params.start
     
   let payload = blocks[flow].message[start]
-  // ATTENTION: req.query seems to be cached by glitch when a query parameter is removed
+  // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
   // e.g. if this url is called with a `channel` parameter first
-  // and another call without this parameter is done, the req.query.channel parameter is still set
+  // and another call without this parameter is done, the `req.query.channel` parameter 
+  // is still set to the old value
   payload.channel = req.query.channel || payload.channel
-  console.log(payload)
   
-  // slackBot.chat.postMessage(payload)
-  return res.send('starting interactive demo: '+flow)
+  return slackBot.chat.postMessage(payload)
+    .then(() => res.send('starting interactive demo: '+flow))
+    .catch((err) => {
+      console.log(err)
+      return res.send(err.data)
+    })
 })
 
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
-  
-  // console.log(payload)
-  // console.log(action) 
   
   switch(action.type) {
     case 'message':

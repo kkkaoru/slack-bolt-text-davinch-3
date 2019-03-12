@@ -1,4 +1,19 @@
 module.exports = {
+  dialog: {
+  },
+  ephemeral: {
+    demo: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "This is an ephemeral message :lock:"
+          }
+        }
+      ]
+    }
+  },
   message: {
     demo: {
       channel: "DGGD1E5RA",
@@ -54,6 +69,19 @@ module.exports = {
       ]
     }
   },
+  thread: {
+    demo: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "This is a reply to a message "
+          }
+        }
+      ]
+    }
+  },
   update: {
     demo: {
       blocks: [
@@ -61,7 +89,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "You updated this message "
+            "text": "You updated this message. Great :clap: job :clap:"
           }
         },
         {
@@ -107,7 +135,5 @@ module.exports = {
         }
       ]
     }
-  },
-  dialog: {
   }
 }
