@@ -14,12 +14,16 @@ const blocks = require('./blocks')
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
-app.get('/start/approval-notice', (req, res) => {
+// this starts the flow with
+app.get('/start/:flow', (req, res) => {
+  let flow = req.params.flow
+  console.log(req.params.flow)
+  
   slackBot.chat.postMessage({
-      channel: process.env.SLACK_CHANNEL,
-      blocks: blocks.approvalNotice.request
+      channel: blocks.approvalNotice.channel.dm,
+      blocks: blocks.approvalNotice.message.request
   })
-  return res.send('starting interactive demo: approval notice')
+  return res.send('starting interactive demo: '+flow)
 })
 
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
@@ -38,6 +42,8 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
       })
   }
 });
+
+
 
 
 // *** Handle errors ***
