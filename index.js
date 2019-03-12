@@ -15,14 +15,11 @@ app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
 // this starts the flow with
-app.get('/start/:flow/', (req, res) => {
+app.get('/start/:flow/:start', (req, res) => {
   let flow = req.params.flow
-  console.log(req.params.flow)
+  let start = req.params.start
   
-  slackBot.chat.postMessage({
-      channel: blocks[flow].channels.dm,
-      blocks: blocks[flow].message.start
-  })
+  slackBot.chat.postMessage(blocks[flow].message[start])
   return res.send('starting interactive demo: '+flow)
 })
 
@@ -34,16 +31,15 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
   
   switch(action.type) {
     case 'message':
-      return respond({
-        blocks: blocks[action.blueprint].message[action.value]
-      })
+      return respond(blocks[action.blueprint].message[action.value])
     case 'thread':
+      console.log(payload.message)
       let opt = blocks[action.blueprint].thread[action.value]
+      opt.channel = payload.message.channel
       opt.thread_ts = payload.message.ts
-      console.log*
-      return respond({
-        blocks: opt
-      })  
+      
+      console.log(opt)
+      return slackBot.chat.postMessage(opt)
     case 'dialog':  
       return slackBot.dialog.open({
         
