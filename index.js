@@ -53,8 +53,9 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
   
   switch(action.type) {
     case 'dialog':  
+      console.log(action)
       return slackBot.dialog.open({
-        
+        dialog: blocks[action.blueprint].dialog[action.value]
       })
     case 'ephemeral':
       let ephemeral = blocks[action.blueprint].ephemeral[action.value]

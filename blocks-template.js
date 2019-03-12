@@ -1,5 +1,16 @@
 module.exports = {
   dialog: {
+    demo: {
+      "callback_id": "dialog:1",
+      "title": "This is a demo dialog",
+      "elements": [
+        {
+          "type": "text",
+          "label": "Enter some data",
+          "name": "loc_origin"
+        }
+      ]
+    }
   },
   ephemeral: {
     demo: {
@@ -63,6 +74,15 @@ module.exports = {
                 "text": "Update message"
               },
               "value": "{\"blueprint\":\"template\",\"type\":\"update\",\"value\":\"demo\"}"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Open dialog"
+              },
+              "value": "{\"blueprint\":\"template\",\"type\":\"dialog\",\"value\":\"demo\"}"
             }
           ]
         }
@@ -130,6 +150,15 @@ module.exports = {
                 "text": "Update message"
               },
               "value": "{\"blueprint\":\"template\",\"type\":\"update\",\"value\":\"demo\"}"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Open dialog"
+              },
+              "value": "{\"blueprint\":\"template\",\"type\":\"dialog\",\"value\":\"demo\"}"
             }
           ]
         }
