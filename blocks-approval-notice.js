@@ -2,6 +2,17 @@ module.exports = {
   channels: {
     dm : "DGGD1E5RA"
   },
+  thread: {
+    confirmation: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "You have a new request:\n*<fakeLink.toEmployeeProfile.com|Fred Enriquez - New device request>*"
+        }
+      }
+    ]
+  },
   message: {
     start: [
       {
@@ -46,7 +57,7 @@ module.exports = {
               "emoji": true,
               "text": "Approve"
             },
-            "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"message\",\"value\":\"confirmation\"}"
+            "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"thread\",\"value\":\"confirmation\"}"
           },
           {
             "type": "button",

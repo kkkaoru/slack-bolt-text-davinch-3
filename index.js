@@ -29,7 +29,7 @@ app.get('/start/:flow', (req, res) => {
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
   
-  console.log(payload)
+  // console.log(payload)
   console.log(action) 
   
   switch(action.type) {
@@ -38,9 +38,11 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
         blocks: blocks[action.blueprint].message[action.value]
       })
     case 'thread':
-      blocks[action.blueprint].message[action.value].thread_ts = payload.message.ts
+      let opt = blocks[action.blueprint].thread[action.value]
+      opt.thread_ts = payload.message.ts
+      console.log*
       return respond({
-        blocks: blocks[action.blueprint].message[action.value]
+        blocks: opt
       })  
     case 'dialog':  
       return slackBot.dialog.open({
