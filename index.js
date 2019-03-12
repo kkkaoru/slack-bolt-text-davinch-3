@@ -20,8 +20,8 @@ app.get('/start/:flow', (req, res) => {
   console.log(req.params.flow)
   
   slackBot.chat.postMessage({
-      channel: blocks.approvalNotice.channel.dm,
-      blocks: blocks.approvalNotice.message.request
+      channel: blocks[flow].channels.dm,
+      blocks: blocks[flow].message.start
   })
   return res.send('starting interactive demo: '+flow)
 })
@@ -29,13 +29,19 @@ app.get('/start/:flow', (req, res) => {
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
   
+  console.log(payload)
   console.log(action) 
   
   switch(action.type) {
     case 'message':
       return respond({
-        blocks: blocks[action.blueprint][action.value]
+        blocks: blocks[action.blueprint].message[action.value]
       })
+    case 'thread':
+      blocks[action.blueprint].message[action.value].thread_ts = payload.message.ts
+      return respond({
+        blocks: blocks[action.blueprint].message[action.value]
+      })  
     case 'dialog':  
       return slackBot.dialog.open({
         
@@ -43,7 +49,12 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
   }
 });
 
-
+slackEvents.on('app_mention', (message) => {
+  let channel = message.channel
+  let user = message.user
+  
+  console.log({channel: channel, user: user})
+});
 
 
 // *** Handle errors ***
