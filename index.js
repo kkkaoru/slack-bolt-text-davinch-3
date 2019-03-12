@@ -29,11 +29,11 @@ app.use('/slack/onAction', slackInteractions.expressMiddleware())
 // })
 
 // this starts the flow
-app.get('/start/:flow/:start', (req, res) => {
+app.get('/start/:flow/:message', (req, res) => {
   let flow = req.params.flow
-  let start = req.params.start
+  let message = req.params.message
     
-  let payload = blocks[flow].message[start]
+  let payload = blocks[flow].message[message]
   // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
   // e.g. if this url is called with a `channel` parameter first
   // and another call without this parameter is done, the `req.query.channel` parameter 
