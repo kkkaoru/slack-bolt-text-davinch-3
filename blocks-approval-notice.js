@@ -2,9 +2,21 @@ module.exports = {
   channels: {
     dm : "DGGD1E5RA"
   },
-  thread: {
+  update: {
     confirmation: {
-      replace_original: false,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "You have a new request:\n*<fakeLink.toEmployeeProfile.com|Fred Enriquez - New device request>*"
+          }
+        }
+      ]
+    }
+  },
+  ephemeral: {
+    confirmation: {
       blocks: [
         {
           "type": "section",
@@ -62,7 +74,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Approve"
               },
-              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"thread\",\"value\":\"confirmation\"}"
+              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"update\",\"value\":\"confirmation\"}"
             },
             {
               "type": "button",
@@ -71,7 +83,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Deny"
               },
-              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"dialog\",\"value\":\"confirmation\"}"
+              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"update\",\"value\":\"confirmation\"}"
             }
           ]
         }

@@ -26,20 +26,29 @@ app.get('/start/:flow/:start', (req, res) => {
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
   
-  // console.log(payload)
+  console.log(payload)
   console.log(action) 
   
   switch(action.type) {
+    case 'update':
+      // return respond(blocks[action.blueprint].message[action.value])
+      let update = blocks[action.blueprint].update[action.value]
+      update.channel = payload.channel.id
+      return slackBot.chat.postMessage(update)
     case 'message':
-      return respond(blocks[action.blueprint].message[action.value])
+      let message = blocks[action.blueprint].message[action.value]
+      message.channel = payload.channel.id
+      return slackBot.chat.postMessage(message)
     case 'thread':
-      console.log(payload.message)
-      let opt = blocks[action.blueprint].thread[action.value]
-      opt.channel = payload.message.channel
-      opt.thread_ts = payload.message.ts
-      
-      console.log(opt)
-      return slackBot.chat.postMessage(opt)
+      let thread = blocks[action.blueprint].thread[action.value]
+      thread.channel = payload.channel.id
+      thread.thread_ts = payload.message.ts
+      return slackBot.chat.postMessage(thread)
+    case 'ephemeral':
+      let ephemeral = blocks[action.blueprint].ephemeral[action.value]
+      ephemeral.channel = payload.channel.id
+      ephemeral.user = payload.user.id
+      return slackBot.chat.postEphemeral(ephemeral)  
     case 'dialog':  
       return slackBot.dialog.open({
         
