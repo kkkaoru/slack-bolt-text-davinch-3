@@ -50,7 +50,12 @@ app.get('/start/:flow/:message', (req, res) => {
 
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   console.log('received action')
+  console.log(payload.actions[0].value)
   let action = JSON.parse(payload.actions[0].value)
+  console.log(typeof action)
+  console.log(action.blueprint)
+  console.log(blocks[action.blueprint])
+  console.log(blocks[action.blueprint][action.type])
   console.log('chosen block', blocks[action.blueprint][action.type][action.value])
   let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
   console.log('edited block', block)

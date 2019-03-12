@@ -9,7 +9,7 @@ exports.stringifyValues = (message) => {
   newMessage.blocks = newMessage.blocks.map(block => {
     if(block.type == 'actions') {
       block.elements = block.elements.map(action => {
-        if(action.value) action.value = JSON.stringify(action.value) 
+        if(action.value && typeof action.value !== 'string') action.value = JSON.stringify(action.value) 
         return action
       })
     }
