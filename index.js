@@ -27,7 +27,43 @@ app.get('/install', (req, res) => {
   return res.redirect(url)
 })
 
-app.get('/redirectFromSlack'
+app.get('/redirectFromSlack', (req, res) => {
+  let opt = {
+    client_id: process.env.SLACK_CIENT_ID,
+    client_secret: process.env.SLACK_CIENT_SECRET,
+    code: req.query.code
+  }
+    let url = SLACK_API+'oauth.access'+'?'+Object.keys(opt).map((key) => key+'='+opt[key]).join('&')
+
+	let options = {
+		url: url,
+		method: 'GET'
+	}
+
+    let slackData
+    return firestore.collection('states').doc(req.query.state).get()
+        .then(doc => {
+            if(!doc || !doc.exists) throw new Error('invalid_state')
+            return firestore.collection('states').doc(req.query.state).delete()
+        })
+        .then(() => {
+            return rp(options)
+        })
+		.then(result => {
+			slackData = JSON.parse(result)
+			if(!slackData) throw new Error('no_slack_api_data_received')
+            if(!slackData.ok) throw new Error(slackData.error)
+            let teamId = slackData.team_id
+            return firestore.collection('teams').doc(teamId).set(slackData)
+        })
+        .then(result => {
+            return res.send('ois ok')
+        })
+		.catch(err => {
+			console.log(err)
+			return res.send({error: err.message})
+		})
+})
 
 // this starts the flow
 app.get('/start/:flow/:start', (req, res) => {
