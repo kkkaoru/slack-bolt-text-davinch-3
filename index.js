@@ -15,7 +15,7 @@ app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
 // this starts the flow with
-app.get('/start/:flow', (req, res) => {
+app.get('/start/:flow/', (req, res) => {
   let flow = req.params.flow
   console.log(req.params.flow)
   
