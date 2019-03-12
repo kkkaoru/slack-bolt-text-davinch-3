@@ -33,12 +33,14 @@ app.get('/start/:flow/:message', (req, res) => {
   let flow = req.params.flow
   let message = req.params.message
     
-  let payload = blocks[flow].message[message]
+  let payload = helpers.stringifyValues(blocks[flow].message[message])
   // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
   // e.g. if this url is called with a `channel` parameter first
   // and another call without this parameter is done, the `req.query.channel` parameter 
   // is still set to the old value
   payload.channel = req.query.channel || payload.channel
+  
+  console.log(payload)
   
   return slackBot.chat.postMessage(payload)
     .then(() => res.send('starting interactive demo: '+flow))
@@ -51,28 +53,32 @@ app.get('/start/:flow/:message', (req, res) => {
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
   
+  let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
+  
+  console.log(block)
+  
   switch(action.type) {
     case 'dialog':  
       console.log(action)
       return slackBot.dialog.open({
-        dialog: blocks[action.blueprint].dialog[action.value]
+        dialog: block
       })
     case 'ephemeral':
-      let ephemeral = blocks[action.blueprint].ephemeral[action.value]
+      let ephemeral = block
       ephemeral.channel = payload.channel.id
       ephemeral.user = payload.user.id
       return slackBot.chat.postEphemeral(ephemeral)    
     case 'message':
-      let message = blocks[action.blueprint].message[action.value]
+      let message = block
       message.channel = payload.channel.id
       return slackBot.chat.postMessage(message)
     case 'thread':
-      let thread = blocks[action.blueprint].thread[action.value]
+      let thread = block
       thread.channel = payload.channel.id
       thread.thread_ts = payload.message.ts
       return slackBot.chat.postMessage(thread)  
     case 'update':
-      let update = blocks[action.blueprint].update[action.value]
+      let update = block
       update.channel = payload.channel.id
       update.ts = payload.message.ts
       return slackBot.chat.update(update)  

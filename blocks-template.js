@@ -46,7 +46,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger message"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"message\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"message","value":"demo"}
             },
             {
               "type": "button",
@@ -55,7 +55,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger message reply"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"thread\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"thread","value":"demo"}
             },
             {
               "type": "button",
@@ -64,7 +64,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger ephemeral message"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"ephemeral\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"ephemeral","value":"demo"}
             },
             {
               "type": "button",
@@ -73,7 +73,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Update message"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"update\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"update","value":"demo"}
             },
             {
               "type": "button",
@@ -82,7 +82,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Open dialog"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"dialog\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"dialog","value":"demo"}
             }
           ]
         }
@@ -122,7 +122,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger message"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"message\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"message","value":"demo"}
             },
             {
               "type": "button",
@@ -131,7 +131,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger message reply"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"thread\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"thread","value":"demo"}
             },
             {
               "type": "button",
@@ -140,16 +140,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger ephemeral message"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"ephemeral\",\"value\":\"demo\"}"
-            },
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Update message"
-              },
-              "value": "{\"blueprint\":\"template\",\"type\":\"update\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"ephemeral","value":"demo"}
             },
             {
               "type": "button",
@@ -158,7 +149,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Open dialog"
               },
-              "value": "{\"blueprint\":\"template\",\"type\":\"dialog\",\"value\":\"demo\"}"
+              "value": {"blueprint":"template","type":"dialog","value":"demo"}
             }
           ]
         }
