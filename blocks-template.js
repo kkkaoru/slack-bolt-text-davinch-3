@@ -26,6 +26,18 @@ module.exports = {
     }
   },
   message: {
+    test: {
+      channel: "DGGD1E5RA",
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Click one of these buttons to start a flow :point_down:"
+          }
+        }
+      ]
+    },
     demo: {
       channel: "DGGD1E5RA",
       blocks: [

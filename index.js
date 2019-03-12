@@ -4,8 +4,8 @@ const SlackClient = require('@slack/client').WebClient
 const express = require('express')
 
 const app = express()
-const slackUser = new SlackClient(process.env.SLACK_BOT_TOKEN)
-const slackBot = new SlackClient(process.env.SLACK_ACCESS_TOKEN)
+const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN)
+const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blocks = require('./blocks')
@@ -40,8 +40,6 @@ app.get('/start/:flow/:message', (req, res) => {
   // is still set to the old value
   payload.channel = req.query.channel || payload.channel
   
-  console.log(payload)
-  
   return slackBot.chat.postMessage(payload)
     .then(() => res.send('starting interactive demo: '+flow))
     .catch((err) => {
@@ -51,12 +49,12 @@ app.get('/start/:flow/:message', (req, res) => {
 })
 
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
+  console.log('received action')
   let action = JSON.parse(payload.actions[0].value)
-  
+  console.log('chosen block', blocks[action.blueprint][action.type][action.value])
   let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
-  
-  console.log(block)
-  
+  console.log('edited block', block)
+    
   switch(action.type) {
     case 'dialog':  
       console.log(action)
@@ -67,6 +65,7 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
       let ephemeral = block
       ephemeral.channel = payload.channel.id
       ephemeral.user = payload.user.id
+      console.log(ephemeral)
       return slackBot.chat.postEphemeral(ephemeral)    
     case 'message':
       let message = block
