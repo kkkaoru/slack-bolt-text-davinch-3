@@ -14,6 +14,21 @@ const blocks = require('./blocks')
 app.use('/slack/onEvent', slackEvents.expressMiddleware());
 app.use('/slack/onAction', slackInteractions.expressMiddleware());
 
+app.get('/install', (req, res) => {
+  let scopes = ['bot', 'chat:write:bot']
+
+  let params = {
+    client_id: process.env.SLACK_CIENT_ID,
+    scope: scopes.join(' '),
+    redirect_uri: process.env.SLACK_REDIRECT_URL
+  }
+  
+  let url = getUrlWithParams('https://slack.com/oauth/authorize', params)
+  return res.redirect(url)
+})
+
+app.get('/redirectFromSlack'
+
 // this starts the flow
 app.get('/start/:flow/:start', (req, res) => {
   let flow = req.params.flow
@@ -87,3 +102,9 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });
+
+const getUrlWithParams = (url, params) => {
+  if(url.indexOf('?') < 0) url =+ '?'
+  url += Object.keys(params).map((key) => key+'='+params[key]).join('&')
+  return url
+}
