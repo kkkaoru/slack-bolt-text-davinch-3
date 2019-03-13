@@ -50,11 +50,15 @@ app.get('/start/:flow/:message', (req, res) => {
 
 slackInteractions.action({ type: 'button' }, (payload, respond) => {
   let action = JSON.parse(payload.actions[0].value)
+  console.log(blocks[action.blueprint][action.type][action.value])
   let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
-
+  console.log(block)
+  
   switch(action.type) {
     case 'dialog':  
+      console.log('send dialog')
       return slackBot.dialog.open({
+        trigger_id: payload.trigger_id,
         dialog: block
       })
     case 'ephemeral':

@@ -6,6 +6,9 @@ exports.getUrlWithParams = (url, params) => {
 
 exports.stringifyValues = (message) => {
   let newMessage = message
+  // only stringify block action values
+  if(!newMessage.blocks) return newMessage
+  
   newMessage.blocks = newMessage.blocks.map(block => {
     if(block.type == 'actions') {
       block.elements = block.elements.map(action => {
