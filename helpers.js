@@ -6,7 +6,11 @@ exports.getUrlWithParams = (url, params) => {
 
 exports.stringifyValues = (message) => {
   let newMessage = message
-  // only stringify block action values
+  
+  // stringify dialog state values
+  if(newMessage.state && typeof newMessage.state !== 'string') newMessage.state = JSON.stringify(newMessage.state)
+  
+  // if there are no blocks, we are done here
   if(!newMessage.blocks) return newMessage
   
   newMessage.blocks = newMessage.blocks.map(block => {
@@ -24,4 +28,5 @@ exports.stringifyValues = (message) => {
 exports.fillOptions = (action, block) => {
   console.log(action.fill_options)
   console.log(block)
+  return block
 }

@@ -32,6 +32,8 @@ app.use('/slack/onAction', slackInteractions.expressMiddleware())
 app.get('/start/:blueprint/:message', (req, res) => {
   let blueprint = req.params.blueprint
   let message = req.params.message
+  
+  console.log(JSON.stringify({"blueprint":"approvalNotice","type":"dialog","value":"info", fill_options: {message_ts: 'message.ts'}}))
     
   let payload = helpers.stringifyValues(blueprints[blueprint].message[message])
   // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
@@ -65,26 +67,19 @@ const handleAction = (payload, value) => {
   let action = JSON.parse(value)
   
   let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value])
-  
-  if(payload.channel && !action.channel_id) block.channel = 
-  if(payload.user && !action.user_id) block.user = payload.user.id
-  if(payload.trigger_id && !action.trigger_id) action.trigger_id = 
-  
-  
   // add options from current action to the next block's value
   // e.g. for updating the current message after a dialog submission
   block = helpers.fillOptions(action, block)
   
   switch(action.type) {
     case 'dialog':  
-      if(block.state && typeof block.state !== 'string') block.state = JSON.stringify(block.state)
       return slackBot.dialog.open({
         trigger_id: payload.trigger_id,
         dialog: block
       })
     case 'ephemeral':
       block.channel = payload.channel.id
-      block.user = action.user_id
+      block.user = payload.user.id
       return slackBot.chat.postEphemeral(block)    
     case 'message':
       block.channel = payload.channel.id
@@ -92,9 +87,9 @@ const handleAction = (payload, value) => {
     case 'thread':
       block.channel = payload.channel.id
       block.thread_ts = payload.message.ts
-      return slackBot.chat.postMessage()  
+      return slackBot.chat.postMessage(block)  
     case 'update':
-      block.channel = apayload.channel.id
+      block.channel = payload.channel.id
       block.ts = payload.message.ts
       return slackBot.chat.update(block)  
   }

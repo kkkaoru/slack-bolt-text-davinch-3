@@ -188,5 +188,12 @@ module.exports = {
       ],
       "state": {"blueprint":"template","type":"update","value":"confirmation"}
     }
+  },
+  fillOptions: {
+    dialog: {
+      info: {
+        
+      } 
+    }
   }
 }
