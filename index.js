@@ -8,7 +8,7 @@ const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN)
 const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
-const blocks = require('./blocks')
+const blueprints = require('./blueprints')
 const helpers = require('./helpers')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
@@ -28,12 +28,12 @@ app.use('/slack/onAction', slackInteractions.expressMiddleware())
 //   return res.redirect(url)
 // })
 
-// this starts the flow
-app.get('/start/:flow/:message', (req, res) => {
-  let flow = req.params.flow
+// call this URL to start a blueprint
+app.get('/start/:blueprint/:message', (req, res) => {
+  let blueprint = req.params.blueprint
   let message = req.params.message
     
-  let payload = helpers.stringifyValues(blocks[flow].message[message])
+  let payload = helpers.stringifyValues(blueprints[blueprint].message[message])
   // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
   // e.g. if this url is called with a `channel` parameter first
   // and another call without this parameter is done, the `req.query.channel` parameter 
@@ -41,7 +41,7 @@ app.get('/start/:flow/:message', (req, res) => {
   payload.channel = req.query.channel || payload.channel
   
   return slackBot.chat.postMessage(payload)
-    .then(() => res.send('starting interactive demo: '+flow))
+    .then(() => res.send('starting blueprint: '+blueprint))
     .catch((err) => {
       console.log(err)
       return res.send(err.data)
@@ -63,14 +63,13 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
 
 const handleAction = (payload, value) => {
   let action = JSON.parse(value)
-  console.log(blocks[action.blueprint][action.type][action.value])
   
   if(payload.channel && !action.channel_id) action.channel_id = payload.channel.id
   if(payload.user && !action.user_id) action.user_id = payload.user.id
   if(payload.trigger_id && !action.trigger_id) action.trigger_id = payload.trigger_id
   if(payload.message && !action.message_id) action.message_ts = payload.message.ts
   
-  let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
+  let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value])
   
   switch(action.type) {
     case 'dialog':  

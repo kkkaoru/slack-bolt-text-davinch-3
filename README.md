@@ -15,13 +15,13 @@ Simple app to showcase App demos. Feel free to clone this app and set up your ow
   
 ## Sending messages
 
-1. Copy `blocks-template.js`
-2. Import your blocks to `blocks.js`
-3. Edit your messages and flow
+1. Copy `blueprint-template.js` and change name accordingly
+2. Import your blueprint to `blueprints.js`
+3. Edit your messages and blueprint
 
-## Start a flow
+## Start a blueprint
 
-Each flow starts with a message from an App, which means you need to know the channel you want to send your first message to.
+Each blueprint starts with a message from an App, which means you need to know the channel you want to send your first message to.
 You can find your channel id either:
 1. in the URL by opening Slack in a browser
 2. mentioning the bot user in channel
@@ -29,12 +29,12 @@ You can find your channel id either:
 
 for 2. & 3. the channel & user id will be logged in Glitch's Log (bottom left -> Tools -> Log)
 
-To start a flow you just need to call the start url:
-* `https://{{your-glitch-project}}.glitch.me/start/:flow/:message`
+To start a blueprint you just need to call the start url:
+* `https://{{your-glitch-project}}.glitch.me/start/:blueprint/:message`
 where 
-* `:flow` is the flow name of your `blocks-` file (e.g. for `blocks-template.js` it's `template`) 
+* `:blueprint` is the blueprint name of your `blueprint-` file (e.g. for `blueprint-template.js` it's `template`) 
 and 
-* `:message` is the first message you want to send (e.g. for `blocks-template.js` it's `demo`).
+* `:message` is the first message you want to send (e.g. for `blueprint-template.js` it's `demo`).
 
-The channel can be specified either as field in the message json (see `blocks-template.js` -> `message` -> `demo` -> `channel`) or as url parameter (`?channel=CXXXXXXXX`).
+The channel can be specified either as field in the message json (see `blueprint-template.js` -> `message` -> `demo` -> `channel`) or as url parameter (`?channel=CXXXXXXXX`).
   
