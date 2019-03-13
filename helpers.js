@@ -24,7 +24,7 @@ exports.stringifyValues = (message) => {
 }
 
 exports.fillOptions = (message, payload) => {
-  console.log(payload)
+  // console.log('payload', payload)
   // fill optional dialog state values
   if(message.state && message.fill_options) {
     // console.log(message.fill_options)
@@ -61,7 +61,9 @@ const createObject = (obj, path, count, value) => {
   if(count === path.length) return value
   
   let key = path[count]
-  obj[key] = createObject(obj[key], path, count++, value[key])
+  console.log(key)
+  obj[key] = {}
+  createObject(obj[key], path, count++, value[key])
   return obj
 }
 
