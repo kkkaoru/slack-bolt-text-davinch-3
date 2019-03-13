@@ -9,7 +9,8 @@ module.exports = {
           "label": "Enter some data",
           "name": "loc_origin"
         }
-      ]
+      ],
+      "state": {"blueprint":"template","type":"ephemeral","value":"confirmation"}
     }
   },
   ephemeral: {
@@ -20,6 +21,17 @@ module.exports = {
           "text": {
             "type": "mrkdwn",
             "text": "This is an ephemeral message :lock:"
+          }
+        }
+      ]
+    },
+    confirmation: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Your dialog has been submitted :ok_hand:"
           }
         }
       ]

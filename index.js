@@ -52,17 +52,17 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
   console.log(payload.type)
   switch(payload.type) {
     case 'dialog_submission': 
-      return respond('')
+      return handleDialogSubmission(payload.state)
     case 'block_actions':
-      return handleBlockAction(payload)
-    default  
+      return handleAction(payload.actions[0].value)
+    default:
+      return respond('')
   }
-  
   
 })
 
-const handleBlockAction = (payload) => {
-  let action = JSON.parse(payload.actions[0].value)
+const handleAction = (value) => {
+  let action = JSON.parse(value)
   console.log(blocks[action.blueprint][action.type][action.value])
   
   if(payload.channel && !action.channel_id) action.channel_id = payload.channel.id
@@ -70,20 +70,12 @@ const handleBlockAction = (payload) => {
   if(payload.trigger_id && !action.trigger_id) action.trigger_id = payload.trigger_id
   if(payload.message && !action.message_id) action.message_ts = payload.message.ts
   
-  return sendActionResponse(action)
-}
-
-const handleDialog = (action) => {
-  
-}
-
-const sendActionResponse = (action) => {
   let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
-  console.log(block)
   
   switch(action.type) {
     case 'dialog':  
       console.log('send dialog')
+      if(block.state && typeof block.state !== 'string') block.state = JSON.stringify(block.state)
       return slackBot.dialog.open({
         trigger_id: action.trigger_id,
         dialog: block
@@ -109,6 +101,17 @@ const sendActionResponse = (action) => {
       update.ts = action.message_ts
       return slackBot.chat.update(update)  
   }
+}
+
+const handleDialogSubmission = (payload) => {
+  console.log(payload.state)
+  if(payload.state) {
+    let action = JSON.parse(payload.state) 
+  }
+}
+
+const sendActionResponse = (action) => {
+  
 }
 
 slackEvents.on('app_mention', (message) => {
