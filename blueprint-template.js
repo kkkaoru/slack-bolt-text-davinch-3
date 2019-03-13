@@ -183,7 +183,7 @@ module.exports = {
   fillOptions: {
     dialog: {
       demo: {
-        some: "test"
+        "ts": "message.ts"
       } 
     }
   }
