@@ -28,8 +28,9 @@ exports.fillOptions = (message, payload) => {
   if(message.state && message.fill_options) {
     console.log(message.fill_options)
     message.fill_options.forEach(fill => {
-      let opt = fill.split('.')
-      let depth = opt.length
+      let path = fill.split('.')
+      let obj = createObject({}, path, 0)
+      console.log(obj)
     })
     
     
@@ -48,6 +49,11 @@ exports.fillOptions = (message, payload) => {
   return message
 }
 
-const createObject = (obj, key, value) => {
+const createObject = (obj, path, count, value) => {
+  if(count === path.length) return value
   
+  let key = path[count]
+  obj[key] = createObject(obj[key], path, count++)
+  return obj
 }
+
