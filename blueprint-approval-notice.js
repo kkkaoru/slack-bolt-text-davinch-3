@@ -45,7 +45,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Approve"
               },
-              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"update\",\"value\":\"confirmation\"}"
+              "value": {"blueprint":"approvalNotice","type":"update","value":"confirmation"}
             },
             {
               "type": "button",
@@ -54,7 +54,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Deny"
               },
-              "value": "{\"blueprint\":\"approvalNotice\",\"type\":\"update\",\"value\":\"denial\"}"
+              "value": {"blueprint":"approvalNotice","type":"dialog","value":"info", options: {message_ts: null}}
             }
           ]
         }
@@ -176,5 +176,17 @@ module.exports = {
     }
   },
   dialog: {
+    info: {
+      "callback_id": "dialog:1",
+      "title": "This is a demo dialog",
+      "elements": [
+        {
+          "type": "text",
+          "label": "Enter some data",
+          "name": "some_data"
+        }
+      ],
+      "state": {"blueprint":"template","type":"update","value":"confirmation",}
+    }
   }
 }
