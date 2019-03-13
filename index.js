@@ -67,11 +67,11 @@ const handleAction = (payload, value) => {
   let action = JSON.parse(value)
   
   let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value])
-  let options = blueprints[action.blueprint].fillOptions[action.type][action.value] || {}
-  console.log('options', options)
+  // let options = blueprints[action.blueprint].fillOptions[action.type][action.value] || {}
+  // console.log('options', options)
   // add options from current action to the next block's value
   // e.g. for updating the current message after a dialog submission
-  block = helpers.fillOptions(action, block)
+  // block = helpers.fillOptions(action, block)
   
   switch(action.type) {
     case 'dialog':  

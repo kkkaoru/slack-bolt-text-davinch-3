@@ -26,9 +26,11 @@ exports.stringifyValues = (message) => {
 }
 
 exports.fillOptions = (action, block, payload) => {
-  console.log(action.fill_options)
-  let options = {}
-  Object.keys(action.fill_options).forEach(key 
-  console.log(block)
+//   console.log(action.fill_options)
+//   let options = {}
+//   Object.keys(action.fill_options).forEach(key => {
+    
+//   })
+//   console.log(block)
   return block
 }
