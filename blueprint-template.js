@@ -179,5 +179,12 @@ module.exports = {
         }
       ]
     }
+  },
+  fillOptions: {
+    dialog: {
+      demo: {
+        some: "test"
+      } 
+    }
   }
 }

@@ -67,6 +67,8 @@ const handleAction = (payload, value) => {
   let action = JSON.parse(value)
   
   let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value])
+  let options = blueprints[action.blueprint].fillOptions[action.type][action.value] || {}
+  console.log('options', options)
   // add options from current action to the next block's value
   // e.g. for updating the current message after a dialog submission
   block = helpers.fillOptions(action, block)
@@ -78,19 +80,19 @@ const handleAction = (payload, value) => {
         dialog: block
       })
     case 'ephemeral':
-      block.channel = payload.channel.id
-      block.user = payload.user.id
+      block.channel = (payload.channel && payload.channel.id)
+      block.user = (payload.user && payload.user.id)
       return slackBot.chat.postEphemeral(block)    
     case 'message':
-      block.channel = payload.channel.id
+      block.channel = (payload.channel && payload.channel.id)
       return slackBot.chat.postMessage(block)
     case 'thread':
-      block.channel = payload.channel.id
-      block.thread_ts = payload.message.ts
+      block.channel = (payload.channel && payload.channel.id)
+      block.thread_ts = (payload.message && payload.message.ts)
       return slackBot.chat.postMessage(block)  
     case 'update':
-      block.channel = payload.channel.id
-      block.ts = payload.message.ts
+      block.channel = (payload.channel && payload.channel.id)
+      block.ts = (payload.message && payload.message.ts)
       return slackBot.chat.update(block)  
   }
 }
