@@ -72,8 +72,8 @@ const handleAction = (payload, value) => {
   // add options from current action to the next block's value
   // e.g. for updating the current message after a dialog submission
   block = helpers.fillOptions(block, payload)
-  console.log(payload)
-  console.log(action)
+  // console.log(payload)
+  // console.log(action)
   
   switch(action.type) {
     case 'dialog':  

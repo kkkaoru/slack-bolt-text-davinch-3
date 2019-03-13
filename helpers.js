@@ -24,13 +24,17 @@ exports.stringifyValues = (message) => {
 }
 
 exports.fillOptions = (message, payload) => {
+  console.log(payload)
   // fill optional dialog state values
   if(message.state && message.fill_options) {
-    console.log(message.fill_options)
+    // console.log(message.fill_options)
     message.fill_options.forEach(fill => {
       let path = fill.split('.')
-      let obj = createObject({}, path, 0)
-      console.log(obj)
+      try {
+        let obj = createObject({}, path, 0, payload)
+        console.log(obj)
+      } catch (e) { console.log(e)}
+      
     })
     
     
@@ -50,10 +54,14 @@ exports.fillOptions = (message, payload) => {
 }
 
 const createObject = (obj, path, count, value) => {
+  console.log(obj)
+  console.log(path)
+  console.log(count)
+  console.log(value)
   if(count === path.length) return value
   
   let key = path[count]
-  obj[key] = createObject(obj[key], path, count++)
+  obj[key] = createObject(obj[key], path, count++, value[key])
   return obj
 }
 
