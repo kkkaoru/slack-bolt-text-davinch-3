@@ -48,9 +48,36 @@ app.get('/start/:flow/:message', (req, res) => {
     })
 })
 
-slackInteractions.action({ type: 'button' }, (payload, respond) => {
+slackInteractions.action(/(\w+)/, (payload, respond) => {
+  console.log(payload.type)
+  switch(payload.type) {
+    case 'dialog_submission': 
+      return respond('')
+    case 'block_actions':
+      return handleBlockAction(payload)
+    default  
+  }
+  
+  
+})
+
+const handleBlockAction = (payload) => {
   let action = JSON.parse(payload.actions[0].value)
   console.log(blocks[action.blueprint][action.type][action.value])
+  
+  if(payload.channel && !action.channel_id) action.channel_id = payload.channel.id
+  if(payload.user && !action.user_id) action.user_id = payload.user.id
+  if(payload.trigger_id && !action.trigger_id) action.trigger_id = payload.trigger_id
+  if(payload.message && !action.message_id) action.message_ts = payload.message.ts
+  
+  return sendActionResponse(action)
+}
+
+const handleDialog = (action) => {
+  
+}
+
+const sendActionResponse = (action) => {
   let block = helpers.stringifyValues(blocks[action.blueprint][action.type][action.value])
   console.log(block)
   
@@ -58,31 +85,31 @@ slackInteractions.action({ type: 'button' }, (payload, respond) => {
     case 'dialog':  
       console.log('send dialog')
       return slackBot.dialog.open({
-        trigger_id: payload.trigger_id,
+        trigger_id: action.trigger_id,
         dialog: block
       })
     case 'ephemeral':
       let ephemeral = block
-      ephemeral.channel = payload.channel.id
-      ephemeral.user = payload.user.id
+      ephemeral.channel = action.channel_id
+      ephemeral.user = action.user_id
       console.log(ephemeral)
       return slackBot.chat.postEphemeral(ephemeral)    
     case 'message':
       let message = block
-      message.channel = payload.channel.id
+      message.channel = action.channel_id
       return slackBot.chat.postMessage(message)
     case 'thread':
       let thread = block
-      thread.channel = payload.channel.id
-      thread.thread_ts = payload.message.ts
+      thread.channel = action.channel_id
+      thread.thread_ts = action.message_ts
       return slackBot.chat.postMessage(thread)  
     case 'update':
       let update = block
-      update.channel = payload.channel.id
-      update.ts = payload.message.ts
+      update.channel = action.channel_id
+      update.ts = action.message_ts
       return slackBot.chat.update(update)  
   }
-})
+}
 
 slackEvents.on('app_mention', (message) => {
   let channel = message.channel
