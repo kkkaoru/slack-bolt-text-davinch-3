@@ -27,8 +27,12 @@ exports.fillOptions = (message, payload) => {
   // fill optional dialog state values
   if(message.state && message.fill_options) {
     console.log(message.fill_options)
-    let opt = message.fill_options.split('.')
-    let depth = opt.length
+    message.fill_options.forEach(fill => {
+      let opt = fill.split('.')
+      let depth = opt.length
+    })
+    
+    
   } else if(message.blocks) { // fill optional block action values
     message.blocks = message.blocks.map(block => {
       if(block.type == 'actions') {
@@ -42,4 +46,8 @@ exports.fillOptions = (message, payload) => {
   }
   
   return message
+}
+
+const createObject = (obj, key, value) => {
+  
 }
