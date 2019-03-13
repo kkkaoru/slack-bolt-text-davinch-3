@@ -54,7 +54,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Deny"
               },
-              "value": {"blueprint":"approvalNotice","type":"dialog","value":"info", options: {message_ts: null}}
+              "value": {"blueprint":"approvalNotice","type":"dialog","value":"info", fill_options: {message_ts: 'message.ts'}}
             }
           ]
         }
@@ -186,7 +186,7 @@ module.exports = {
           "name": "some_data"
         }
       ],
-      "state": {"blueprint":"template","type":"update","value":"confirmation",}
+      "state": {"blueprint":"template","type":"update","value":"confirmation"}
     }
   }
 }

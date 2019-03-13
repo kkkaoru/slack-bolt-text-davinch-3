@@ -64,39 +64,39 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
 const handleAction = (payload, value) => {
   let action = JSON.parse(value)
   
-  if(payload.channel && !action.channel_id) action.channel_id = payload.channel.id
-  if(payload.user && !action.user_id) action.user_id = payload.user.id
-  if(payload.trigger_id && !action.trigger_id) action.trigger_id = payload.trigger_id
-  if(payload.message && !action.message_id) action.message_ts = payload.message.ts
-  
   let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value])
+  
+  if(payload.channel && !action.channel_id) block.channel = 
+  if(payload.user && !action.user_id) block.user = payload.user.id
+  if(payload.trigger_id && !action.trigger_id) action.trigger_id = 
+  
+  
+  // add options from current action to the next block's value
+  // e.g. for updating the current message after a dialog submission
+  block = helpers.fillOptions(action, block)
   
   switch(action.type) {
     case 'dialog':  
       if(block.state && typeof block.state !== 'string') block.state = JSON.stringify(block.state)
       return slackBot.dialog.open({
-        trigger_id: action.trigger_id,
+        trigger_id: payload.trigger_id,
         dialog: block
       })
     case 'ephemeral':
-      let ephemeral = block
-      ephemeral.channel = action.channel_id
-      ephemeral.user = action.user_id
-      return slackBot.chat.postEphemeral(ephemeral)    
+      block.channel = payload.channel.id
+      block.user = action.user_id
+      return slackBot.chat.postEphemeral(block)    
     case 'message':
-      let message = block
-      message.channel = action.channel_id
-      return slackBot.chat.postMessage(message)
+      block.channel = payload.channel.id
+      return slackBot.chat.postMessage(block)
     case 'thread':
-      let thread = block
-      thread.channel = action.channel_id
-      thread.thread_ts = action.message_ts
-      return slackBot.chat.postMessage(thread)  
+      block.channel = payload.channel.id
+      block.thread_ts = payload.message.ts
+      return slackBot.chat.postMessage()  
     case 'update':
-      let update = block
-      update.channel = action.channel_id
-      update.ts = action.message_ts
-      return slackBot.chat.update(update)  
+      block.channel = apayload.channel.id
+      block.ts = payload.message.ts
+      return slackBot.chat.update(block)  
   }
 }
 

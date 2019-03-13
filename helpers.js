@@ -20,3 +20,8 @@ exports.stringifyValues = (message) => {
   })
   return newMessage
 }
+
+exports.fillOptions = (action, block) => {
+  console.log(action.fill_options)
+  console.log(block)
+}
