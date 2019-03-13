@@ -7,7 +7,7 @@ module.exports = {
         {
           "type": "text",
           "label": "Enter some data",
-          "name": "loc_origin"
+          "name": "some_data"
         }
       ],
       "state": {"blueprint":"template","type":"ephemeral","value":"confirmation"}

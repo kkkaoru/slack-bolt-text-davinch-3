@@ -52,16 +52,16 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
   console.log(payload.type)
   switch(payload.type) {
     case 'dialog_submission': 
-      return handleDialogSubmission(payload.state)
+      return respond()
     case 'block_actions':
-      return handleAction(payload.actions[0].value)
+      return handleAction(payload, payload.actions[0].value)
     default:
-      return respond('')
+      return respond()
   }
   
 })
 
-const handleAction = (value) => {
+const handleAction = (payload, value) => {
   let action = JSON.parse(value)
   console.log(blocks[action.blueprint][action.type][action.value])
   
@@ -74,7 +74,6 @@ const handleAction = (value) => {
   
   switch(action.type) {
     case 'dialog':  
-      console.log('send dialog')
       if(block.state && typeof block.state !== 'string') block.state = JSON.stringify(block.state)
       return slackBot.dialog.open({
         trigger_id: action.trigger_id,
@@ -84,7 +83,6 @@ const handleAction = (value) => {
       let ephemeral = block
       ephemeral.channel = action.channel_id
       ephemeral.user = action.user_id
-      console.log(ephemeral)
       return slackBot.chat.postEphemeral(ephemeral)    
     case 'message':
       let message = block
@@ -101,17 +99,6 @@ const handleAction = (value) => {
       update.ts = action.message_ts
       return slackBot.chat.update(update)  
   }
-}
-
-const handleDialogSubmission = (payload) => {
-  console.log(payload.state)
-  if(payload.state) {
-    let action = JSON.parse(payload.state) 
-  }
-}
-
-const sendActionResponse = (action) => {
-  
 }
 
 slackEvents.on('app_mention', (message) => {
