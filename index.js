@@ -52,11 +52,11 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
   console.log(payload.type)
   switch(payload.type) {
     case 'dialog_submission': 
-      return respond()
+      handleAction(payload, payload.state)
+      break
     case 'block_actions':
-      return handleAction(payload, payload.actions[0].value)
-    default:
-      return respond()
+      handleAction(payload, payload.actions[0].value)
+      break
   }
   
 })
