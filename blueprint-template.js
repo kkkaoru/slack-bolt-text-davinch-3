@@ -180,12 +180,5 @@ module.exports = {
         }
       ]
     }
-  },
-  fillOptions: {
-    dialog: {
-      demo: {
-        "ts": "message.ts"
-      } 
-    }
   }
 }

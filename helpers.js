@@ -23,21 +23,24 @@ exports.stringifyValues = (message) => {
   return message
 }
 
+// currently only supported for dialogs
+// also because of the 75 characters block kit value limit
 exports.fillOptions = (message, payload) => {
   // console.log('payload', payload)
   // fill optional dialog state values
   if(message.state && message.fill_options) {
     // console.log(message.fill_options)
-    message.fill_options.forEach(fill => {
+    let options = message.fill_options.map(fill => {
       let path = fill.split('.')
       try {
-        let obj = createObject({}, path, 0, payload)
-        console.log(obj)
+        return createObject({}, path, 0, payload)
       } catch (e) { console.log(e)}
-      
     })
-    
-    
+    options.forEach(opt => {
+      message.state = Object.assign(message.state, opt)
+    })
+    // delete original fill options to remove it from payload which is sent to slack
+    delete message.fill_options
   } else if(message.blocks) { // fill optional block action values
     message.blocks = message.blocks.map(block => {
       if(block.type == 'actions') {
@@ -53,16 +56,17 @@ exports.fillOptions = (message, payload) => {
   return message
 }
 
+// this is a very limited function, which can't deep copy
+// complex structures or arrays
+// does the job for now
 const createObject = (obj, path, count, value) => {
-  console.log(count, value)
   if(count === path.length) {
     return value
   }
   
   let key = path[count]
-  // console.log(key)
-  // obj[key] = {}
   count++
+  obj[key] = {}
   obj[key] = createObject(obj[key], path, count, value[key])
   return obj
 }
