@@ -107,7 +107,7 @@ module.exports = {
   },
   thread: {},
   update: {
-    vote: {
+    select1: {
       blocks: []
     }
   }
