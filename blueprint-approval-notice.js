@@ -52,7 +52,7 @@ module.exports = {
               "text": {
                 "type": "plain_text",
                 "emoji": true,
-                "text": "Deny"
+                "text": "Decline"
               },
               "value": {"blueprint":"approvalNotice","type":"dialog","value":"info"}
             }
@@ -178,12 +178,32 @@ module.exports = {
   dialog: {
     info: {
       "callback_id": "dialog:1",
-      "title": "This is a demo dialog",
+      "title": "You're about to decline this request",
       "elements": [
         {
-          "type": "text",
-          "label": "Enter some data",
-          "name": "some_data"
+          "label": "Select a reason",
+          "type": "select",
+          "name": "reject:reason",
+          "options": [
+            {
+              "label": "Out of Policy",
+              "value": "reject:reason:out-of-policy"
+            },
+            {
+              "label": "",
+              "value": "reject:reason:out-of-policy"
+            },
+            {
+              "label": "Other",
+              "value": "reject:reason:other"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "label": "Comment",
+          "name": "some_data",
+          "optional": true
         }
       ],
       "state": {"blueprint":"approvalNotice","type":"update","value":"denial"},
