@@ -108,6 +108,8 @@ slackEvents.on('message', (message) => {
   let user = message.user
   
   if(message.channel_type === 'im' && user) console.log({channel: channel, user: user})
+  
+  console.log(message)
 })
 
 
