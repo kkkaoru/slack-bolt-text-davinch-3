@@ -15,9 +15,10 @@ Simple app to showcase App demos. Feel free to clone this app and set up your ow
   
 ## Sending messages
 
-1. Copy `blueprint-template.js` and change name accordingly
-2. Import your blueprint to `blueprints.js`
-3. Edit your messages and blueprint
+1. Create a new blueprint, e.g. `blueprint-<name-of-blueprint>.js` 
+2. Copy the content from `blueprint-template.js` and paste it to your file 
+3. Import your blueprint to `blueprints.js`
+4. Edit your messages and blueprint
 
 ## Start a blueprint
 
