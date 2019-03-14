@@ -178,7 +178,8 @@ module.exports = {
   dialog: {
     info: {
       "callback_id": "dialog:1",
-      "title": "This is a demo dialog",
+      "title": "Reject request",
+      "submit_label": "Reject",
       "elements": [
         {
           "label": "Select a reason",

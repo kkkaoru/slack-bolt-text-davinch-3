@@ -67,8 +67,6 @@ const handleAction = (payload, value) => {
   try {
     let action = JSON.parse(value)
 
-    console.log(action)
-
     let block = blueprints[action.blueprint][action.type][action.value]
     // order of these two functions is important here
     block = helpers.fillOptions(block, payload)
