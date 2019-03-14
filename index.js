@@ -32,9 +32,7 @@ app.use('/slack/onAction', slackInteractions.expressMiddleware())
 app.get('/start/:blueprint/:message', (req, res) => {
   let blueprint = req.params.blueprint
   let message = req.params.message
-  
-  console.log(JSON.stringify({"blueprint":"approvalNotice","type":"dialog","value":"info", fill_options: {message_ts: 'message.ts'}}))
-    
+      
   let payload = helpers.stringifyValues(blueprints[blueprint].message[message])
   // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
   // e.g. if this url is called with a `channel` parameter first
@@ -51,7 +49,6 @@ app.get('/start/:blueprint/:message', (req, res) => {
 })
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {
-  console.log(payload.type)
   switch(payload.type) {
     case 'dialog_submission': 
       handleAction(payload, payload.state)

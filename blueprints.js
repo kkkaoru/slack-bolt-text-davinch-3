@@ -1,7 +1,7 @@
-const approvalNotice = require('./blueprint-approval-notice')
+const approval = require('./blueprint-approval')
 const template = require('./blueprint-template')
 
 module.exports = {
-  approvalNotice: approvalNotice,
+  approval: approval,
   template: template
 }

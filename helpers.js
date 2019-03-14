@@ -6,12 +6,13 @@ exports.getUrlWithParams = (url, params) => {
 
 exports.stringifyValues = (message) => {  
   // stringify dialog state values
-  if(message.state && typeof message.state !== 'string') message.state = JSON.stringify(message.state)
+  let newMessage = deepCopy(message)
+  if(newMessage.state && typeof newMessage.state !== 'string') newMessage.state = JSON.stringify(newMessage.state)
   
   // if there are no blocks, we are done here
-  if(!message.blocks) return message
+  if(!newMessage.blocks) return newMessage
   
-  message.blocks = message.blocks.map(block => {
+  newMessage.blocks = newMessage.blocks.map(block => {
     if(block.type == 'actions') {
       block.elements = block.elements.map(action => {
         if(action.value && typeof action.value !== 'string') action.value = JSON.stringify(action.value) 
@@ -20,30 +21,32 @@ exports.stringifyValues = (message) => {
     }
     return block
   })
-  return message
+  return newMessage
 }
 
 // currently only supported for dialogs
 // also because of the 75 characters block kit value limit
 exports.fillOptions = (message, payload) => {
+  let newMessage = deepCopy(message)
+  
   // fill optional dialog state values
-  if(message.state && message.fill_options) {
-    let options = message.fill_options.map(fill => {
+  if(newMessage.state && newMessage.fill_options) {
+    let options = newMessage.fill_options.map(fill => {
       let path = fill.split('.')
       try {
         return createObject({}, path, 0, payload)
       } catch (e) { console.log(e)}
     })
     options.forEach(opt => {
-      message.state = Object.assign(message.state, opt)
+      newMessage.state = Object.assign(newMessage.state, opt)
     })
     
     // delete message.fill_options
-  } else if(message.blocks) { // fill optional block action values
-    message.blocks = message.blocks.map(block => {
+  } else if(newMessage.blocks) { // fill optional block action values
+    newMessage.blocks = newMessage.blocks.map(block => {
       if(block.type == 'actions') {
         block.elements = block.elements.map(action => {
-          if(action.fill_options) console.log(action.fill_options)
+          if(action.fill_options) console.log('not implemented yet', action.fill_options)
           return action
         })
       }
@@ -51,7 +54,7 @@ exports.fillOptions = (message, payload) => {
     })
   }
   
-  return message
+  return newMessage
 }
 
 // this is a very limited function, which can't deep copy
@@ -67,5 +70,9 @@ const createObject = (obj, path, count, value) => {
   obj[key] = {}
   obj[key] = createObject(obj[key], path, count, value[key])
   return obj
+}
+
+const deepCopy = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
 }
 
