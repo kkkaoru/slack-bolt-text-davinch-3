@@ -1,9 +1,9 @@
 const approval = require('./blueprint-approval')
-const poll = require('./blueprint-poll')
+const publicPoll = require('./blueprint-public-poll')
 const template = require('./blueprint-template')
 
 module.exports = {
   approval: approval,
-  poll: poll,
+  publicPoll: publicPoll,
   template: template
 }

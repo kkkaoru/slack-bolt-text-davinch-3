@@ -19,6 +19,9 @@ exports.stringifyValues = (message) => {
         return action
       })
     }
+    if(block.type === 'section' && block.accessory && typeof block.accessory.value !== 'string') {
+      block.accessory.value = JSON.stringify(block.accessory.value)  
+    }
     return block
   })
   return newMessage
@@ -50,15 +53,10 @@ exports.fillOptions = (message, payload) => {
           return action
         })
       }
-      if(block.type === 'section' && block.accessory && typeof block.accessory.value !== 'string') {
-        block.accessory.value = JSON.stringify(block.accessory.value)  
-      }
       return block
     })
   }
-  
-  console.log(newMessage)
-  
+    
   return newMessage
 }
 
