@@ -44,15 +44,20 @@ exports.fillOptions = (message, payload) => {
     // delete message.fill_options
   } else if(newMessage.blocks) { // fill optional block action values
     newMessage.blocks = newMessage.blocks.map(block => {
-      if(block.type == 'actions') {
+      if(block.type === 'actions') {
         block.elements = block.elements.map(action => {
           if(action.fill_options) console.log('not implemented yet', action.fill_options)
           return action
         })
       }
+      if(block.type === 'section' && block.accessory && typeof block.accessory.value !== 'string') {
+        block.accessory.value = JSON.stringify(block.accessory.value)  
+      }
       return block
     })
   }
+  
+  console.log(newMessage)
   
   return newMessage
 }
