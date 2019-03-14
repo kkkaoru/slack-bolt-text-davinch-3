@@ -26,10 +26,8 @@ exports.stringifyValues = (message) => {
 // currently only supported for dialogs
 // also because of the 75 characters block kit value limit
 exports.fillOptions = (message, payload) => {
-  // console.log('payload', payload)
   // fill optional dialog state values
   if(message.state && message.fill_options) {
-    // console.log(message.fill_options)
     let options = message.fill_options.map(fill => {
       let path = fill.split('.')
       try {
@@ -39,8 +37,6 @@ exports.fillOptions = (message, payload) => {
     options.forEach(opt => {
       message.state = Object.assign(message.state, opt)
     })
-    // delete original fill options to remove it from payload which is sent to slack
-    delete message.fill_options
   } else if(message.blocks) { // fill optional block action values
     message.blocks = message.blocks.map(block => {
       if(block.type == 'actions') {
