@@ -54,16 +54,16 @@ exports.fillOptions = (message, payload) => {
 }
 
 const createObject = (obj, path, count, value) => {
-  console.log(obj)
-  console.log(path)
-  console.log(count)
-  console.log(value)
-  if(count === path.length) return value
+  console.log(count, value)
+  if(count === path.length) {
+    return value
+  }
   
   let key = path[count]
-  console.log(key)
-  obj[key] = {}
-  createObject(obj[key], path, count++, value[key])
+  // console.log(key)
+  // obj[key] = {}
+  count++
+  obj[key] = createObject(obj[key], path, count, value[key])
   return obj
 }
 
