@@ -108,7 +108,7 @@ module.exports = {
         }
       ]
     },
-    denial: {
+    rejection: {
       blocks: [
         {
           "type": "section",
@@ -178,7 +178,7 @@ module.exports = {
   dialog: {
     info: {
       "callback_id": "dialog:1",
-      "title": "You're about to decline this request",
+      "title": "This is a demo dialog",
       "elements": [
         {
           "label": "Select a reason",
@@ -190,8 +190,8 @@ module.exports = {
               "value": "reject:reason:out-of-policy"
             },
             {
-              "label": "",
-              "value": "reject:reason:out-of-policy"
+              "label": "Invalid request",
+              "value": "reject:reason:invalid-request"
             },
             {
               "label": "Other",
@@ -200,13 +200,14 @@ module.exports = {
           ]
         },
         {
-          "type": "textarea",
           "label": "Comment",
-          "name": "some_data",
+          "name": "comment",
+          "type": "textarea",
+          "hint": "Provide additional information.",
           "optional": true
         }
       ],
-      "state": {"blueprint":"approvalNotice","type":"update","value":"denial"},
+      "state": {"blueprint":"approvalNotice","type":"update","value":"rejection"},
       "fill_options": ["message.ts"]
     }
   }

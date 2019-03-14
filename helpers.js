@@ -37,6 +37,8 @@ exports.fillOptions = (message, payload) => {
     options.forEach(opt => {
       message.state = Object.assign(message.state, opt)
     })
+    
+    // delete message.fill_options
   } else if(message.blocks) { // fill optional block action values
     message.blocks = message.blocks.map(block => {
       if(block.type == 'actions') {
