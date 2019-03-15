@@ -37,7 +37,7 @@ module.exports = {
                 "text": "Choose Farmhouse",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"select1"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"select1"}]
             }
           ]
         },
@@ -66,7 +66,7 @@ module.exports = {
                 "text": "Choose Kin Khao",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"select2"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"select2"}]
             }
           ]
         },
@@ -95,7 +95,7 @@ module.exports = {
                 "text": "Choose Le Ros",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"select3"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"select3"}]
             }
           ]
         },
@@ -142,7 +142,7 @@ module.exports = {
                 "text": "Choose Farmhouse",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"select1"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"select1"}]
             }
           ]
         },
@@ -171,7 +171,7 @@ module.exports = {
                 "text": "Choose Kin Khao",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"select2"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"select2"}]
             }
           ]
         },
@@ -200,7 +200,7 @@ module.exports = {
                 "text": "Choose Le Ros",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"select3"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"select3"}]
             }
           ]
         },
@@ -286,7 +286,7 @@ module.exports = {
                 "text": "Edit selection",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"edit"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"edit"}]
             }
           ]
         }
@@ -369,7 +369,7 @@ module.exports = {
                 "text": "Edit selection",
                 "emoji": true
               },
-              "value": {"blueprint":"privatePoll","type":"update","value":"edit"}
+              "value": [{"blueprint":"privatePoll","type":"update","value":"edit"}]
             }
           ]
         }

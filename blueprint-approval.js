@@ -45,7 +45,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Approve"
               },
-              "value": {"blueprint":"approval","type":"update","value":"confirmation"}
+              "value": [{"blueprint":"approval","type":"update","value":"confirmation"}]
             },
             {
               "type": "button",
@@ -54,7 +54,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Decline"
               },
-              "value": {"blueprint":"approval","type":"dialog","value":"info"}
+              "value": [{"blueprint":"approval","type":"dialog","value":"info"}]
             }
           ]
         }
@@ -208,7 +208,7 @@ module.exports = {
           "optional": true
         }
       ],
-      "state": {"blueprint":"approval","type":"update","value":"rejection"},
+      "state": [{"blueprint":"approval","type":"update","value":"rejection"}],
       "fill_options": ["message.ts"]
     }
   }

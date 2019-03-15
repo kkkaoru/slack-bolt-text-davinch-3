@@ -28,7 +28,7 @@ module.exports = {
               "emoji": true,
               "text": "Vote"
             },
-            "value": {"blueprint":"publicPoll","type":"update","value":"vote"}
+            "value": [{"blueprint":"publicPoll","type":"update","value":"vote"}]
           }
         },
           {
@@ -56,7 +56,7 @@ module.exports = {
               "emoji": true,
               "text": "Vote"
             },
-            "value": {"blueprint":"publicPoll","type":"update","value":"vote"}
+            "value": [{"blueprint":"publicPoll","type":"update","value":"vote"}]
           }
         },
         {
@@ -84,7 +84,7 @@ module.exports = {
               "emoji": true,
               "text": "Vote"
             },
-            "value": {"blueprint":"publicPoll","type":"update","value":"vote"}
+            "value": [{"blueprint":"publicPoll","type":"update","value":"vote"}]
           }
         },
         {
