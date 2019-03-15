@@ -2,6 +2,8 @@ const slackEventsApi = require('@slack/events-api')
 const { createMessageAdapter } = require('@slack/interactive-messages')
 const SlackClient = require('@slack/client').WebClient
 const express = require('express')
+const bodyParser = require('body-parser')
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const app = express()
 const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN)
@@ -13,6 +15,23 @@ const helpers = require('./helpers')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
+app.post('/slack/onCommand', urlencodedParser, (req, res) => {
+  console.log(req.body)
+  let command = req.body.command.replace('/', '')
+  // parsing payload to something which can be handled by handleAction
+  let payload = {
+    channel: {
+      id: req.body.channel_id
+    },
+    user: {
+      id: req.body.user_id
+    }
+  }
+  // stringify the value since handleAction expects a string
+  let action =
+  
+  return res.send()
+})
 
 // need a way to store access tokens for the install. firebase?
 // app.get('/install', (req, res) => {
