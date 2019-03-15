@@ -1,6 +1,6 @@
 # Block Kit Blueprints App
 
-Simple app to showcase App demos. Feel free to clone this app and set up your own Slack App.
+Simple app to showcase workflows & demos. Feel free to clone this app and set up your own Slack App.
 
 ## Setup
 
