@@ -57,7 +57,9 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
     case 'block_actions':
       handleAction(payload, payload.actions[0].value)
       break
-    case 'message_action'  
+    case 'message_action':
+      handleAction(payload, payload.callback_id)
+      break
   }
   
 })
