@@ -46,4 +46,12 @@ Use this format as `callback_id` for message actions:
 ```
 [{"blueprint":"template","type":"dialog","value":"demo"}]
 ```
+
+## Slash Commands
+
+To make use of slash commands you can define the flow it should trigger in `slash-commands.js`. The json key has to be the same name as your slash command without the `/`, e.g. for the slash command `/demo` it should look like this:
+
+```
+demo: [{"blueprint":"template","type":"message","value":"slash"}]
+```
   

@@ -114,9 +114,6 @@ module.exports = {
       ]
     }
   },
-  slash: {
-    demo: [{"blueprint":"template","type":"message","value":"slash"}]
-  },
   thread: {
     demo: {
       blocks: [

@@ -28,7 +28,9 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     }
   }
   // stringify the value since handleAction expects a string
-  let action =
+  let action = JSON.stringify(blueprints.slashCommands[command])
+  
+  handleAction(payload, action)
   
   return res.send()
 })
