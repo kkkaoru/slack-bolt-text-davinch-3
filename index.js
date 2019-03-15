@@ -49,6 +49,7 @@ app.get('/start/:blueprint/:message', (req, res) => {
 })
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {
+  console.log(payload)
   switch(payload.type) {
     case 'dialog_submission': 
       handleAction(payload, payload.state)
@@ -56,6 +57,7 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
     case 'block_actions':
       handleAction(payload, payload.actions[0].value)
       break
+    case 'message_action'  
   }
   
 })
