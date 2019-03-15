@@ -38,4 +38,12 @@ and
 * `:message` is the first message you want to send (e.g. for `blueprint-template.js` it's `demo`).
 
 The channel can be specified either as field in the message json (see `blueprint-template.js` -> `message` -> `demo` -> `channel`) or as url parameter (`?channel=CXXXXXXXX`).
+
+## Message Actions
+
+Use this format as `callback_id` for message actions:
+
+```
+[{"blueprint":"template","type":"dialog","value":"demo"}]
+```
   

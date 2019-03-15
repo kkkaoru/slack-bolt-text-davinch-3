@@ -57,9 +57,9 @@ module.exports = {
               "text": {
                 "type": "plain_text",
                 "emoji": true,
-                "text": "Trigger message"
+                "text": "Trigger messages"
               },
-              "value": [{"blueprint":"template","type":"message","value":"demo"},{"blueprint":"template","type":"message","value":"demo","delay":2000},{"blueprint":"template","type":"message","value":"demo","delay":4000}]
+              "value": [{"blueprint":"template","type":"message","value":"demo"},{"blueprint":"template","type":"message","value":"demo","delay":2000}]
             },
             {
               "type": "button",
@@ -100,7 +100,22 @@ module.exports = {
           ]
         }
       ]
+    },
+    slash: {
+      channel: "DGGD1E5RA",
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "This is a response to a `slash command`"
+          }
+        }
+      ]
     }
+  },
+  slash: {
+    demo: [{"blueprint":"template","type":"message","value":"slash"}]
   },
   thread: {
     demo: {
