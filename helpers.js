@@ -1,5 +1,5 @@
 exports.getUrlWithParams = (url, params) => {
-  if(url.indexOf('?') < 0) url =+ '?'
+  if(url.indexOf('?') < 0) url += '?'
   url += Object.keys(params).map((key) => key+'='+params[key]).join('&')
   return url
 }
@@ -13,7 +13,7 @@ exports.stringifyValues = (message) => {
   if(!newMessage.blocks) return newMessage
   
   newMessage.blocks = newMessage.blocks.map(block => {
-    if(block.type == 'actions') {
+    if(block.type === 'actions') {
       block.elements = block.elements.map(action => {
         if(action.value && typeof action.value !== 'string') action.value = JSON.stringify(action.value) 
         return action
@@ -44,7 +44,8 @@ exports.fillOptions = (message, payload) => {
       newMessage.state = Object.assign(newMessage.state, opt)
     })
     
-    // delete message.fill_options
+    // remove fill_options from the actual payload
+    delete newMessage.fill_options
   } else if(newMessage.blocks) { // fill optional block action values
     newMessage.blocks = newMessage.blocks.map(block => {
       if(block.type === 'actions') {
@@ -70,7 +71,7 @@ const createObject = (obj, path, count, value) => {
   
   let key = path[count]
   count++
-  obj[key] = {}
+  if(!obj[key]) obj[key] = {}
   obj[key] = createObject(obj[key], path, count, value[key])
   return obj
 }

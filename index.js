@@ -15,25 +15,6 @@ const helpers = require('./helpers')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
-app.post('/slack/onCommand', urlencodedParser, (req, res) => {
-  console.log(req.body)
-  let command = req.body.command.replace('/', '')
-  // parsing payload to something which can be handled by handleAction
-  let payload = {
-    channel: {
-      id: req.body.channel_id
-    },
-    user: {
-      id: req.body.user_id
-    }
-  }
-  // stringify the value since handleAction expects a string
-  let action = JSON.stringify(blueprints.slashCommands[command])
-  
-  handleAction(payload, action)
-  
-  return res.send()
-})
 
 // need a way to store access tokens for the install. firebase?
 // app.get('/install', (req, res) => {
@@ -69,8 +50,27 @@ app.get('/start/:blueprint/:message', (req, res) => {
     })
 })
 
+app.post('/slack/onCommand', urlencodedParser, (req, res) => {
+  console.log(req.body)
+  let command = req.body.command.replace('/', '')
+  // parsing payload to something which can be handled by handleAction
+  let payload = {
+    channel: {
+      id: req.body.channel_id
+    },
+    user: {
+      id: req.body.user_id
+    }
+  }
+  // stringify the value since handleAction expects a string
+  let action = JSON.stringify(blueprints.slashCommands[command])
+  
+  handleAction(payload, action)
+  
+  return res.send()
+})
+
 slackInteractions.action(/(\w+)/, (payload, respond) => {
-  console.log(payload)
   switch(payload.type) {
     case 'dialog_submission': 
       handleAction(payload, payload.state)
@@ -138,10 +138,7 @@ slackEvents.on('message', (message) => {
   let user = message.user
   
   if(message.channel_type === 'im' && user) console.log({channel: channel, user: user})
-  
-  console.log(message)
 })
-
 
 // *** Handle errors ***
 slackEvents.on('error', (error) => {

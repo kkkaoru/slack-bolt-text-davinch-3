@@ -21,7 +21,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Your dialog has been submitted :ok_hand:"
+            "text": "Your task has been created :ok_hand:"
           }
         }
       ]
