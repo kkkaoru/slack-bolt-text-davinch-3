@@ -8,6 +8,13 @@ module.exports = {
           "type": "text",
           "label": "Enter some data",
           "name": "some_data"
+        },
+        {
+          "label": "channel",
+          "name": "bug_assignee",
+          "type": "select",
+          "data_source": "conversations",
+          "value": "GGZ3E91SQ"
         }
       ],
       "state": [{"blueprint":"template","type":"ephemeral","value":"confirmation"}],
