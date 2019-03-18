@@ -51,7 +51,6 @@ app.get('/start/:blueprint/:message', (req, res) => {
 })
 
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
-  console.log(req.body)
   let command = req.body.command.replace('/', '')
   // parsing payload to something which can be handled by handleAction
   let payload = {
@@ -66,7 +65,6 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let action = JSON.stringify(blueprints.slashCommands[command])
   
   handleAction(payload, action)
-  
   return res.send()
 })
 
@@ -113,11 +111,11 @@ const handleAction = (payload, value) => {
           case 'thread':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
             block.thread_ts = (payload.message && payload.message.ts) || (action.message && action.message.ts)
-            return slackBot.chat.postMessage(block)  
+            return  slackBot.chat.postMessage(block)  
           case 'update':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
             block.ts = (payload.message && payload.message.ts) || (action.message && action.message.ts)
-            return slackBot.chat.update(block)  
+            return  slackBot.chat.update(block)  
         }
       }, delay)
     })
