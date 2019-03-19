@@ -43,8 +43,8 @@ exports.fillOptions = (message, payload) => {
   let newMessage = deepCopy(message)
   
   // fill optional dialog state values
-  if(newMessage.state && newMessage.fill_options) {
-    let options = newMessage.fill_options.map(fill => {
+  if(newMessage.state && newMessage.fill_values) {
+    let options = newMessage.fill_values.map(fill => {
       let path = fill.split('.')
       try {
         return createObject({}, path, 0, payload)
@@ -54,13 +54,13 @@ exports.fillOptions = (message, payload) => {
       newMessage.state = Object.assign(newMessage.state, opt)
     })
     
-    // remove fill_options from the actual payload
-    delete newMessage.fill_options
+    // remove fill_values from the actual payload
+    delete newMessage.fill_values
   } else if(newMessage.blocks) { // fill optional block action values
     newMessage.blocks = newMessage.blocks.map(block => {
       if(block.type === 'actions') {
         block.elements = block.elements.map(action => {
-          if(action.fill_options) console.log('not implemented yet', action.fill_options)
+          if(action.fill_values) console.log('not implemented yet', action.fill_values)
           return action
         })
       }

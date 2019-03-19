@@ -10,11 +10,16 @@ module.exports = {
           "name": "some_data"
         }
       ],
-      "state": [{"blueprint":"createTask","type":"ephemeral","value":"confirmation"}],
-      "fill_options": ["message.ts"]
+      "state": [{"blueprint":"createTask","type":"thread","value":"confirmation"}],
+      "fill_values": ["message.ts"],
+      "prefill": {
+        "message.ts": ""
+      }
     }
   },
-  ephemeral: {
+  ephemeral: {},
+  message: {},
+  thread: {
     confirmation: {
       blocks: [
         {
@@ -27,7 +32,5 @@ module.exports = {
       ]
     }
   },
-  message: {},
-  thread: {},
   update: {}
 }

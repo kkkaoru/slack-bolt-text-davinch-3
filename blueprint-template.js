@@ -10,8 +10,7 @@ module.exports = {
           "name": "some_data"
         }
       ],
-      "state": [{"blueprint":"template","type":"ephemeral","value":"confirmation"}],
-      "fill_options": ["message.ts"]
+      "state": [{"blueprint":"template","type":"ephemeral","value":"confirmation"}]
     }
   },
   ephemeral: {

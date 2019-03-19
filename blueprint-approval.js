@@ -209,7 +209,7 @@ module.exports = {
         }
       ],
       "state": [{"blueprint":"approval","type":"update","value":"rejection"}],
-      "fill_options": ["message.ts"]
+      "fill_values": ["message.ts"]
     }
   }
 }
