@@ -92,10 +92,10 @@ const handleAction = (payload, value) => {
       setTimeout(() => {
         let block = blueprints[action.blueprint][action.type][action.value]
         // order of these two functions is important here
-        block = helpers.fillOptions(block, payload)
+        console.log('before filling', block.state)
         block = helpers.stringifyValues(block)
         
-        console.log(block)
+        console.log('actual sent', block.state)
 
         switch(action.type) {
           case 'dialog':  

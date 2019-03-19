@@ -7,6 +7,8 @@ exports.getUrlWithParams = (url, params) => {
 exports.stringifyValues = (message) => {  
   // stringify dialog state values
   let newMessage = deepCopy(message)
+  newMessage = fillValues(newMessage)
+  
   if(newMessage.state && typeof newMessage.state !== 'string') {
     try {
       newMessage.state = JSON.stringify(newMessage.state)
@@ -39,7 +41,7 @@ exports.stringifyValues = (message) => {
 
 // currently only supported for dialogs
 // also because of the 75 characters block kit value limit
-exports.fillOptions = (message, payload) => {
+const fillValues = (message, payload) => {
   let newMessage = deepCopy(message)
   
   // fill optional dialog state values
@@ -53,6 +55,7 @@ exports.fillOptions = (message, payload) => {
     options.forEach(opt => {
       newMessage.state = Object.assign(newMessage.state, opt)
     })
+    
     
     // remove fill_values from the actual payload
     delete newMessage.fill_values
@@ -68,6 +71,7 @@ exports.fillOptions = (message, payload) => {
     })
   }
     
+  console.log('should send', newMessage.state)
   return newMessage
 }
 
