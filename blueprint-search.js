@@ -585,12 +585,12 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Windsor Court Hotel>*\n★★★★★\n$340 per night\nRated: 9.4 - Excellent"
+            "text": "*<fakeLink.toHotelPage.com|Grand Hotel>*\n★★★★★\n$380 per night\nRated: 9.3 - Excellent"
           },
           "accessory": {
             "type": "image",
-            "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgent_1.png",
-            "alt_text": "Windsor Court Hotel thumbnail"
+            "image_url": "https://images.unsplash.com/photo-1515362778563-6a8d0e44bc0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+            "alt_text": "Grand Hotel thumbnail"
           }
         },
         {
@@ -604,7 +604,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Location: Central Business District"
+              "text": "Location: Downtown"
             }
           ]
         },
