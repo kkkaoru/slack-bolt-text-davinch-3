@@ -7,7 +7,11 @@ exports.getUrlWithParams = (url, params) => {
 exports.stringifyValues = (message) => {  
   // stringify dialog state values
   let newMessage = deepCopy(message)
-  if(newMessage.state && typeof newMessage.state !== 'string') newMessage.state = JSON.stringify(newMessage.state)
+  if(newMessage.state && typeof newMessage.state !== 'string') {
+    try {
+      newMessage.state = JSON.stringify(newMessage.state)
+    } catch(err) {}
+  }
   
   // if there are no blocks, we are done here
   if(!newMessage.blocks) return newMessage
@@ -15,12 +19,18 @@ exports.stringifyValues = (message) => {
   newMessage.blocks = newMessage.blocks.map(block => {
     if(block.type === 'actions') {
       block.elements = block.elements.map(action => {
-        if(action.value && typeof action.value !== 'string') action.value = JSON.stringify(action.value) 
+        if(action.value && typeof action.value !== 'string') {
+          try {
+            action.value = JSON.stringify(action.value) 
+          } catch(err) {}  
+        }
         return action
       })
     }
     if(block.type === 'section' && block.accessory && typeof block.accessory.value !== 'string') {
-      block.accessory.value = JSON.stringify(block.accessory.value)  
+      try {
+        block.accessory.value = JSON.stringify(block.accessory.value) 
+      } catch(err) {}  
     }
     return block
   })

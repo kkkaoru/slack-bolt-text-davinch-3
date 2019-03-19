@@ -20,7 +20,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": {}
+                "value": "click13"
               },
               {
                 "text": {
@@ -28,7 +28,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": {}
+                "value": "click123"
               }
             ]
           }
@@ -73,7 +73,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
-              "value": "click_me_123"
+              "value": "click"
             },
                   {
               "type": "button",
@@ -82,7 +82,7 @@ module.exports = {
                 "emoji": true,
                 "text": "See available rooms"
               },
-              "value": "click_me_123"
+              "value": "click"
             },
                   {
                       "type": "overflow",
@@ -268,7 +268,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Next >"
               },
-              "value": {"template":"search","type":"update","value":"result_1"}
+              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
             }
           ]
         }
@@ -542,7 +542,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Next >"
               },
-              "value": {"template":"search","type":"update","value":"result_1"}
+              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
             }
           ]
         }
@@ -813,7 +813,7 @@ module.exports = {
                 "emoji": true,
                 "text": "< Previous"
               },
-              "value": {"template":"search","type":"update","value":"result_0"}
+              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
             },
             {
               "type": "button",
@@ -822,7 +822,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Next >"
               },
-              "value": {"template":"search","type":"update","value":"result_2"}
+              "value": [{"blueprint":"search","type":"update","value":"result_2"}]
             }
           ]
         }
@@ -945,7 +945,7 @@ module.exports = {
                 "emoji": true,
                 "text": "< Previous"
               },
-              "value": {"template":"search","type":"update","value":"result_1"}
+              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
             }
           ]
         }
