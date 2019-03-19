@@ -51,25 +51,35 @@ const fillValues = (message, payload) => {
   let newMessage = deepCopy(message)
   
   // fill optional dialog state values
-  if(newMessage.state && newMessage.fill_values) {
-    let options = newMessage.fill_values.map(fill => {
-      let path = fill.split('.')
-      try {
-        return createObject({}, path, 0, payload)
-      } catch (e) { console.log(e)}
-    })
-    options.forEach(opt => {
-      newMessage.state = Object.assign(newMessage.state, opt)
+  if(newMessage.state) {
+    let values = newMessage.state.map(value => {
+      if(value.fill_values) {
+        let options = value.fill_values.map(fill => {
+          let path = fill.split('.')
+          try {
+            return createObject({}, path, 0, payload)
+          } catch (e) { console.log(e)}
+        })
+        options.forEach(opt => {
+          value = Object.assign(value, opt)
+        })
+          
+        // don't need this anymore  
+        delete value.fill_values
+      }
+      return value
     })
     
     
-    // remove fill_values from the actual payload
-    delete newMessage.fill_values
+    newMessage.state = values
   } else if(newMessage.blocks) { // fill optional block action values
     newMessage.blocks = newMessage.blocks.map(block => {
       if(block.type === 'actions') {
         block.elements = block.elements.map(action => {
-          if(action.fill_values) console.log('not implemented yet', action.fill_values)
+          action.value = action.value.map(value => {
+            if(value.fill_values) console.log('fill_values are not implemented yet for actions', value.fill_values)
+          })
+          
           return action
         })
       }

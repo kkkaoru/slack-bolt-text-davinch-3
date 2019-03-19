@@ -208,8 +208,7 @@ module.exports = {
           "optional": true
         }
       ],
-      "state": [{"blueprint":"approval","type":"update","value":"rejection"}],
-      "fill_values": ["message.ts"]
+      "state": [{"blueprint":"approval","type":"update","value":"rejection","fill_values":["message.ts"]}]
     }
   }
 }

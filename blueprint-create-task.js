@@ -46,11 +46,7 @@ module.exports = {
           "name": "description"
         }
       ],
-      "state": [{"blueprint":"createTask","type":"thread","value":"confirmation"}],
-      "fill_values": ["message.ts"],
-      "prefill": {
-        "message.ts": ""
-      }
+      "state": [{"blueprint":"createTask","type":"thread","value":"confirmation","fill_values":["message.ts"]}]
     }
   },
   ephemeral: {},
