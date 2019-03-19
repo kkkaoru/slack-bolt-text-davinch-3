@@ -4,14 +4,15 @@ exports.getUrlWithParams = (url, params) => {
   return url
 }
 
-exports.stringifyValues = (message) => {  
+exports.stringifyValues = (message, payload) => {  
   // stringify dialog state values
   let newMessage = deepCopy(message)
-  newMessage = fillValues(newMessage)
+  newMessage = fillValues(newMessage, payload)
   
   if(newMessage.state && typeof newMessage.state !== 'string') {
     try {
       newMessage.state = JSON.stringify(newMessage.state)
+      console.log(newMessage.state)
     } catch(err) {}
   }
   

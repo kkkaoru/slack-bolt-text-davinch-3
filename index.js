@@ -90,12 +90,11 @@ const handleAction = (payload, value) => {
     actions.forEach(action => {
       let delay = action.delay || 0
       setTimeout(() => {
-        let block = blueprints[action.blueprint][action.type][action.value]
+        // let block = blueprints[action.blueprint][action.type][action.value]
         // order of these two functions is important here
-        console.log('before filling', block.state)
-        block = helpers.stringifyValues(block)
-        
-        console.log('actual sent', block.state)
+        // console.log('before filling', block.state)
+        let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value], payload)
+        console.log('after filling', block.state)
 
         switch(action.type) {
           case 'dialog':  
