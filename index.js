@@ -94,6 +94,8 @@ const handleAction = (payload, value) => {
         // order of these two functions is important here
         block = helpers.fillOptions(block, payload)
         block = helpers.stringifyValues(block)
+        
+        console.log(block)
 
         switch(action.type) {
           case 'dialog':  
