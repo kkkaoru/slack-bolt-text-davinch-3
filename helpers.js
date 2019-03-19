@@ -8,11 +8,16 @@ exports.stringifyValues = (message, payload) => {
   // stringify dialog state values
   let newMessage = deepCopy(message)
   newMessage = fillValues(newMessage, payload)
+  console.log(newMessage.state)
   
   if(newMessage.state && typeof newMessage.state !== 'string') {
     try {
-      newMessage.state = JSON.stringify(newMessage.state)
       console.log(newMessage.state)
+      console.log(typeof newMessage.state.message)
+      console.log(newMessage.state.message)
+      console.log(JSON.stringify(newMessage.state.message))
+      newMessage.state = JSON.stringify(newMessage.state)
+      console.log('stringified', newMessage.state)
     } catch(err) {}
   }
   
