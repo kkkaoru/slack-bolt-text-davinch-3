@@ -259,6 +259,16 @@ module.exports = {
           "type": "divider"
         },
         {
+          "type": "context",
+          "elements": [
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Page 1/3"
+            }
+          ]
+        },
+        {
           "type": "actions",
           "elements": [
             {
@@ -533,6 +543,16 @@ module.exports = {
           "type": "divider"
         },
         {
+          "type": "context",
+          "elements": [
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Page 1/3"
+            }
+          ]
+        },
+        {
           "type": "actions",
           "elements": [
             {
@@ -659,12 +679,12 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|The Ritz-Carlton New Orleans>*\n★★★★★\n$340 per night\nRated: 9.1 - Excellent"
+            "text": "*<fakeLink.toHotelPage.com|New Orleans Inn>*\n★★★★★\n$420 per night\nRated: 9.0 - Excellent"
           },
           "accessory": {
             "type": "image",
-            "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgent_2.png",
-            "alt_text": "Ritz-Carlton New Orleans thumbnail"
+            "image_url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+            "alt_text": "New Orleans Inn thumbnail"
           }
         },
         {
@@ -678,7 +698,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Location: French Quarter"
+              "text": "Location: Downtown"
             }
           ]
         },
@@ -733,12 +753,12 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Omni Royal Orleans Hotel>*\n★★★★★\n$419 per night\nRated: 8.8 - Excellent"
+            "text": "*<fakeLink.toHotelPage.com|Royal Queens Hotel>*\n★★★★★\n$370 per night\nRated: 8.7 - Excellent"
           },
           "accessory": {
             "type": "image",
-            "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgent_3.png",
-            "alt_text": "Omni Royal Orleans Hotel thumbnail"
+            "image_url": "https://images.unsplash.com/photo-1508253578933-20b529302151?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+            "alt_text": "Royal Queens Hotel thumbnail"
           }
         },
         {
@@ -802,6 +822,16 @@ module.exports = {
         },
         {
           "type": "divider"
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Page 2/3"
+            }
+          ]
         },
         {
           "type": "actions",
@@ -865,12 +895,12 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Windsor Court Hotel>*\n★★★★★\n$340 per night\nRated: 9.4 - Excellent"
+            "text": "*<fakeLink.toHotelPage.com|Court Plaza Hotel>*\n★★★★\n$319 per night\nRated: 8.7 - Good"
           },
           "accessory": {
             "type": "image",
-            "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgent_1.png",
-            "alt_text": "Windsor Court Hotel thumbnail"
+            "image_url": "https://images.unsplash.com/photo-1544097935-e6d136448533?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+            "alt_text": "Court Plaza Hotel thumbnail"
           }
         },
         {
@@ -934,6 +964,16 @@ module.exports = {
         },
         {
           "type": "divider"
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Page 3/3"
+            }
+          ]
         },
         {
           "type": "actions",
