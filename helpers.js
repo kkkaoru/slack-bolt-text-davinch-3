@@ -40,7 +40,6 @@ exports.stringifyValues = (message, payload) => {
 }
 
 // currently only supported for dialogs
-// also because of the 75 characters block kit value limit
 const fillValues = (message, payload) => {
   let newMessage = deepCopy(message)
   
