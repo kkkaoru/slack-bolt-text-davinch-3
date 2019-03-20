@@ -8,16 +8,10 @@ exports.stringifyValues = (message, payload) => {
   // stringify dialog state values
   let newMessage = deepCopy(message)
   newMessage = fillValues(newMessage, payload)
-  console.log(newMessage.state)
   
   if(newMessage.state && typeof newMessage.state !== 'string') {
     try {
-      console.log(newMessage.state)
-      console.log(typeof newMessage.state.message)
-      console.log(newMessage.state.message)
-      console.log(JSON.stringify(newMessage.state.message))
       newMessage.state = JSON.stringify(newMessage.state)
-      console.log('stringified', newMessage.state)
     } catch(err) {}
   }
   
@@ -78,6 +72,7 @@ const fillValues = (message, payload) => {
         block.elements = block.elements.map(action => {
           action.value = action.value.map(value => {
             if(value.fill_values) console.log('fill_values are not implemented yet for actions', value.fill_values)
+            return value
           })
           
           return action
@@ -87,7 +82,6 @@ const fillValues = (message, payload) => {
     })
   }
     
-  console.log('should send', newMessage.state)
   return newMessage
 }
 

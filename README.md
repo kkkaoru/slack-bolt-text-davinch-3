@@ -54,4 +54,17 @@ To make use of slash commands you can define the flow it should trigger in `slas
 ```
 demo: [{"blueprint":"template","type":"message","value":"slash"}]
 ```
+
+## Sending multiple and delayed messages
+
+If you want to send multiple messages at once, you can do that by adding multiple instructions to the `value` (message actions) or `state` (dialogs) array.
+
+In this example, `message_1` is sent immediately after the interaction, `message_2` 2 seconds after the interaction, and `message_3` 4 seconds after the interaction
+```
+[
+  {"blueprint":"template","type":"message","value":"message_1","delay":0},
+  {"blueprint":"template","type":"message","value":"message_2","delay":2000},
+  {"blueprint":"template","type":"message","value":"message_3","delay":4000}
+]
+```
   
