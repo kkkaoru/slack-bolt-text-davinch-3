@@ -4,6 +4,12 @@ const SlackClient = require('@slack/client').WebClient
 const express = require('express')
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const admin = require('firebase-admin')
+
+admin.initializeApp({
+  credential: admin.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT),
+  databaseURL: process.env.FIREBASE_DATABASE
+})
 
 const app = express()
 const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN)
@@ -12,6 +18,7 @@ const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blueprints = require('./blueprints')
 const helpers = require('./helpers')
+
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
