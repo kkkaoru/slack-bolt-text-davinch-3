@@ -15,6 +15,7 @@
     "@slack/events-api": "^2.0.0",
     "@slack/interactive-messages": "^1.0.2",
     "express": "^4.16.3",
-    "body-parser": "^1.18.3"
+    "body-parser": "^1.18.3",
+    "firebase-admin": "^7.0.0"
   }
 }
