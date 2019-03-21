@@ -10,6 +10,7 @@ admin.initializeApp({
   credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
   databaseURL: process.env.FIREBASE_DATABASE
 })
+const firestore = admin.firestore()
 
 const app = express()
 const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN)
@@ -23,18 +24,49 @@ app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
 
 // need a way to store access tokens for the install. firebase?
-// app.get('/install', (req, res) => {
-//   let scopes = ['bot', 'chat:write:bot']
+app.get('/install', (req, res) => {
+  let scopes = ['bot', 'chat:write:bot']
 
-//   let params = {
-//     client_id: process.env.SLACK_CIENT_ID,
-//     scope: scopes.join(' '),
-//     redirect_uri: process.env.SLACK_REDIRECT_URL
-//   }
+  let params = {
+    client_id: process.env.SLACK_CIENT_ID,
+    scope: scopes.join(' '),
+    redirect_uri: process.env.SLACK_REDIRECT_URL
+  }
   
-//   let url = getUrlWithParams('https://slack.com/oauth/authorize', params)
-//   return res.redirect(url)
-// })
+  let url = helpers.getUrlWithParams('https://slack.com/oauth/authorize', params)
+  return res.redirect(url)
+})
+
+app.get('/redirect', (req, res) => {
+  let opt = {
+    client_id: process.env.SLACK_CLIENT_ID,
+    client_secret: process.env.SLACK_CLIENT_SECRET,
+    code: req.query.code
+  }
+  let url = helpers.getUrlWithParams('https://slack.com/api/oauth.access', opt)
+
+	let options = {
+		url: url,
+		method: 'GET'
+	}
+
+
+  return rp(options)
+		.then(result => {
+			let slackData = JSON.parse(result)
+			if(!slackData) throw new Error('no_slack_api_data_received')
+            if(!slackData.ok) throw new Error(slackData.error)
+            let teamId = slackData.team_id
+            return firestore.collection('teams').doc(teamId).set(slackData)
+        })
+        .then(result => {
+            return res.send('ois ok')
+        })
+		.catch(err => {
+			console.log(err)
+			return res.send({error: err.message})
+		})
+})
 
 // call this URL to start a blueprint
 app.get('/start/:blueprint/:message', (req, res) => {
