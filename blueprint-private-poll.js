@@ -131,7 +131,7 @@ module.exports = {
             "alt_text": "alt text for image"
           }
         },
-          {
+        {
           "type": "actions",
           "elements": [
             {
