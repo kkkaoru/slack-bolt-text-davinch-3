@@ -4,6 +4,7 @@ const SlackClient = require('@slack/client').WebClient
 const express = require('express')
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const jsonParser = bodyParser.json()
 const rp = require('request-promise')
 const admin = require('firebase-admin')
 
@@ -19,7 +20,7 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blueprints = require('./blueprints')
 const helpers = require('./helpers')
 
-app.use('/slack/onEvent', slackEvents.expressMiddleware())
+// app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
 
 // need a way to store access tokens for the install. firebase?
@@ -33,7 +34,8 @@ app.get('/install', (req, res) => {
   }
   
   let url = helpers.getUrlWithParams('https://slack.com/oauth/authorize', params)
-  return res.redirect(url)
+  console.log(url)
+  return res.send(url)
 })
 
 app.get('/redirect', (req, res) => {
@@ -107,6 +109,10 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   return res.send()
 })
 
+app.post('/slack/onEvent', jsonParser, (req, res) => {
+  console.log(req.body) 
+})
+
 slackInteractions.action(/(\w+)/, (payload, respond) => {
   console.log(payload)
   switch(payload.type) {
@@ -167,21 +173,22 @@ const handleAction = (payload, value) => {
   }
 }
 
-slackEvents.on('app_mention', (message) => {
-  console.log(message)
-  let channel = message.channel
-  let user = message.user
+// slackEvents.on('app_mention', (message) => {
+//   console.log(message)
+//   let channel = message.channel
+//   let user = message.user
   
-  console.log({channel: channel, user: user})
-})
+//   console.log({channel: channel, user: user})
+// })
 
-slackEvents.on('message', (message) => {
-  console.log(message)
-  let channel = message.channel
-  let user = message.user
+// slackEvents.on('message', (message, event) => {
+//    console.log(message)
+//   console.log(event)
+// //   let channel = message.channel
+// //   let user = message.user
   
-  if(message.channel_type === 'im' && user) console.log({channel: channel, user: user})
-})
+// //   if(message.channel_type === 'im' && user) console.log({channel: channel, user: user})
+// })
 
 // *** Handle errors ***
 slackEvents.on('error', (error) => {
