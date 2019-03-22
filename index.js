@@ -7,7 +7,6 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const rp = require('request-promise')
 const admin = require('firebase-admin')
 
-
 admin.initializeApp({
   credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
   databaseURL: process.env.FIREBASE_DATABASE
@@ -15,8 +14,6 @@ admin.initializeApp({
 const firestore = admin.firestore()
 
 const app = express()
-const slackUser = new SlackClient(process.env.SLACK_USER_TOKEN)
-const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blueprints = require('./blueprints')
@@ -81,6 +78,8 @@ app.get('/start/:blueprint/:message', (req, res) => {
   // is still set to the old value
   payload.channel = req.query.channel || payload.channel
   
+  const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
+  
   return slackBot.chat.postMessage(payload)
     .then(() => res.send('starting blueprint: '+blueprint))
     .catch((err) => {
@@ -90,6 +89,7 @@ app.get('/start/:blueprint/:message', (req, res) => {
 })
 
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
+  console.log(req.body)
   let command = req.body.command.replace('/', '')
   // parsing payload to something which can be handled by handleAction
   let payload = {
@@ -108,6 +108,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
 })
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {
+  console.log(payload)
   switch(payload.type) {
     case 'dialog_submission': 
       handleAction(payload, payload.state)
@@ -124,6 +125,8 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
 
 const handleAction = (payload, value) => {
   try {
+    const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
+    
     let actions = JSON.parse(value)
     
     actions.forEach(action => {
@@ -165,6 +168,7 @@ const handleAction = (payload, value) => {
 }
 
 slackEvents.on('app_mention', (message) => {
+  console.log(message)
   let channel = message.channel
   let user = message.user
   
@@ -172,6 +176,7 @@ slackEvents.on('app_mention', (message) => {
 })
 
 slackEvents.on('message', (message) => {
+  console.log(message)
   let channel = message.channel
   let user = message.user
   
