@@ -68,12 +68,14 @@ const fillValues = (message, payload) => {
   } else if(newMessage.blocks) { // fill optional block action values
     newMessage.blocks = newMessage.blocks.map(block => {
       if(block.type === 'actions') {
-        console.log(block)
         block.elements = block.elements.map(action => {
-          action.value = action.value.map(value => {
-            if(value.fill_values) console.log('fill_values are not implemented yet for actions', value.fill_values)
-            return value
-          })
+          if(action.value && typeof action.value !== 'string') {
+            console.log(action.value)
+            action.value = action.value.map(value => {
+              if(value.fill_values) console.log('fill_values are not implemented yet for actions', value.fill_values)
+              return value
+            })
+          }
           
           return action
         })
