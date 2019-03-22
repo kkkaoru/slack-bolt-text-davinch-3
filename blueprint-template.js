@@ -1,4 +1,5 @@
 module.exports = {
+  start: [{"blueprint":"template","type":"message","value":"demo"}],
   dialog: {
     demo: {
       "callback_id": "dialog:1",
@@ -58,7 +59,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Trigger messages"
               },
-              "value": [{"blueprint":"template","type":"message","value":"demo"},{"blueprint":"template","type":"message","value":"demo","delay":2000}]
+              "value": [{"blueprint":"template","type":"message","value":"demo"},{"blueprint":"template","type":"message","value":"demo","delay":1000}]
             },
             {
               "type": "button",

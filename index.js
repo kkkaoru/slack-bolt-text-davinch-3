@@ -90,7 +90,6 @@ app.get('/start/:blueprint/:message', (req, res) => {
 })
 
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
-  console.log(req.body)
   let command = req.body.command.replace('/', '')
   // parsing payload to something which can be handled by handleAction
   let payload = {
@@ -102,22 +101,12 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     }
   }
   // stringify the value since handleAction expects a string
-  let action
-  if(req.body.text && req.body.text.length) {
-    let text = req.body.text.trim()
-    action = blueprints[text].start
-  } else {
-    action = blueprints.slashCommands[command]  
-  }
+  let text = req.body.text
+  let action = (text && text.length && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
   action = JSON.stringify(action)
-  console.log(action)
-  console.log(req.body.channel_id)
   
-  firestore.collection('teams').doc(req.body.team_id).get()
-    .then(doc => {
-      // console.log(doc.data())
-      handleAction(payload, action)
-    })
+  return firestore.collection('teams').doc(req.body.team_id).get()
+    .then(doc => handleAction(payload, action, doc.data()))
     .then(() => res.send())
 })
 
@@ -126,19 +115,22 @@ app.post('/slack/onEvent', jsonParser, (req, res) => {
 })
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {
-  console.log(payload)
-  switch(payload.type) {
-    case 'dialog_submission': 
-      handleAction(payload, payload.state)
-      break
-    case 'block_actions':
-      handleAction(payload, payload.actions[0].value)
-      break
-    case 'message_action':
-      handleAction(payload, payload.callback_id)
-      break
-  }
+  let team = payload.team.id
   
+  return firestore.collection('teams').doc(team).get()
+    .then(doc => {
+      switch(payload.type) {
+        case 'dialog_submission': 
+          handleAction(payload, payload.state, doc.data())
+          break
+        case 'block_actions':
+          handleAction(payload, payload.actions[0].value, doc.data())
+          break
+        case 'message_action':
+          handleAction(payload, payload.callback_id, doc.data())
+          break
+      }
+    })
 })
 
 const handleAction = (payload, value, tokens) => {
@@ -148,7 +140,7 @@ const handleAction = (payload, value, tokens) => {
     
     const slackUser = new SlackClient(userToken)
     const slackBot = new SlackClient(botToken)
-    
+        
     let actions = JSON.parse(value)
     
     actions.forEach(action => {
@@ -170,7 +162,7 @@ const handleAction = (payload, value, tokens) => {
             return slackBot.chat.postEphemeral(block)    
           case 'message':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
-            console.log(channel)
+            console.log(block.channel)
             return slackBot.chat.postMessage(block)
           case 'thread':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)

@@ -1,4 +1,5 @@
 module.exports = {
+  start: [{"blueprint":"privatePoll","type":"message","value":"start"}],
   dialog: {},
   ephemeral: {},
   message: {

@@ -1,4 +1,5 @@
 module.exports = {
+  start: [{"blueprint":"search","type":"message","value":"result"}],
   dialog: {},
   ephemeral: {},
   message: {

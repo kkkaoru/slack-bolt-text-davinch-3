@@ -1,7 +1,7 @@
 module.exports = {
-  start: [{"blueprint":"approval","type":"message","value":"start"}],
+  start: [{"blueprint":"approval","type":"message","value":"request"}],
   message: {
-    start: {
+    request: {
       channel: "DGGD1E5RA",
       blocks: [
         {
