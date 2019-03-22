@@ -4,7 +4,9 @@ const SlackClient = require('@slack/client').WebClient
 const express = require('express')
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const rp = require('request-promise')
 const admin = require('firebase-admin')
+
 
 admin.initializeApp({
   credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
@@ -49,7 +51,6 @@ app.get('/redirect', (req, res) => {
 		url: url,
 		method: 'GET'
 	}
-
 
   return rp(options)
 		.then(result => {
