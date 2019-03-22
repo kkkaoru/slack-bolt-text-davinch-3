@@ -1,5 +1,7 @@
 module.exports = {
+  // this defines the start flow
   start: [{"blueprint":"template","type":"message","value":"demo"}],
+  // definitions of dialogs
   dialog: {
     demo: {
       "callback_id": "dialog:1",
@@ -11,9 +13,10 @@ module.exports = {
           "name": "some_data"
         }
       ],
-      "state": [{"blueprint":"template","type":"ephemeral","value":"confirmation"}]
+      "state": [{"blueprint":"template","type":"thread","value":"confirmation","fill_values":["message.ts"]}]
     }
   },
+  // definitions of ephemeral messages
   ephemeral: {
     demo: {
       blocks: [
@@ -25,22 +28,11 @@ module.exports = {
           }
         }
       ]
-    },
-    confirmation: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Your dialog has been submitted :ok_hand:"
-          }
-        }
-      ]
     }
   },
+  // definitions of standard messages
   message: {
     demo: {
-      channel: "DGGD1E5RA",
       blocks: [
         {
           "type": "section",
@@ -114,6 +106,7 @@ module.exports = {
       ]
     }
   },
+  // definitions of message replies / thread messages
   thread: {
     demo: {
       blocks: [
@@ -125,8 +118,20 @@ module.exports = {
           }
         }
       ]
+    },
+    confirmation: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Your dialog has been submitted :ok_hand:"
+          }
+        }
+      ]
     }
   },
+  // definitions of messages which should update
   update: {
     demo: {
       blocks: [

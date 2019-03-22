@@ -12,11 +12,12 @@ Install the Block Kit App on your workspace through [this url](http://block-kit-
 2. Copy the content from `blueprint-template.js` and paste it to your file 
 3. Import your blueprint to `blueprints.js`
 4. Edit your messages and blueprint
+5. Define your `start` flow in your blueprints `.js` file. (See `blueprint-template.js` for an example)
 
 ## Start a blueprint
 
-Define your `start` flow
-To start a blueprint, call the `/demo` slash command followed by the blueprint's name, e.g. `/demo template`. 
+Define your `start` flow in your blueprints `.js` file.
+To start a blueprint from Slack, simply call the `/demo` slash command followed by the blueprint's name, e.g. `/demo template`. 
 Blueprint file names are `kebab-case`, blueprint names are `camelCase`. E.g. `blueprint-template-demo.js` can be started with `/demo templateDemo`.
 
 ## Message Actions
