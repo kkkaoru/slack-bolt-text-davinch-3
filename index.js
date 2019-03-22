@@ -25,7 +25,7 @@ app.use('/slack/onAction', slackInteractions.expressMiddleware())
 
 // need a way to store access tokens for the install. firebase?
 app.get('/install', (req, res) => {
-  let scopes = ['bot', 'chat:write:bot']
+  let scopes = ['bot', 'chat:write:bot', 'commands']
 
   let params = {
     client_id: process.env.SLACK_CLIENT_ID,
@@ -106,7 +106,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   
   firestore.collection('teams').doc(req.body.team_id).get()
     .then(doc => {
-      console.log(doc.data())
+      // console.log(doc.data())
     })
   handleAction(payload, action)
   return res.send()
