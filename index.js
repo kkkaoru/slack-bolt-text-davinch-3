@@ -28,14 +28,13 @@ app.get('/install', (req, res) => {
   let scopes = ['bot', 'chat:write:bot']
 
   let params = {
-    client_id: process.env.SLACK_CIENT_ID,
+    client_id: process.env.SLACK_CLIENT_ID,
     scope: scopes.join(' '),
     redirect_uri: process.env.SLACK_REDIRECT_URL
   }
-  
+    
   let url = helpers.getUrlWithParams('https://slack.com/oauth/authorize', params)
-  console.log(url)
-  return res.send(url)
+  return res.redirect(url)
 })
 
 app.get('/redirect', (req, res) => {
@@ -60,7 +59,7 @@ app.get('/redirect', (req, res) => {
             return firestore.collection('teams').doc(teamId).set(slackData)
         })
         .then(result => {
-            return res.send('ois ok')
+            return res.send('App installed.')
         })
 		.catch(err => {
 			console.log(err)
@@ -105,6 +104,10 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   // stringify the value since handleAction expects a string
   let action = JSON.stringify(blueprints.slashCommands[command])
   
+  firestore.collection('teams').doc(req.body.team_id).get()
+    .then(doc => {
+      console.log(doc.data())
+    })
   handleAction(payload, action)
   return res.send()
 })
@@ -129,9 +132,10 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
   
 })
 
-const handleAction = (payload, value) => {
+const handleAction = (payload, value, token) => {
   try {
-    const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
+    token = token || process.env.SLACK_BOT_TOKEN
+    const slackBot = new SlackClient(token)
     
     let actions = JSON.parse(value)
     
