@@ -102,14 +102,23 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     }
   }
   // stringify the value since handleAction expects a string
-  let action = JSON.stringify(blueprints.slashCommands[command])
+  let action
+  if(req.body.text && req.body.text.length) {
+    let text = req.body.text.trim()
+    action = blueprints[text].start
+  } else {
+    action = blueprints.slashCommands[command]  
+  }
+  action = JSON.stringify(action)
+  console.log(action)
+  console.log(req.body.channel_id)
   
   firestore.collection('teams').doc(req.body.team_id).get()
     .then(doc => {
       // console.log(doc.data())
+      handleAction(payload, action)
     })
-  handleAction(payload, action)
-  return res.send()
+    .then(() => res.send())
 })
 
 app.post('/slack/onEvent', jsonParser, (req, res) => {
@@ -132,10 +141,13 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
   
 })
 
-const handleAction = (payload, value, token) => {
+const handleAction = (payload, value, tokens) => {
   try {
-    token = token || process.env.SLACK_BOT_TOKEN
-    const slackBot = new SlackClient(token)
+    let userToken = (tokens && tokens.access_token) || process.env.SLACK_BOT_TOKEN
+    let botToken = (tokens && tokens.bot && tokens.bot.bot_access_token) || process.env.SLACK_USER_TOKEN
+    
+    const slackUser = new SlackClient(userToken)
+    const slackBot = new SlackClient(botToken)
     
     let actions = JSON.parse(value)
     
@@ -143,10 +155,8 @@ const handleAction = (payload, value, token) => {
       let delay = action.delay || 0
       setTimeout(() => {
         // let block = blueprints[action.blueprint][action.type][action.value]
-        // order of these two functions is important here
-        // console.log('before filling', block.state)
+
         let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value], payload)
-        console.log('after filling', block.state)
 
         switch(action.type) {
           case 'dialog':  
@@ -160,6 +170,7 @@ const handleAction = (payload, value, token) => {
             return slackBot.chat.postEphemeral(block)    
           case 'message':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
+            console.log(channel)
             return slackBot.chat.postMessage(block)
           case 'thread':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)

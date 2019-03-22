@@ -1,5 +1,5 @@
 module.exports = {
-  
+  start: [{"blueprint":"approval","type":"message","value":"start"}],
   message: {
     start: {
       channel: "DGGD1E5RA",
