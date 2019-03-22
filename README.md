@@ -51,7 +51,7 @@ In this example, `message_1` is sent immediately after the interaction, `message
 
 # Set up your own Slack App
 
-Feel free to clone this app and set up your own Slack App.
+Feel free to [remix](https://glitch.com/edit/#!/remix/block-kit-blueprints) this project and set up your own Slack App.
 
 ## Setup
 
