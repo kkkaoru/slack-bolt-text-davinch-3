@@ -1,19 +1,12 @@
 # Block Kit Blueprints App
 
-Simple app to showcase workflows & demos. Feel free to clone this app and set up your own Slack App.
+Simple app to showcase workflows & demos. 
 
-## Setup
+## Install App
 
-1. Create your app at [api.slack.com](https://api.slack.com/apps)
-2. Create a bot user
-3. Install App to a workspace
-4. Copy **OAuth Access Token**, **Bot User OAuth Access Token**, **Signing Secret** to your `.env` file
-5. Add features and functionality
-  * Interactive components (Request Url: `https://{{your-glitch-project}}.glitch.me/slack/onAction`)
-  * Event subscriptions (Request Url: `https://{{your-glitch-project}}.glitch.me/slack/onEvent`)
-  * Permissions (`bot`, `chat:write:bot`)
-  
-## Sending messages
+Install the Block Kit App on your workspace through [this url](http://block-kit-blueprints.glitch.me/install).
+
+## Create a blueprint
 
 1. Create a new blueprint, e.g. `blueprint-<name-of-blueprint>.js` 
 2. Copy the content from `blueprint-template.js` and paste it to your file 
@@ -22,22 +15,9 @@ Simple app to showcase workflows & demos. Feel free to clone this app and set up
 
 ## Start a blueprint
 
-Each blueprint starts with a message from an App, which means you need to know the channel you want to send your first message to.
-You can find your channel id either:
-1. in the URL by opening Slack in a browser
-2. mentioning the bot user in channel
-3. sending a DM to the bot user
-
-for 2. & 3. the channel & user id will be logged in Glitch's Log (bottom left -> Tools -> Log)
-
-To start a blueprint you just need to call the start url:
-* `https://{{your-glitch-project}}.glitch.me/start/:blueprint/:message`
-where 
-* `:blueprint` is the blueprint name of your `blueprint-` file (e.g. for `blueprint-template.js` it's `template`) 
-and 
-* `:message` is the first message you want to send (e.g. for `blueprint-template.js` it's `demo`).
-
-The channel can be specified either as field in the message json (see `blueprint-template.js` -> `message` -> `demo` -> `channel`) or as url parameter (`?channel=CXXXXXXXX`).
+Define your `start` flow
+To start a blueprint, call the `/demo` slash command followed by the blueprint's name, e.g. `/demo template`. 
+Blueprint file names are `kebab-case`, blueprint names are `camelCase`. E.g. `blueprint-template-demo.js` can be started with `/demo templateDemo`.
 
 ## Message Actions
 
@@ -67,4 +47,26 @@ In this example, `message_1` is sent immediately after the interaction, `message
   {"blueprint":"template","type":"message","value":"message_3","delay":4000}
 ]
 ```
+
+# Set up your own Slack App
+
+Feel free to clone this app and set up your own Slack App.
+
+## Setup
+
+1. Create your app at [api.slack.com](https://api.slack.com/apps)
+2. Create a bot user
+3. Install App to a workspace
+4. Copy **OAuth Access Token**, **Bot User OAuth Access Token**, **Signing Secret** to your `.env` file
+5. Add features and functionality
+  * Interactive components (Request Url: `https://{{your-glitch-project}}.glitch.me/slack/onAction`)
+  * Event subscriptions (Request Url: `https://{{your-glitch-project}}.glitch.me/slack/onEvent`)
+  * Permissions (`bot`, `chat:write:bot`)
+  * Add the `/demo` slash command
+  
+
+
+
+
+
   
