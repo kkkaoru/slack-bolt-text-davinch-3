@@ -103,7 +103,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates","fill_values":["message.ts"]}]
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
               }
             ]
           }

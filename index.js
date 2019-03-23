@@ -117,6 +117,8 @@ app.post('/slack/onEvent', jsonParser, (req, res) => {
 slackInteractions.action(/(\w+)/, (payload, respond) => {
   let team = payload.team.id
   
+  // console.log(payload)
+  
   return firestore.collection('teams').doc(team).get()
     .then(doc => {
       switch(payload.type) {
@@ -124,7 +126,8 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
           handleAction(payload, payload.state, doc.data())
           break
         case 'block_actions':
-          handleAction(payload, payload.actions[0].value, doc.data())
+          console.log(payload.actions[0].selected_option)
+          handleAction(payload, payload.actions[0].value || (payload.actions[0].selected_option && payload.actions[0].selected_option.value), doc.data())
           break
         case 'message_action':
           handleAction(payload, payload.callback_id, doc.data())
