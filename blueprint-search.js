@@ -1,7 +1,11 @@
 module.exports = {
   start: [{"blueprint":"search","type":"message","value":"result"}],
   dialog: {},
-  ephemeral: {},
+  ephemeral: {
+    editDates: {
+      
+    }
+  },
   message: {
     result: {
       channel: "DGGD1E5RA",
@@ -19,9 +23,9 @@ module.exports = {
                 "text": {
                   "type": "plain_text",
                   "emoji": true,
-                  "text": ":mag: Edit search"
+                  "text": ":mag: Edit dates"
                 },
-                "value": "click13"
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates",fill_values:["message.ts"]}]
               },
               {
                 "text": {
@@ -29,7 +33,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": "click123"
+                "value": [{"blueprint":"search","type":"dialog","value":"editSearch"}]
               }
             ]
           }
