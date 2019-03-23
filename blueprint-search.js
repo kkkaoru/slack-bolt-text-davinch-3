@@ -3,7 +3,78 @@ module.exports = {
   dialog: {},
   ephemeral: {
     editDates: {
-      
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Update your search:*"
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Select your location"
+          },
+          "accessory": {
+            "type": "external_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Enter location",
+              "emoji": true
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Select your *start date*"
+          },
+          "accessory": {
+            "type": "datepicker",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select date"
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Select your *end date*"
+          },
+          "accessory": {
+            "type": "datepicker",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select date"
+            }
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Update",
+                "emoji": true
+              },
+              "value": "click_me_123"
+            }
+          ]
+        }
+      ]
     }
   },
   message: {
