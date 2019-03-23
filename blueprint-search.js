@@ -1,82 +1,7 @@
 module.exports = {
   start: [{"blueprint":"search","type":"message","value":"result"}],
   dialog: {},
-  ephemeral: {
-    editDates: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Update your search:*"
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Select your location"
-          },
-          "accessory": {
-            "type": "external_select",
-            "placeholder": {
-              "type": "plain_text",
-              "text": "Enter location",
-              "emoji": true
-            }
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Select your *start date*"
-          },
-          "accessory": {
-            "type": "datepicker",
-            "placeholder": {
-              "type": "plain_text",
-              "text": "Select date"
-            }
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Select your *end date*"
-          },
-          "accessory": {
-            "type": "datepicker",
-            "placeholder": {
-              "type": "plain_text",
-              "text": "Select date"
-            }
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "text": "Update",
-                "emoji": true
-              },
-              "value": "click_me_123"
-            }
-          ]
-        }
-      ]
-    }
-  },
+  ephemeral: {},
   message: {
     result: {
       blocks: [
@@ -93,9 +18,9 @@ module.exports = {
                 "text": {
                   "type": "plain_text",
                   "emoji": true,
-                  "text": ":mag: Edit dates"
+                  "text": ":mag: Edit search"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
+                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -159,27 +84,27 @@ module.exports = {
               },
               "value": "click"
             },
+            {
+              "type": "overflow",
+              "options": [
                   {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
+                      "text": {
+                          "type": "plain_text",
+                          "text": "View gallery",
+                          "emoji": true
+                      },
+                      "value": "value-0"
+                  },
+                  {
+                      "text": {
+                          "type": "plain_text",
+                          "text": "Show on map",
+                          "emoji": true
+                      },
+                      "value": "value-1"
                   }
+              ]
+            }
           ]
         },
         {
@@ -362,6 +287,80 @@ module.exports = {
   },
   thread: {},
   update: {
+    editSearch: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Update your search:*"
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Select your location"
+          },
+          "accessory": {
+            "type": "external_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Enter location",
+              "emoji": true
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Select your *start date*"
+          },
+          "accessory": {
+            "type": "datepicker",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select date"
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Select your *end date*"
+          },
+          "accessory": {
+            "type": "datepicker",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select date"
+            }
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Update",
+                "emoji": true
+              },
+              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
+            }
+          ]
+        }
+      ]
+    },
     result_0: {
       blocks: [
         {
@@ -379,7 +378,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": "value-0"
+                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -387,7 +386,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": "value-1"
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
@@ -660,7 +659,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": "value-0"
+                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -668,7 +667,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": "value-1"
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
@@ -950,7 +949,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": "value-0"
+                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -958,7 +957,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": "value-1"
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
