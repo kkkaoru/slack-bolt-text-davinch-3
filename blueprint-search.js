@@ -95,7 +95,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit dates"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates","fill_values":["message.ts"]}]
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
               },
               {
                 "text": {
@@ -339,7 +339,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Page 1/3"
+              "text": "Results 1-3 of 8"
             }
           ]
         },
@@ -623,7 +623,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Page 1/3"
+              "text": "Results 1-3 of 8"
             }
           ]
         },
@@ -904,7 +904,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Page 2/3"
+              "text": "Results 4-6 of 8"
             }
           ]
         },
@@ -1046,7 +1046,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Page 3/3"
+              "text": "Result 8 of 8"
             }
           ]
         },

@@ -37,8 +37,11 @@ exports.stringifyValues = (message, payload) => {
     if(block.type === 'section' && block.accessory && block.accessory.options) {
       try {
         block.accessory.options = block.accessory.options.map(option => {
-           if(option.value !== 'string') 
-        }) JSON.stringify(block.accessory.value) 
+          if(option.value !== 'string') {
+            option.value = JSON.stringify(option.value) 
+          }
+          return option
+        }) 
       } catch(err) {}  
     }
     return block

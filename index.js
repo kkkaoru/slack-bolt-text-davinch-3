@@ -140,7 +140,7 @@ const handleAction = (payload, value, tokens) => {
     
     const slackUser = new SlackClient(userToken)
     const slackBot = new SlackClient(botToken)
-        
+    console.log(value)    
     let actions = JSON.parse(value)
     
     actions.forEach(action => {
