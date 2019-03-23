@@ -102,7 +102,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   }
   // stringify the value since handleAction expects a string
   let text = req.body.text
-  let action = (text && text.length && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
+  let action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
   action = JSON.stringify(action)
   
   return firestore.collection('teams').doc(req.body.team_id).get()
@@ -162,7 +162,7 @@ const handleAction = (payload, value, tokens) => {
             return slackBot.chat.postEphemeral(block)    
           case 'message':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
-            console.log(block.channel)
+            console.log(JSON.stringify(block))
             return slackBot.chat.postMessage(block)
           case 'thread':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)

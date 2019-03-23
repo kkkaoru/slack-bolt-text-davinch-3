@@ -79,7 +79,6 @@ module.exports = {
   },
   message: {
     result: {
-      channel: "DGGD1E5RA",
       blocks: [
         {
           "type": "section",
@@ -96,7 +95,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit dates"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates",fill_values:["message.ts"]}]
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates","fill_values":["message.ts"]}]
               },
               {
                 "text": {
@@ -104,7 +103,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": [{"blueprint":"search","type":"dialog","value":"editSearch"}]
+                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates","fill_values":["message.ts"]}]
               }
             ]
           }

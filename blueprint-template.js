@@ -28,6 +28,18 @@ module.exports = {
           }
         }
       ]
+    },
+    slash: {
+      channel: "DGGD1E5RA",
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "No blueprint found with this name."
+          }
+        }
+      ]
     }
   },
   // definitions of standard messages
@@ -90,18 +102,6 @@ module.exports = {
               "value": [{"blueprint":"template","type":"dialog","value":"demo"}]
             }
           ]
-        }
-      ]
-    },
-    slash: {
-      channel: "DGGD1E5RA",
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "This is a response to a `slash command`"
-          }
         }
       ]
     }
