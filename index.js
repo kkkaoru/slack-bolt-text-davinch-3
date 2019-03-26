@@ -116,9 +116,7 @@ app.post('/slack/onEvent', jsonParser, (req, res) => {
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {
   let team = payload.team.id
-  
-  // console.log(payload)
-  
+    
   return firestore.collection('teams').doc(team).get()
     .then(doc => {
       switch(payload.type) {
@@ -149,8 +147,6 @@ const handleAction = (payload, value, tokens) => {
     actions.forEach(action => {
       let delay = action.delay || 0
       setTimeout(() => {
-        // let block = blueprints[action.blueprint][action.type][action.value]
-
         let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value], payload)
 
         switch(action.type) {
