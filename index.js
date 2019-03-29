@@ -114,6 +114,24 @@ app.post('/slack/onEvent', jsonParser, (req, res) => {
   console.log(req.body) 
 })
 
+app.post('/slack/options', urlencodedParser, (req, res) => {
+    let payload = JSON.parse(req.body.payload)
+
+    return res.send(
+      {
+        "options": [
+          {
+          "text": {
+            "type": "plain_text",
+            "text": payload.value
+          },
+          "value": payload.value.replace(/ /g, "-")
+          }
+        ]
+      }
+    )
+})
+
 slackInteractions.action(/(\w+)/, (payload, respond) => {
   let team = payload.team.id
     
