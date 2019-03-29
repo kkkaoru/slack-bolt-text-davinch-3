@@ -116,20 +116,36 @@ app.post('/slack/onEvent', jsonParser, (req, res) => {
 
 app.post('/slack/options', urlencodedParser, (req, res) => {
     let payload = JSON.parse(req.body.payload)
+    
+    console.log(payload)
+  
+    switch (payload.type) {
+      case 'dialog_suggestions':
+        return res.send({
+          "options": [
+            {
+              "label": payload.value,
+              "value": payload.value.replace(/ /g, "-")
+            }
+          ]
+        })
+        break
+      case 'block_suggestions':
+        return res.send({
+          "options": [
+            {
+            "text": {
+              "type": "plain_text",
+              "text": payload.value
+            },
+            "value": payload.value.replace(/ /g, "-")
+            }
+          ]
+        })
+        break  
+    }    
 
-    return res.send(
-      {
-        "options": [
-          {
-          "text": {
-            "type": "plain_text",
-            "text": payload.value
-          },
-          "value": payload.value.replace(/ /g, "-")
-          }
-        ]
-      }
-    )
+    
 })
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {

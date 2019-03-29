@@ -41,6 +41,13 @@ module.exports = {
           "optional": true
         },
         {
+          "label": "Label",
+          "name": "label",
+          "type": "select",
+          "data_source": "external",
+          "optional": true
+        },
+        {
           "type": "textarea",
           "label": "Description",
           "name": "description"
