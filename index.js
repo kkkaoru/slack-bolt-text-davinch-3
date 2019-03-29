@@ -120,7 +120,7 @@ app.post('/slack/options', urlencodedParser, (req, res) => {
     console.log(payload)
   
     switch (payload.type) {
-      case 'dialog_suggestions':
+      case 'dialog_suggestion':
         return res.send({
           "options": [
             {
@@ -130,7 +130,7 @@ app.post('/slack/options', urlencodedParser, (req, res) => {
           ]
         })
         break
-      case 'block_suggestions':
+      case 'block_suggestion':
         return res.send({
           "options": [
             {
