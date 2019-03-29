@@ -136,7 +136,7 @@ module.exports = {
           {
           "type": "context",
           "elements": [
-                  {
+            {
               "type": "image",
               "image_url": "https://ca.slack-edge.com/TAW6LHTB5-UAVNY70E5-0f54a6b30573-72",
               "alt_text": "Michael Scott"
