@@ -361,6 +361,78 @@ module.exports = {
         }
       ]
     },
+    editFilter: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Filter results:*"
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Stars"
+          },
+          "accessory": {
+            "type": "static_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select stars",
+              "emoji": true
+            },
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Choice 1",
+                  "emoji": true
+                },
+                "value": "value-0"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Choice 2",
+                  "emoji": true
+                },
+                "value": "value-1"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Choice 3",
+                  "emoji": true
+                },
+                "value": "value-2"
+              }
+            ]
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Filter",
+                "emoji": true
+              },
+              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
+            }
+          ]
+        }
+      ]
+    },
     result_0: {
       blocks: [
         {
