@@ -20,7 +20,7 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blueprints = require('./blueprints')
 const helpers = require('./helpers')
 
-// app.use('/slack/onEvent', slackEvents.expressMiddleware())
+app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
 
 // need a way to store access tokens for the install. firebase?
@@ -92,6 +92,7 @@ app.get('/start/:blueprint/:message', (req, res) => {
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let command = req.body.command.replace('/', '')
   // parsing payload to something which can be handled by handleAction
+  console.log(command) 
   let payload = {
     channel: {
       id: req.body.channel_id
@@ -105,14 +106,16 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
   action = JSON.stringify(action)
   
+  console.log(action)
+  
   return firestore.collection('teams').doc(req.body.team_id).get()
     .then(doc => handleAction(payload, action, doc.data()))
     .then(() => res.send())
 })
 
-app.post('/slack/onEvent', jsonParser, (req, res) => {
-  console.log(req.body) 
-})
+// app.post('/slack/onEvent', jsonParser, (req, res) => {
+//   console.log(req.body) 
+// })
 
 app.post('/slack/options', urlencodedParser, (req, res) => {
     let payload = JSON.parse(req.body.payload)
