@@ -44,8 +44,9 @@ module.exports = {
               "text": {
                 "type": "plain_text",
                 "emoji": true,
-                "text": "Approve"
+                "text": "Approve",
               },
+              "style": "primary",
               "value": [{"blueprint":"approval","type":"update","value":"confirmation"}]
             },
             {
@@ -53,8 +54,9 @@ module.exports = {
               "text": {
                 "type": "plain_text",
                 "emoji": true,
-                "text": "Decline"
+                "text": "Decline" 
               },
+              "style": "danger",
               "value": [{"blueprint":"approval","type":"dialog","value":"info"}]
             }
           ]
