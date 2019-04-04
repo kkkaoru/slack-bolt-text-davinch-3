@@ -8,11 +8,11 @@ const template = require('./blueprint-template')
 const slashCommands = require('./slash-commands')
 
 module.exports = {
-  approval: approval,
-  createTask: createTask,
-  privatePoll: privatePoll,
-  publicPoll: publicPoll,
-  search: search,
-  template: template,
+  "approval": approval,
+  "create-task": createTask,
+  "private-poll": privatePoll,
+  "public-poll": publicPoll,
+  "search": search,
+  "template": template,
   slashCommands: slashCommands
 }
