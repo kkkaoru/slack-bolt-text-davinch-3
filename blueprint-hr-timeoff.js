@@ -35,7 +35,7 @@ module.exports = {
                   "text": "Paid Time Off",
                   "emoji": true
                 },
-                "value": [{"blueprint":"timeoff","type":"update","value":"step"}]
+                "value": [{"blueprint":"hr-timeoff","type":"update","value":"step"}]
               },
               {
                 "text": {
@@ -43,7 +43,7 @@ module.exports = {
                   "text": "Jury Duty",
                   "emoji": true
                 },
-                "value": [{"blueprint":"timeoff","type":"update","value":"step"}]
+                "value": [{"blueprint":"hr-timeoff","type":"update","value":"step"}]
               },
               {
                 "text": {
@@ -51,7 +51,7 @@ module.exports = {
                   "text": "Volunteering Day",
                   "emoji": true
                 },
-                "value": [{"blueprint":"timeoff","type":"update","value":"step"}]
+                "value": [{"blueprint":"hr-timeoff","type":"update","value":"step"}]
               }
             ]
           }

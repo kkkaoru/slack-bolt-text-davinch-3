@@ -1,5 +1,6 @@
 const approval = require('./blueprint-approval')
 const createTask = require('./blueprint-create-task')
+const hrTimeoff = require('./blueprint-hr-timeoff')
 const privatePoll = require('./blueprint-private-poll')
 const publicPoll = require('./blueprint-public-poll')
 const search = require('./blueprint-search')
@@ -11,6 +12,7 @@ const help = require('./blueprint-help')
 module.exports = {
   "approval": approval,
   "create-task": createTask,
+  "hr-timeoff": hrTimeoff,
   "private-poll": privatePoll,
   "public-poll": publicPoll,
   "search": search,

@@ -75,28 +75,6 @@ app.get('/redirect', (req, res) => {
 		})
 })
 
-// call this URL to start a blueprint
-app.get('/start/:blueprint/:message', (req, res) => {
-  let blueprint = req.params.blueprint
-  let message = req.params.message
-      
-  let payload = helpers.stringifyValues(blueprints[blueprint].message[message])
-  // ATTENTION: `req.query` seems to be cached by glitch when a query parameter is removed
-  // e.g. if this url is called with a `channel` parameter first
-  // and another call without this parameter is done, the `req.query.channel` parameter 
-  // is still set to the old value
-  payload.channel = req.query.channel || payload.channel
-  
-  const slackBot = new SlackClient(process.env.SLACK_BOT_TOKEN)
-  
-  return slackBot.chat.postMessage(payload)
-    .then(() => res.send('starting blueprint: '+blueprint))
-    .catch((err) => {
-      console.log(err)
-      return res.send(err.data)
-    })
-})
-
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let command = req.body.command.replace('/', '')
   // parsing payload to something which can be handled by handleAction
