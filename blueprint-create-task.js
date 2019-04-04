@@ -86,7 +86,7 @@ module.exports = {
           "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Assignee:* <fakeLink.toUser.com|Fluttershy>"
+              "text": "*Assignee:* <fakeLink.toUser.com|David>"
             },
             {
               "type": "mrkdwn",
@@ -94,7 +94,7 @@ module.exports = {
             },
             {
               "type": "mrkdwn",
-              "text": "*Labels:* Block Kit"
+              "text": "*Labels:* Sales"
             }
           ]
         },
