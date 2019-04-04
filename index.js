@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const jsonParser = bodyParser.json()
 const rp = require('request-promise')
+const fs = require('fs')
+const markdown = require('markdown-it')
 const admin = require('firebase-admin')
 
 admin.initializeApp({
@@ -22,6 +24,12 @@ const helpers = require('./helpers')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
 app.use('/slack/onAction', slackInteractions.expressMiddleware())
+
+app.get('/', (req, res) => {
+  let contents = fs.readFileSync('README.md', 'utf8')
+  let md = new markdown()
+  return res.send(md.render(contents))
+})
 
 // need a way to store access tokens for the install. firebase?
 app.get('/install', (req, res) => {

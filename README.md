@@ -17,8 +17,8 @@ Install the Block Kit App on your workspace through [this url](http://block-kit-
 ## Start a blueprint
 
 Define your `start` flow in your blueprints `.js` file.
-To start a blueprint from Slack, simply call the `/demo` slash command followed by the blueprint's name, e.g. `/demo template`. 
-Blueprint file names are `kebab-case`, blueprint names are `camelCase`. E.g. `blueprint-template-demo.js` can be started with `/demo templateDemo`.
+To start a blueprint from Slack, simply call the `/blueprint-demo` slash command followed by the blueprint's name, e.g. `/blueprint-demo template`. 
+Blueprint file names are `kebab-case`, blueprint names are `camelCase`. E.g. `blueprint-template-demo.js` can be started with `/blueprint-demo templateDemo`.
 
 ## Message Actions
 
@@ -30,7 +30,7 @@ Use this format as `callback_id` for message actions:
 
 ## Slash Commands
 
-To make use of slash commands you can define the flow it should trigger in `slash-commands.js`. The json key has to be the same name as your slash command without the `/`, e.g. for the slash command `/demo` it should look like this:
+To make use of slash commands you can define the flow it should trigger in `slash-commands.js`. The json key has to be the same name as your slash command without the `/`, e.g. for the slash command `/blueprint-demo` it should look like this:
 
 ```
 demo: [{"blueprint":"template","type":"message","value":"slash"}]
@@ -63,7 +63,7 @@ Feel free to [remix](https://glitch.com/edit/#!/remix/block-kit-blueprints) this
   * Interactive components (Request Url: `https://{{your-glitch-project}}.glitch.me/slack/onAction`)
   * Event subscriptions (Request Url: `https://{{your-glitch-project}}.glitch.me/slack/onEvent`)
   * Permissions (`bot`, `chat:write:bot`)
-  * Add the `/demo` slash command
+  * Add the `/blueprint-demo` slash command
   
 
 
