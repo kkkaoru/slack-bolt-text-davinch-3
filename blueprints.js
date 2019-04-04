@@ -6,7 +6,7 @@ const search = require('./blueprint-search')
 const template = require('./blueprint-template')
 
 const slashCommands = require('./slash-commands')
-const help = require('./blueprint-help')
+const help = require('./x-blueprint-help')
 
 module.exports = {
   "approval": approval,

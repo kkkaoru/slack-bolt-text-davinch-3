@@ -20,6 +20,7 @@ const app = express()
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blueprints = require('./blueprints')
+console.log(blueprints)
 const helpers = require('./helpers')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
