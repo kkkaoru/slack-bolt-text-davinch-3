@@ -20,7 +20,6 @@ const app = express()
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
 const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const blueprints = require('./blueprints')
-console.log(blueprints)
 const helpers = require('./helpers')
 
 app.use('/slack/onEvent', slackEvents.expressMiddleware())
@@ -184,7 +183,6 @@ const handleAction = (payload, value, tokens) => {
     
     const slackUser = new SlackClient(userToken)
     const slackBot = new SlackClient(botToken)
-    console.log(value)    
     let actions = JSON.parse(value)
     
     actions.forEach(action => {
@@ -204,7 +202,6 @@ const handleAction = (payload, value, tokens) => {
             return slackBot.chat.postEphemeral(block)    
           case 'message':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
-            console.log(JSON.stringify(block))
             return slackBot.chat.postMessage(block)
           case 'thread':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
