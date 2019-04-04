@@ -51,7 +51,7 @@ module.exports = {
           "type": "textarea",
           "label": "Description",
           "name": "description",
-          "value": "This is a prefilled text \n\n https://pony-farm.slack.com/archives/DH46T0QV6/p1553819686001000"
+          "value": "Can you please prepare the deck for our customer meeting tomorrow, David?\n\nhttps://workspace.slack.com/archives/CXXXXXXX/p1553819686001000"
         }
       ],
       "state": [{"blueprint":"create-task","type":"thread","value":"confirmation","fill_values":["message.ts"]}]
