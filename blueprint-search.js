@@ -73,7 +73,6 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
-              "style": "primary",
               "value": "click"
             },
                   {
@@ -148,7 +147,6 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
-              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -223,7 +221,6 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
-              "style": "primary",
               "value": "click_me_123"
             },
                   {
