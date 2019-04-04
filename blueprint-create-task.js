@@ -54,7 +54,7 @@ module.exports = {
           "value": "This is a prefilled text \n\n https://pony-farm.slack.com/archives/DH46T0QV6/p1553819686001000"
         }
       ],
-      "state": [{"blueprint":"createTask","type":"thread","value":"confirmation","fill_values":["message.ts"]}]
+      "state": [{"blueprint":"create-task","type":"thread","value":"confirmation","fill_values":["message.ts"]}]
     }
   },
   ephemeral: {},

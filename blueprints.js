@@ -6,6 +6,7 @@ const search = require('./blueprint-search')
 const template = require('./blueprint-template')
 
 const slashCommands = require('./slash-commands')
+const help = require('./blueprint-help')
 
 module.exports = {
   "approval": approval,
@@ -14,5 +15,6 @@ module.exports = {
   "public-poll": publicPoll,
   "search": search,
   "template": template,
-  slashCommands: slashCommands
+  "slashCommands": slashCommands,
+  "help": help
 }

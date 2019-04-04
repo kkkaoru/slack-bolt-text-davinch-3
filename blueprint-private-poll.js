@@ -1,5 +1,5 @@
 module.exports = {
-  start: [{"blueprint":"privatePoll","type":"message","value":"start"}],
+  start: [{"blueprint":"private-poll","type":"message","value":"start"}],
   dialog: {},
   ephemeral: {},
   message: {
@@ -37,7 +37,7 @@ module.exports = {
                 "text": "Choose Farmhouse",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"select1"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"select1"}]
             }
           ]
         },
@@ -66,7 +66,7 @@ module.exports = {
                 "text": "Choose Kin Khao",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"select2"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"select2"}]
             }
           ]
         },
@@ -95,7 +95,7 @@ module.exports = {
                 "text": "Choose Le Ros",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"select3"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"select3"}]
             }
           ]
         },
@@ -141,7 +141,7 @@ module.exports = {
                 "text": "Choose Farmhouse",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"select1"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"select1"}]
             }
           ]
         },
@@ -170,7 +170,7 @@ module.exports = {
                 "text": "Choose Kin Khao",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"select2"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"select2"}]
             }
           ]
         },
@@ -199,7 +199,7 @@ module.exports = {
                 "text": "Choose Le Ros",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"select3"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"select3"}]
             }
           ]
         },
@@ -285,7 +285,7 @@ module.exports = {
                 "text": "Edit selection",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"edit"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"edit"}]
             }
           ]
         }
@@ -368,7 +368,7 @@ module.exports = {
                 "text": "Edit selection",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"edit"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"edit"}]
             }
           ]
         }
@@ -451,7 +451,7 @@ module.exports = {
                 "text": "Edit selection",
                 "emoji": true
               },
-              "value": [{"blueprint":"privatePoll","type":"update","value":"edit"}]
+              "value": [{"blueprint":"private-poll","type":"update","value":"edit"}]
             }
           ]
         }

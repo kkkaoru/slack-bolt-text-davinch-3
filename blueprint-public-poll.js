@@ -1,5 +1,5 @@
 module.exports = {
-  start: [{"blueprint":"publicPoll","type":"message","value":"start"}],
+  start: [{"blueprint":"public-poll","type":"message","value":"start"}],
   dialog: {},
   ephemeral: {},
   message: {
@@ -29,7 +29,7 @@ module.exports = {
               "emoji": true,
               "text": "Vote"
             },
-            "value": [{"blueprint":"publicPoll","type":"update","value":"vote"}]
+            "value": [{"blueprint":"public-poll","type":"update","value":"vote"}]
           }
         },
           {
@@ -57,7 +57,7 @@ module.exports = {
               "emoji": true,
               "text": "Vote"
             },
-            "value": [{"blueprint":"publicPoll","type":"update","value":"vote"}]
+            "value": [{"blueprint":"public-poll","type":"update","value":"vote"}]
           }
         },
         {
@@ -85,7 +85,7 @@ module.exports = {
               "emoji": true,
               "text": "Vote"
             },
-            "value": [{"blueprint":"publicPoll","type":"update","value":"vote"}]
+            "value": [{"blueprint":"public-poll","type":"update","value":"vote"}]
           }
         },
         {
