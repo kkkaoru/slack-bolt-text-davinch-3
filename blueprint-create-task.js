@@ -66,7 +66,43 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Your task has been created :ok_hand:"
+            "text": "Your task *Prepare customer deck* has been created :ok_hand:"
+          },
+          "accessory": {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "View :arrow_upper_right:",
+              "emoji": true
+            },
+            "value": "click_me_123"
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "*Assignee:* <fakeLink.toUser.com|Fluttershy>"
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Priority:* :arrow_double_up: High"
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Labels:* Block Kit"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Description*\nCan you please prepare the deck for our customer meeting tomorrow, <fakeLink.toUser.com|David>?\n\nhttps://pony-farm.slack.com/archives/DH46T0QV6/p1553819686001000"
           }
         }
       ]
