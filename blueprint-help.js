@@ -8,7 +8,7 @@ const getBlueprints = () => {
   fs.readdirSync(dir).forEach(file => {
     if(file.indexOf('blueprint-') >= 0) {
       let bp = file.replace('blueprint-', '').replace('.js', '')
-      blueprints.push(bp)
+      if(bp !== 'help') blueprints.push(bp)
     }
   })
   
