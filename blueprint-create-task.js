@@ -97,7 +97,7 @@ module.exports = {
               "text": "View :arrow_upper_right:",
               "emoji": true
             },
-            "value": "click_me_123"
+            "url": "https://example.com"
           }
         },
         {
