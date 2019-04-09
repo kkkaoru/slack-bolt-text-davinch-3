@@ -4,7 +4,6 @@ module.exports = {
   ephemeral: {},
   message: {
     start: {
-      channel: "GGZ3E91SQ",
       blocks: [
         {
           "type": "section",

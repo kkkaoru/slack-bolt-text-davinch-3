@@ -1,5 +1,5 @@
 module.exports = {
-  start: [{"blueprint":"search","type":"message","value":"result"}],
+  start: [{"blueprint":"paging","type":"message","value":"result"}],
   dialog: {},
   ephemeral: {},
   message: {
@@ -20,7 +20,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
+                "value": [{"blueprint":"paging","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -28,7 +28,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
+                "value": [{"blueprint":"paging","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
@@ -278,7 +278,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Next >"
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_1"}]
             }
           ]
         }
@@ -355,7 +355,7 @@ module.exports = {
                 "text": "Update",
                 "emoji": true
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_0"}]
             }
           ]
         }
@@ -427,7 +427,7 @@ module.exports = {
                 "text": "Filter",
                 "emoji": true
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_0"}]
             }
           ]
         }
@@ -450,7 +450,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
+                "value": [{"blueprint":"paging","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -458,7 +458,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
+                "value": [{"blueprint":"paging","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
@@ -708,7 +708,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Next >"
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_1"}]
             }
           ]
         }
@@ -731,7 +731,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
+                "value": [{"blueprint":"paging","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -739,7 +739,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
+                "value": [{"blueprint":"paging","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
@@ -989,7 +989,7 @@ module.exports = {
                 "emoji": true,
                 "text": "< Previous"
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_0"}]
             },
             {
               "type": "button",
@@ -998,7 +998,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Next >"
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_2"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_2"}]
             }
           ]
         }
@@ -1021,7 +1021,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":mag: Edit search"
                 },
-                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
+                "value": [{"blueprint":"paging","type":"update","value":"editSearch"}]
               },
               {
                 "text": {
@@ -1029,7 +1029,7 @@ module.exports = {
                   "emoji": true,
                   "text": ":pencil2: Edit filters"
                 },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
+                "value": [{"blueprint":"paging","type":"ephemeral","value":"editDates"}]
               }
             ]
           }
@@ -1131,7 +1131,7 @@ module.exports = {
                 "emoji": true,
                 "text": "< Previous"
               },
-              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_1"}]
             }
           ]
         }
