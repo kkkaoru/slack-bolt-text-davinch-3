@@ -1,7 +1,8 @@
 module.exports = {
+  start: [{"blueprint":"create-task","type":"message","value":"task"}],
   dialog: {
     create: {
-      "callback_id": "dialog:1",
+      "callback_id": "dialog_task",
       "title": "Create a task",
       "elements": [
         {
@@ -58,7 +59,28 @@ module.exports = {
     }
   },
   ephemeral: {},
-  message: {},
+  message: {
+    task: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Can you please prepare the deck for our customer meeting tomorrow, David?"
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "(Click \"Create Task\" message action to create a task)"
+            }
+          ]
+        }
+      ]
+    }
+  },
   thread: {
     confirmation: {
       blocks: [
@@ -102,7 +124,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Description*\nCan you please prepare the deck for our customer meeting tomorrow, <fakeLink.toUser.com|David>?\n\nhttps://pony-farm.slack.com/archives/DH46T0QV6/p1553819686001000"
+            "text": "*Description*\nCan you please prepare the deck for our customer meeting tomorrow, <fakeLink.toUser.com|David>?\n\nhttps://workspace.slack.com/archives/CXXXXXXX/p1553819686001000"
           }
         }
       ]
