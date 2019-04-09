@@ -2,7 +2,6 @@ module.exports = {
   start: [{"blueprint":"approval","type":"message","value":"request"}],
   message: {
     request: {
-      channel: "DGGD1E5RA",
       blocks: [
         {
           "type": "section",
@@ -180,7 +179,7 @@ module.exports = {
   },
   dialog: {
     info: {
-      "callback_id": "dialog:1",
+      "callback_id": "dialog:reject",
       "title": "Reject request",
       "submit_label": "Reject",
       "elements": [
