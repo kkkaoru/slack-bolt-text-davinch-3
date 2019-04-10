@@ -73,6 +73,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click"
             },
                   {
@@ -147,6 +148,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -158,27 +160,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -221,6 +223,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -232,27 +235,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -503,6 +506,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -514,27 +518,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -577,6 +581,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -588,27 +593,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -651,6 +656,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -662,27 +668,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -784,6 +790,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -795,27 +802,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -858,6 +865,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -869,27 +877,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -932,6 +940,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -943,27 +952,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
@@ -1074,6 +1083,7 @@ module.exports = {
                 "emoji": true,
                 "text": "Book now"
               },
+              "style": "primary",
               "value": "click_me_123"
             },
                   {
@@ -1085,27 +1095,27 @@ module.exports = {
               },
               "value": "click_me_123"
             },
-                  {
-                      "type": "overflow",
-                      "options": [
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "View gallery",
-                                  "emoji": true
-                              },
-                              "value": "value-0"
-                          },
-                          {
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Show on map",
-                                  "emoji": true
-                              },
-                              "value": "value-1"
-                          }
-                      ]
-                  }
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
           ]
         },
         {
