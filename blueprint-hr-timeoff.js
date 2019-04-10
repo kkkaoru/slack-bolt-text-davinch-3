@@ -162,6 +162,7 @@ module.exports = {
                 "text": "Send request",
                 "emoji": true
               },
+              "style": "primary",
               "value": [{"blueprint":"hr-timeoff","type":"update","value":"confirmation"}]
             },
                   {
