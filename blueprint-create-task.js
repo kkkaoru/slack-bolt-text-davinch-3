@@ -61,12 +61,14 @@ module.exports = {
   ephemeral: {},
   message: {
     task: {
+      icon_url: "https://api.slack.com/img/blocks/bkb_template_images/profile_2.png",
+      username: "Pam",
       blocks: [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Can you please prepare the deck for our customer meeting tomorrow, David?"
+            "text": "Can you please prepare the deck for our customer meeting tomorrow, <fakeLink.toUser.com|David>?"
           }
         },
         {
