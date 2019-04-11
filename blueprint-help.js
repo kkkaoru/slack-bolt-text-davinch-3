@@ -46,14 +46,14 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "`/blueprint-settings set_name App name`"
+            "text": "`/blueprint-settings app_name App name`"
           }
         },
           {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "`/blueprint-settings set_icon https://path.to/icon.jpg`"
+            "text": "`/blueprint-settings app_icon https://path.to/icon.jpg`"
           }
         }
       ]

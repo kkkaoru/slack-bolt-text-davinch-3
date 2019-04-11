@@ -93,16 +93,18 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   
   if(command === 'blueprint-settings') {
     let text = req.body.text
-    let settings = text.split(' ', 2).map(value => value.trim())
-    if(!settings.length || settings.length === 1 || (settings[0] !== 'app_name' && settings[0] !== 'app_icon')) {
+    let setting = text.split(' ', 1)[0]
+    let value = text.split(' ').slice(1).join(' ')
+    console.log(setting)
+    console.log(value)
+    if(setting !== 'app_name' && setting !== 'app_icon') {
       action = blueprints.slashCommands[command]
-    } else if (settings[0] === 'app_name') {
-      firestore.collection('teams').doc(req.body.team_id).set({app_name: settings[1]}, {merge: true})   
-      action = blueprints.slashCommands['blueprint-settings-app-name']
-    } else if (settings[0] === 'app_icon') {
-      firestore.collection('teams').doc(req.body.team_id).set({app_icon: settings[1]}, {merge: true})  
-      action = blueprints.slashCommands['blueprint-settings-app-name']
-    }
+    } else {
+      let json = {}
+      json[setting] = value
+      firestore.collection('teams').doc(req.body.team_id).set(json, {merge: true})   
+      action = blueprints.slashCommands['blueprint-settings-'+(setting.replace('_', '-'))]
+    } 
   } else {
     action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]
   } 
@@ -183,8 +185,8 @@ const executeAction = (payload, value, tokens) => {
       setTimeout(() => {
         let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value], payload)
         
-        if(tokens && tokens.bot && tokens.bot.username) block.username = tokens.bot.username
-        if(tokens && tokens.bot && tokens.bot.icon) block.icon_url = tokens.bot.icon
+        if(tokens && tokens.app_name) block.username = tokens.app_name
+        if(tokens && tokens.app_icon) block.icon_url = tokens.app_icon
 
         switch(action.type) {
           case 'dialog':  
