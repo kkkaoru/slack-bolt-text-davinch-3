@@ -77,6 +77,20 @@ app.get('/redirect', (req, res) => {
 
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let command = req.body.command.replace('/', '')
+  
+  // parsing payload to something which can be handled by executeAction
+  let payload = {
+    channel: {
+      id: req.body.channel_id
+    },
+    user: {
+      id: req.body.user_id
+    }
+  }
+  // stringify the value since executeAction expects a string
+  let text = req.body.text
+  let action 
+  
   if(command === 'blueprint-settings') {
     let text = req.body.text
     let settings = text.split(' ', 2).map(value => value.trim())
@@ -86,8 +100,11 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
         
     }
   } else {
-    return executeCommand(req, res)  
+    action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]
   } 
+  
+  return executeCommand(action)
+      .then(() => res.send()) 
 })
 
 // app.post('/slack/onEvent', jsonParser, (req, res) => {
@@ -195,23 +212,11 @@ const executeAction = (payload, value, tokens) => {
 }
 
 const executeCommand = (req, res) => {
-  // parsing payload to something which can be handled by executeAction
-  let payload = {
-    channel: {
-      id: req.body.channel_id
-    },
-    user: {
-      id: req.body.user_id
-    }
-  }
-  // stringify the value since executeAction expects a string
-  let text = req.body.text
-  let action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
+   
   action = JSON.stringify(action)
     
   return firestore.collection('teams').doc(req.body.team_id).get()
     .then(doc => executeAction(payload, action, doc.data()))
-    .then(() => res.send()) 
 }
 
 // slackEvents.on('app_mention', (message) => {
