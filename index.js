@@ -77,23 +77,11 @@ app.get('/redirect', (req, res) => {
 
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let command = req.body.command.replace('/', '')
-  // parsing payload to something which can be handled by handleAction
-  let payload = {
-    channel: {
-      id: req.body.channel_id
-    },
-    user: {
-      id: req.body.user_id
-    }
-  }
-  // stringify the value since handleAction expects a string
-  let text = req.body.text
-  let action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
-  action = JSON.stringify(action)
+  if(command === 'blueprint-settings') {
     
-  return firestore.collection('teams').doc(req.body.team_id).get()
-    .then(doc => handleAction(payload, action, doc.data()))
-    .then(() => res.send())
+  } else {
+    return executeCommand(req, res)  
+  } 
 })
 
 // app.post('/slack/onEvent', jsonParser, (req, res) => {
@@ -141,20 +129,20 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
     .then(doc => {
       switch(payload.type) {
         case 'dialog_submission': 
-          handleAction(payload, payload.state, doc.data())
+          executeAction(payload, payload.state, doc.data())
           break
         case 'block_actions':
           console.log(payload.actions[0].selected_option)
-          handleAction(payload, payload.actions[0].value || (payload.actions[0].selected_option && payload.actions[0].selected_option.value), doc.data())
+          executeAction(payload, payload.actions[0].value || (payload.actions[0].selected_option && payload.actions[0].selected_option.value), doc.data())
           break
         case 'message_action':
-          handleAction(payload, payload.callback_id, doc.data())
+          executeAction(payload, payload.callback_id, doc.data())
           break
       }
     })
 })
 
-const handleAction = (payload, value, tokens) => {
+const executeAction = (payload, value, tokens) => {
   try {
     let userToken = (tokens && tokens.access_token) || process.env.SLACK_BOT_TOKEN
     let botToken = (tokens && tokens.bot && tokens.bot.bot_access_token) || process.env.SLACK_USER_TOKEN
@@ -195,6 +183,26 @@ const handleAction = (payload, value, tokens) => {
   } catch(e) {
     console.log(e)
   }
+}
+
+const executeCommand = (req, res) => {
+  // parsing payload to something which can be handled by executeAction
+  let payload = {
+    channel: {
+      id: req.body.channel_id
+    },
+    user: {
+      id: req.body.user_id
+    }
+  }
+  // stringify the value since executeAction expects a string
+  let text = req.body.text
+  let action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]  
+  action = JSON.stringify(action)
+    
+  return firestore.collection('teams').doc(req.body.team_id).get()
+    .then(doc => executeAction(payload, action, doc.data()))
+    .then(() => res.send()) 
 }
 
 // slackEvents.on('app_mention', (message) => {
