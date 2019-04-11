@@ -94,16 +94,20 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   if(command === 'blueprint-settings') {
     let text = req.body.text
     let settings = text.split(' ', 2).map(value => value.trim())
-    if(!settings.length || settings.length === 1 || (settings[0] !== 'set_name' && settings[0] !== 'set_icon')) {
+    if(!settings.length || settings.length === 1 || (settings[0] !== 'app_name' && settings[0] !== 'app_icon')) {
       action = blueprints.slashCommands[command]
-    } else {
-        
+    } else if (settings[0] === 'app_name') {
+      firestore.collection('teams').doc(req.body.team_id).set({app_name: settings[1]}, {merge: true})   
+      action = blueprints.slashCommands['blueprint-settings-app-name']
+    } else if (settings[0] === 'app_icon') {
+      firestore.collection('teams').doc(req.body.team_id).set({app_icon: settings[1]}, {merge: true})  
+      action = blueprints.slashCommands['blueprint-settings-app-name']
     }
   } else {
     action = (text && text.length && blueprints[text.trim()] && blueprints[text.trim()].start) || blueprints.slashCommands[command]
   } 
   
-  return executeCommand(action)
+  return executeCommand(payload, action, req.body.team_id)
       .then(() => res.send()) 
 })
 
@@ -211,11 +215,11 @@ const executeAction = (payload, value, tokens) => {
   }
 }
 
-const executeCommand = (req, res) => {
+const executeCommand = (payload, action, teamId) => {
    
   action = JSON.stringify(action)
     
-  return firestore.collection('teams').doc(req.body.team_id).get()
+  return firestore.collection('teams').doc(teamId).get()
     .then(doc => executeAction(payload, action, doc.data()))
 }
 

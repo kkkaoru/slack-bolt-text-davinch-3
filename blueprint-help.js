@@ -39,6 +39,13 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
+            "text": "Usage hint:"
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
             "text": "`/blueprint-settings set_name App name`"
           }
         },
@@ -47,6 +54,28 @@ module.exports = {
           "text": {
             "type": "mrkdwn",
             "text": "`/blueprint-settings set_icon https://path.to/icon.jpg`"
+          }
+        }
+      ]
+    },
+    icon: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Your App icon has been updated!"
+          }
+        }
+      ]
+    },
+    name: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Your App name has been updated!"
           }
         }
       ]
