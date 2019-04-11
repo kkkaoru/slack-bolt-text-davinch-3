@@ -358,7 +358,7 @@ module.exports = {
                 "text": "Update",
                 "emoji": true
               },
-              "value": [{"blueprint":"paging","type":"update","value":"result_0"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_edit"}]
             }
           ]
         }
@@ -430,7 +430,7 @@ module.exports = {
                 "text": "Filter",
                 "emoji": true
               },
-              "value": [{"blueprint":"paging","type":"update","value":"result_0"}]
+              "value": [{"blueprint":"paging","type":"update","value":"result_edit"}]
             }
           ]
         }
@@ -700,21 +700,7 @@ module.exports = {
             {
               "type": "plain_text",
               "emoji": true,
-              "text": "Results 1-3 of 8"
-            }
-          ]
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Next >"
-              },
-              "value": [{"blueprint":"paging","type":"update","value":"result_1"}]
+              "text": "Results 1-3 of 3"
             }
           ]
         }
