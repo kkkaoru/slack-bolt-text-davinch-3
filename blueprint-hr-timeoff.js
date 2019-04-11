@@ -165,7 +165,7 @@ module.exports = {
               "style": "primary",
               "value": [{"blueprint":"hr-timeoff","type":"update","value":"confirmation"}]
             },
-                  {
+            {
               "type": "button",
               "text": {
                 "type": "plain_text",
