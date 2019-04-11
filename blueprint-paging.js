@@ -436,6 +436,290 @@ module.exports = {
         }
       ]
     },
+    result_edit: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "We found *3 Hotels* in Los Angeles from *12/14 to 12/17*"
+          },
+          "accessory": {
+            "type": "overflow",
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "emoji": true,
+                  "text": ":mag: Edit search"
+                },
+                "value": [{"blueprint":"paging","type":"update","value":"editSearch"}]
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "emoji": true,
+                  "text": ":pencil2: Edit filters"
+                },
+                "value": [{"blueprint":"paging","type":"ephemeral","value":"editDates"}]
+              }
+            ]
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*<fakeLink.toHotelPage.com|Five Points>*\n★★★★★\n$340 per night\nRated: 9.4 - Excellent"
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://images.unsplash.com/photo-1525905708812-b271b5e3b2f3",
+            "alt_text": "Five Points thumbnail"
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "image",
+              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
+              "alt_text": "Location Pin Icon"
+            },
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Location: Central Business District"
+            }
+          ]
+        },
+          {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Book now"
+              },
+              "style": "primary",
+              "value": "click_me_123"
+            },
+                  {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "See available rooms"
+              },
+              "value": "click_me_123"
+            },
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*<fakeLink.toHotelPage.com|Venice Beach Hotel>*\n★★★★★\n$340 per night\nRated: 9.1 - Excellent"
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://images.unsplash.com/photo-1549638441-b787d2e11f14",
+            "alt_text": "Venice Beach Hotel thumbnail"
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "image",
+              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
+              "alt_text": "Location Pin Icon"
+            },
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Location: Venice Beach"
+            }
+          ]
+        },
+          {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Book now"
+              },
+              "style": "primary",
+              "value": "click_me_123"
+            },
+                  {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "See available rooms"
+              },
+              "value": "click_me_123"
+            },
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*<fakeLink.toHotelPage.com|Central Inn>*\n★★★★★\n$419 per night\nRated: 8.8 - Excellent"
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://images.unsplash.com/photo-1455587734955-081b22074882",
+            "alt_text": "Central Inn thumbnail"
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "image",
+              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
+              "alt_text": "Location Pin Icon"
+            },
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Location: Downtown LA"
+            }
+          ]
+        },
+          {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Book now"
+              },
+              "style": "primary",
+              "value": "click_me_123"
+            },
+                  {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "See available rooms"
+              },
+              "value": "click_me_123"
+            },
+            {
+                "type": "overflow",
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "View gallery",
+                            "emoji": true
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Show on map",
+                            "emoji": true
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Results 1-3 of 8"
+            }
+          ]
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Next >"
+              },
+              "value": [{"blueprint":"paging","type":"update","value":"result_1"}]
+            }
+          ]
+        }
+      ]
+    },
     result_0: {
       blocks: [
         {
