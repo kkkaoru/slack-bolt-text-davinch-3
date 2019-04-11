@@ -95,7 +95,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     let text = req.body.text
     let settings = text.split(' ', 2).map(value => value.trim())
     if(!settings.length || settings.length === 1 || (settings[0] !== 'set_name' && settings[0] !== 'set_icon')) {
-    
+      action = blueprints.slashCommands[command]
     } else {
         
     }
