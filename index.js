@@ -95,8 +95,6 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     let text = req.body.text
     let setting = text.split(' ', 1)[0]
     let value = text.split(' ').slice(1).join(' ')
-    console.log(setting)
-    console.log(value)
     if(setting !== 'app_name' && setting !== 'app_icon' && setting !== 'delete_name' && setting !== 'delete_icon') {
       action = blueprints.slashCommands[command]
     } else {
@@ -104,7 +102,6 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
       value = (setting === 'delete_name' || setting === 'delete_icon') ? null : value
       setting = setting.replace('delete', 'app')
       json[setting] = value
-      console.log(json)
       firestore.collection('teams').doc(req.body.team_id).set(json, {merge: true})   
       action = blueprints.slashCommands['blueprint-settings-'+(setting.replace('_', '-'))]
     } 
