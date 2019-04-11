@@ -78,7 +78,13 @@ app.get('/redirect', (req, res) => {
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
   let command = req.body.command.replace('/', '')
   if(command === 'blueprint-settings') {
+    let text = req.body.text
+    let settings = text.split(' ', 2).map(value => value.trim())
+    if(!settings.length || settings.length === 1 || (settings[0] !== 'set_name' && settings[0] !== 'set_icon')) {
     
+    } else {
+        
+    }
   } else {
     return executeCommand(req, res)  
   } 
@@ -155,6 +161,9 @@ const executeAction = (payload, value, tokens) => {
       let delay = action.delay || 0
       setTimeout(() => {
         let block = helpers.stringifyValues(blueprints[action.blueprint][action.type][action.value], payload)
+        
+        if(tokens && tokens.bot && tokens.bot.username) block.username = tokens.bot.username
+        if(tokens && tokens.bot && tokens.bot.icon) block.icon_url = tokens.bot.icon
 
         switch(action.type) {
           case 'dialog':  
@@ -172,11 +181,11 @@ const executeAction = (payload, value, tokens) => {
           case 'thread':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
             block.thread_ts = (payload.message && payload.message.ts) || (action.message && action.message.ts)
-            return  slackBot.chat.postMessage(block)  
+            return slackBot.chat.postMessage(block)  
           case 'update':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
             block.ts = (payload.message && payload.message.ts) || (action.message && action.message.ts)
-            return  slackBot.chat.update(block)  
+            return slackBot.chat.update(block)  
         }
       }, delay)
     })

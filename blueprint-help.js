@@ -32,6 +32,24 @@ module.exports = {
           }
         }
       ]
+    },
+    usage: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "`/blueprint-settings set_name App name`"
+          }
+        },
+          {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "`/blueprint-settings set_icon https://path.to/icon.jpg`"
+          }
+        }
+      ]
     }
   }
 }
