@@ -97,11 +97,14 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     let value = text.split(' ').slice(1).join(' ')
     console.log(setting)
     console.log(value)
-    if(setting !== 'app_name' && setting !== 'app_icon') {
+    if(setting !== 'app_name' && setting !== 'app_icon' && setting !== 'delete_name' && setting !== 'delete_icon') {
       action = blueprints.slashCommands[command]
     } else {
       let json = {}
+      value = (setting === 'delete_name' || setting === 'delete_icon') ? null : value
+      setting = setting.replace('delete', 'app')
       json[setting] = value
+      console.log(json)
       firestore.collection('teams').doc(req.body.team_id).set(json, {merge: true})   
       action = blueprints.slashCommands['blueprint-settings-'+(setting.replace('_', '-'))]
     } 
@@ -161,7 +164,6 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
           executeAction(payload, payload.state, doc.data())
           break
         case 'block_actions':
-          console.log(payload.actions[0].selected_option)
           executeAction(payload, payload.actions[0].value || (payload.actions[0].selected_option && payload.actions[0].selected_option.value), doc.data())
           break
         case 'message_action':
