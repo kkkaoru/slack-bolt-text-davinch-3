@@ -1,9 +1,9 @@
 module.exports = {
-  start: [{"blueprint":"search","type":"message","value":"result"}],
+  start: [{"blueprint":"search","type":"message","value":"dates"}],
   dialog: {},
   ephemeral: {},
   message: {
-    result: {
+    dates: {
       blocks: [
         {
           "type": "section",
