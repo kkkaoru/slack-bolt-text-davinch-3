@@ -88,7 +88,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
     }
   }
   // stringify the value since executeAction expects a string
-  let text = req.body.text
+  let text = req.body.text && req.body.text.split(' ')[0]
   let action 
   
   if(command === 'blueprint-settings') {

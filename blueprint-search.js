@@ -23,7 +23,7 @@ module.exports = {
                 "type": "plain_text",
                 "text": "Los Angeles"
               },
-              "value": "los_angeles"
+              "value": "los-angeles"
             }
           }
         },
@@ -69,7 +69,7 @@ module.exports = {
                 "emoji": true
               },
               "style": "primary",
-              "value": "search"
+              "value": [{"blueprint":"search","type":"update","value":"result"}]
             }
           ]
         }
@@ -84,17 +84,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Update your search:*"
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Select your location"
+            "text": "Searching hotels in"
           },
           "accessory": {
             "type": "external_select",
@@ -102,6 +92,13 @@ module.exports = {
               "type": "plain_text",
               "text": "Enter location",
               "emoji": true
+            },
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Los Angeles"
+              },
+              "value": "los-angeles"
             }
           }
         },
@@ -109,28 +106,30 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Select your *start date*"
+            "text": "*From*"
           },
           "accessory": {
             "type": "datepicker",
             "placeholder": {
               "type": "plain_text",
               "text": "Select date"
-            }
+            },
+            "initial_date": "2019-04-14"
           }
         },
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Select your *end date*"
+            "text": "*To*"
           },
           "accessory": {
             "type": "datepicker",
             "placeholder": {
               "type": "plain_text",
               "text": "Select date"
-            }
+            },
+            "initial_date": "2019-04-17"
           }
         },
         {
@@ -158,7 +157,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "We found *3 Hotels* in Los Angeles from *12/14 to 12/17*"
+            "text": "We found *3 Hotels* in Venice Beach from *12/14 to 12/17*"
           },
           "accessory": {
             "type": "overflow",
