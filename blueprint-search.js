@@ -5,7 +5,74 @@ module.exports = {
   message: {
     dates: {
       blocks: [
-        
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Searching hotels in"
+          },
+          "accessory": {
+            "type": "external_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Enter location",
+              "emoji": true
+            },
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Los Angeles"
+              },
+              "value": "los_angeles"
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*From*"
+          },
+          "accessory": {
+            "type": "datepicker",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select date"
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*To*"
+          },
+          "accessory": {
+            "type": "datepicker",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select date"
+            }
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Search hotels",
+                "emoji": true
+              },
+              "style": "primary",
+              "value": "search"
+            }
+          ]
+        }
       ]
     }
   },
@@ -77,78 +144,6 @@ module.exports = {
               "text": {
                 "type": "plain_text",
                 "text": "Update",
-                "emoji": true
-              },
-              "value": [{"blueprint":"search","type":"update","value":"result_edit"}]
-            }
-          ]
-        }
-      ]
-    },
-    editFilter: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Filter results:*"
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Stars"
-          },
-          "accessory": {
-            "type": "static_select",
-            "placeholder": {
-              "type": "plain_text",
-              "text": "Select stars",
-              "emoji": true
-            },
-            "options": [
-              {
-                "text": {
-                  "type": "plain_text",
-                  "text": "Choice 1",
-                  "emoji": true
-                },
-                "value": "value-0"
-              },
-              {
-                "text": {
-                  "type": "plain_text",
-                  "text": "Choice 2",
-                  "emoji": true
-                },
-                "value": "value-1"
-              },
-              {
-                "text": {
-                  "type": "plain_text",
-                  "text": "Choice 3",
-                  "emoji": true
-                },
-                "value": "value-2"
-              }
-            ]
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "text": "Filter",
                 "emoji": true
               },
               "value": [{"blueprint":"search","type":"update","value":"result_edit"}]
@@ -427,7 +422,7 @@ module.exports = {
         }
       ]
     },
-    result_0: {
+    result: {
       blocks: [
         {
           "type": "section",
@@ -704,433 +699,6 @@ module.exports = {
                 "type": "plain_text",
                 "emoji": true,
                 "text": "Next >"
-              },
-              "value": [{"blueprint":"search","type":"update","value":"result_1"}]
-            }
-          ]
-        }
-      ]
-    },
-    result_1: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "We found *8 Hotels* in Los Angeles from *12/14 to 12/17*"
-          },
-          "accessory": {
-            "type": "overflow",
-            "options": [
-              {
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":mag: Edit search"
-                },
-                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
-              },
-              {
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":pencil2: Edit filters"
-                },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
-              }
-            ]
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Grand Hotel>*\n★★★★★\n$380 per night\nRated: 9.3 - Excellent"
-          },
-          "accessory": {
-            "type": "image",
-            "image_url": "https://images.unsplash.com/photo-1515362778563-6a8d0e44bc0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-            "alt_text": "Grand Hotel thumbnail"
-          }
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "image",
-              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
-              "alt_text": "Location Pin Icon"
-            },
-            {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Location: Downtown"
-            }
-          ]
-        },
-          {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Book now"
-              },
-              "style": "primary",
-              "value": "click_me_123"
-            },
-                  {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "See available rooms"
-              },
-              "value": "click_me_123"
-            },
-            {
-                "type": "overflow",
-                "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "View gallery",
-                            "emoji": true
-                        },
-                        "value": "value-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Show on map",
-                            "emoji": true
-                        },
-                        "value": "value-1"
-                    }
-                ]
-            }
-          ]
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Los Angeles Inn>*\n★★★★★\n$420 per night\nRated: 9.0 - Excellent"
-          },
-          "accessory": {
-            "type": "image",
-            "image_url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-            "alt_text": "Los Angeles Inn thumbnail"
-          }
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "image",
-              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
-              "alt_text": "Location Pin Icon"
-            },
-            {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Location: Downtown"
-            }
-          ]
-        },
-          {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Book now"
-              },
-              "style": "primary",
-              "value": "click_me_123"
-            },
-                  {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "See available rooms"
-              },
-              "value": "click_me_123"
-            },
-            {
-                "type": "overflow",
-                "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "View gallery",
-                            "emoji": true
-                        },
-                        "value": "value-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Show on map",
-                            "emoji": true
-                        },
-                        "value": "value-1"
-                    }
-                ]
-            }
-          ]
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Royal Queens Hotel>*\n★★★★★\n$370 per night\nRated: 8.7 - Excellent"
-          },
-          "accessory": {
-            "type": "image",
-            "image_url": "https://images.unsplash.com/photo-1508253578933-20b529302151?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-            "alt_text": "Royal Queens Hotel thumbnail"
-          }
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "image",
-              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
-              "alt_text": "Location Pin Icon"
-            },
-            {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Location: French Quarter"
-            }
-          ]
-        },
-          {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Book now"
-              },
-              "style": "primary",
-              "value": "click_me_123"
-            },
-                  {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "See available rooms"
-              },
-              "value": "click_me_123"
-            },
-            {
-                "type": "overflow",
-                "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "View gallery",
-                            "emoji": true
-                        },
-                        "value": "value-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Show on map",
-                            "emoji": true
-                        },
-                        "value": "value-1"
-                    }
-                ]
-            }
-          ]
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Results 4-6 of 8"
-            }
-          ]
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "< Previous"
-              },
-              "value": [{"blueprint":"search","type":"update","value":"result_0"}]
-            },
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Next >"
-              },
-              "value": [{"blueprint":"search","type":"update","value":"result_2"}]
-            }
-          ]
-        }
-      ]
-    },
-    result_2: {
-      blocks: [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "We found *8 Hotels* in Los Angeles from *12/14 to 12/17*"
-          },
-          "accessory": {
-            "type": "overflow",
-            "options": [
-              {
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":mag: Edit search"
-                },
-                "value": [{"blueprint":"search","type":"update","value":"editSearch"}]
-              },
-              {
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":pencil2: Edit filters"
-                },
-                "value": [{"blueprint":"search","type":"ephemeral","value":"editDates"}]
-              }
-            ]
-          }
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*<fakeLink.toHotelPage.com|Court Plaza Hotel>*\n★★★★\n$319 per night\nRated: 8.7 - Good"
-          },
-          "accessory": {
-            "type": "image",
-            "image_url": "https://images.unsplash.com/photo-1544097935-e6d136448533?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-            "alt_text": "Court Plaza Hotel thumbnail"
-          }
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "image",
-              "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
-              "alt_text": "Location Pin Icon"
-            },
-            {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Location: Central Business District"
-            }
-          ]
-        },
-          {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "Book now"
-              },
-              "style": "primary",
-              "value": "click_me_123"
-            },
-                  {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "See available rooms"
-              },
-              "value": "click_me_123"
-            },
-            {
-                "type": "overflow",
-                "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "View gallery",
-                            "emoji": true
-                        },
-                        "value": "value-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Show on map",
-                            "emoji": true
-                        },
-                        "value": "value-1"
-                    }
-                ]
-            }
-          ]
-        },
-        {
-          "type": "divider"
-        },
-        {
-          "type": "context",
-          "elements": [
-            {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Result 8 of 8"
-            }
-          ]
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "emoji": true,
-                "text": "< Previous"
               },
               "value": [{"blueprint":"search","type":"update","value":"result_1"}]
             }
