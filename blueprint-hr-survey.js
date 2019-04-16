@@ -270,7 +270,7 @@ module.exports = {
                   "text": ":back: Previous",
                   "emoji": true
                 },
-                "value": [{"blueprint":"hr-survey","type":"update","value":"step1"}]
+                "value": [{"blueprint":"hr-survey","type":"update","value":"step2"}]
               },
               {
                 "text": {
