@@ -5,7 +5,37 @@ module.exports = {
   message: {
     start : {
       blocks: [
-        
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Hi <fakeLink.toUser.com|David>!\n\nOur Q1 Pulse Survey launches today. Please take a few minutes to give your honest opinion on how things are going.\n\nYou have until Friday, April 19 to respond. Thank you!"
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Start survey",
+                "emoji": true
+              },
+              "style": "primary",
+              "value": [{"blueprint":"hr-survey","type":"update","value":"step1"}]
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": ":alarm_clock: Remind me later",
+                "emoji": true
+              },
+              "value": "remind"
+            }
+          ]
+        }
       ]
     }
   },
@@ -550,7 +580,7 @@ module.exports = {
                 "emoji": true
               },
               "style": "primary",
-              "value": "5"
+              "value": [{"blueprint":"hr-survey","type":"update","value":"confirmation"}]
             },
             {
               "type": "button",
@@ -572,19 +602,69 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Your request for *Paid Time Off* has been sent."
+            "text": "*Thank you, <fakeLink.toUser.com|David>!*"
           }
         },
         {
+          "type": "divider"
+        },
+        {
           "type": "section",
-          "fields": [
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Question 1*\nThis job is a good fit for a person like me."
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
             {
               "type": "mrkdwn",
-              "text": "*Start Date:*\nApr 10, 2019"
-            },
+              "text": "*Answer:* Fully agree"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Question 2*\nThe atmosphere here is good."
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
             {
               "type": "mrkdwn",
-              "text": "*End Date:*\nApr 12, 2019"
+              "text": "*Answer:* Agree"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Question 3*\nI personally agree with the organization's values."
+          }
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "*Answer:* Agree"
+            }
+          ]
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": ":white_check_mark: You submitted this survey on 03/14/2019 at 03:45pm"
             }
           ]
         }
