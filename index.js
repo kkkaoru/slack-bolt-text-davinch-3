@@ -207,6 +207,7 @@ const executeAction = (payload, value, tokens) => {
           case 'update':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
             block.ts = (payload.message && payload.message.ts) || (action.message && action.message.ts)
+            console.log(JSON.stringify(block))
             return slackBot.chat.update(block)  
         }
       }, delay)
