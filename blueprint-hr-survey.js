@@ -391,7 +391,7 @@ module.exports = {
                   "text": "Fully agree",
                   "emoji": true
                 },
-                "value": "5"
+                "value": "1:5"
               },
               {
                 "text": {
@@ -399,7 +399,7 @@ module.exports = {
                   "text": "Agree",
                   "emoji": true
                 },
-                "value": "4"
+                "value": "1:4"
               },
               {
                 "text": {
@@ -407,7 +407,7 @@ module.exports = {
                   "text": "Neutral",
                   "emoji": true
                 },
-                "value": "3"
+                "value": "1:3"
               },
               {
                 "text": {
@@ -415,7 +415,7 @@ module.exports = {
                   "text": "Disagree",
                   "emoji": true
                 },
-                "value": "2"
+                "value": "1:2"
               },
               {
                 "text": {
@@ -423,7 +423,7 @@ module.exports = {
                   "text": "Fully disagree",
                   "emoji": true
                 },
-                "value": "1"
+                "value": "1:1"
               }
             ],
             "initial_option": {
@@ -432,7 +432,7 @@ module.exports = {
                 "text": "Fully agree",
                 "emoji": true
               },
-              "value": "5"
+              "value": "1:5"
             }
           }
         },
@@ -456,7 +456,7 @@ module.exports = {
                   "text": "Fully agree",
                   "emoji": true
                 },
-                "value": "5"
+                "value": "2:5"
               },
               {
                 "text": {
@@ -464,7 +464,7 @@ module.exports = {
                   "text": "Agree",
                   "emoji": true
                 },
-                "value": "4"
+                "value": "2:4"
               },
               {
                 "text": {
@@ -472,7 +472,7 @@ module.exports = {
                   "text": "Neutral",
                   "emoji": true
                 },
-                "value": "3"
+                "value": "2:3"
               },
               {
                 "text": {
@@ -480,7 +480,7 @@ module.exports = {
                   "text": "Disagree",
                   "emoji": true
                 },
-                "value": "2"
+                "value": "2:2"
               },
               {
                 "text": {
@@ -488,7 +488,7 @@ module.exports = {
                   "text": "Fully disagree",
                   "emoji": true
                 },
-                "value": "1"
+                "value": "2:1"
               }
             ],
             "initial_option": {
@@ -497,7 +497,7 @@ module.exports = {
                 "text": "Agree",
                 "emoji": true
               },
-              "value": "4"
+              "value": "2:4"
             }
           }
         },
@@ -521,7 +521,7 @@ module.exports = {
                   "text": "Fully agree",
                   "emoji": true
                 },
-                "value": "5"
+                "value": "3:5"
               },
               {
                 "text": {
@@ -529,7 +529,7 @@ module.exports = {
                   "text": "Agree",
                   "emoji": true
                 },
-                "value": "4"
+                "value": "3:4"
               },
               {
                 "text": {
@@ -537,7 +537,7 @@ module.exports = {
                   "text": "Neutral",
                   "emoji": true
                 },
-                "value": "3"
+                "value": "3:3"
               },
               {
                 "text": {
@@ -545,7 +545,7 @@ module.exports = {
                   "text": "Disagree",
                   "emoji": true
                 },
-                "value": "2"
+                "value": "3:2"
               },
               {
                 "text": {
@@ -553,7 +553,7 @@ module.exports = {
                   "text": "Fully disagree",
                   "emoji": true
                 },
-                "value": "1"
+                "value": "3:1"
               }
             ],
             "initial_option": {
@@ -562,7 +562,7 @@ module.exports = {
                 "text": "Agree",
                 "emoji": true
               },
-              "value": "4"
+              "value": "3:4"
             }
           }
         },
@@ -590,7 +590,7 @@ module.exports = {
                 "emoji": true
               },
               "style": "danger",
-              "value": "1"
+              "value": "cancel"
             }
           ]
         }
