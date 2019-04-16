@@ -329,6 +329,243 @@ module.exports = {
         }
       ]
     },
+    step4: {
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Here are your answers, <fakeLink.toUser.com|David>:"
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Question 1*\nThis job is a good fit for a person like me."
+          },
+          "accessory": {
+            "type": "static_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select answer",
+              "emoji": true
+            },
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Fully agree",
+                  "emoji": true
+                },
+                "value": "5"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Agree",
+                  "emoji": true
+                },
+                "value": "4"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Neutral",
+                  "emoji": true
+                },
+                "value": "3"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Disagree",
+                  "emoji": true
+                },
+                "value": "2"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Fully disagree",
+                  "emoji": true
+                },
+                "value": "1"
+              }
+            ],
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Fully agree",
+                "emoji": true
+              },
+              "value": "5"
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Question 2*\nThe atmosphere here is good."
+          },
+          "accessory": {
+            "type": "static_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select answer",
+              "emoji": true
+            },
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Fully agree",
+                  "emoji": true
+                },
+                "value": "5"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Agree",
+                  "emoji": true
+                },
+                "value": "4"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Neutral",
+                  "emoji": true
+                },
+                "value": "3"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Disagree",
+                  "emoji": true
+                },
+                "value": "2"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Fully disagree",
+                  "emoji": true
+                },
+                "value": "1"
+              }
+            ],
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Agree",
+                "emoji": true
+              },
+              "value": "4"
+            }
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Question 3*\nI personally agree with the organization's values."
+          },
+          "accessory": {
+            "type": "static_select",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select answer",
+              "emoji": true
+            },
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Fully agree",
+                  "emoji": true
+                },
+                "value": "5"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Agree",
+                  "emoji": true
+                },
+                "value": "4"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Neutral",
+                  "emoji": true
+                },
+                "value": "3"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Disagree",
+                  "emoji": true
+                },
+                "value": "2"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Fully disagree",
+                  "emoji": true
+                },
+                "value": "1"
+              }
+            ],
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Agree",
+                "emoji": true
+              },
+              "value": "4"
+            }
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Submit answers",
+                "emoji": true
+              },
+              "style": "primary",
+              "value": "5"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Cancel",
+                "emoji": true
+              },
+              "style": "danger",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    },
     confirmation: {
       blocks: [
         {
