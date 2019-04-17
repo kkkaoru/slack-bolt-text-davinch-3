@@ -121,9 +121,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
 
 app.post('/slack/options', urlencodedParser, (req, res) => {
     let payload = JSON.parse(req.body.payload)
-    
-    console.log(payload)
-  
+      
     switch (payload.type) {
       case 'dialog_suggestion':
         return res.send({
@@ -209,7 +207,6 @@ const executeAction = (payload, value, tokens) => {
           case 'update':
             block.channel = (payload.channel && payload.channel.id) || (action.channel && action.channel.id)
             block.ts = (payload.message && payload.message.ts) || (action.message && action.message.ts)
-            console.log(JSON.stringify(block))
             return slackBot.chat.update(block)  
         }
       }, delay)
