@@ -25,6 +25,11 @@ exports.stringifyValues = (message, payload) => {
           try {
             action.value = JSON.stringify(action.value) 
           } catch(err) {}  
+        } else if (action.options) {
+            action.options = action.options.map(opt => {
+              if(typeof opt.value !== 'string') opt.value = JSON.stringify(opt.value)
+              return opt
+            })
         }
         return action
       })
