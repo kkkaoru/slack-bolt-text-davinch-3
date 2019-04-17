@@ -31,13 +31,13 @@ exports.stringifyValues = (message, payload) => {
     }
     if(block.type === 'section' && block.accessory && typeof block.accessory.value !== 'string') {
       try {
-        block.accessory.value = JSON.stringify(block.accessory.value) 
+        block.accessory.value = typeof block.accessory.value !== 'string' && JSON.stringify(block.accessory.value) 
       } catch(err) {}  
     }
     if(block.type === 'section' && block.accessory && block.accessory.options) {
       try {
         block.accessory.options = block.accessory.options.map(option => {
-          if(option.value !== 'string') {
+          if(option.value && typeof option.value !== 'string') {
             option.value = JSON.stringify(option.value) 
           }
           return option
