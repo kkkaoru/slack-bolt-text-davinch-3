@@ -100,6 +100,40 @@ module.exports = {
                 "text": "Open dialog"
               },
               "value": [{"blueprint":"template","type":"dialog","value":"demo"}]
+            },
+            {
+              "type": "static_select",
+              "placeholder": {
+                "type": "plain_text",
+                "text": "Select an item",
+                "emoji": true
+              },
+              "options": [
+                {
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Send message",
+                    "emoji": true
+                  },
+                  "value": [{"blueprint":"template","type":"message","value":"demo"}]
+                },
+                {
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Send ephemeral",
+                    "emoji": true
+                  },
+                  "value": [{"blueprint":"template","type":"ephemeral","value":"demo"}]
+                },
+                {
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Send message reply",
+                    "emoji": true
+                  },
+                  "value": [{"blueprint":"template","type":"thread","value":"demo"}]
+                }
+              ]
             }
           ]
         }
