@@ -171,6 +171,7 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
 })
 
 const executeAction = (payload, value, tokens) => {
+  console.log(payload)
   try {
     let userToken = (tokens && tokens.access_token) || process.env.SLACK_BOT_TOKEN
     let botToken = (tokens && tokens.bot && tokens.bot.bot_access_token) || process.env.SLACK_USER_TOKEN
