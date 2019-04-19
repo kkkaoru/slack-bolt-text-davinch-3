@@ -10,29 +10,36 @@ module.exports = {
           "label": "Select your colleague",
           "type": "select",
           "name": "reject:reason",
-          "options": [
-            {
-              "label": "Out of Policy",
-              "value": "reject:reason:out-of-policy"
-            },
-            {
-              "label": "Invalid request",
-              "value": "reject:reason:invalid-request"
-            },
-            {
-              "label": "Other",
-              "value": "reject:reason:other"
-            }
-          ]
+          "data_source": "users"
         },
         {
-          "label": "Comment",
+          "label": "What do you want to share?",
           "name": "feedback",
           "type": "textarea",
+          "placeholder": "Enter your feedback here.",
           "optional": true
+        },
+        {
+          "label": "Choose visibility",
+          "name": "visibility",
+          "type": "select",
+          "options": [
+            {
+              "label": "Private",
+              "value": "private"
+            },
+            {
+              "label": "Private + Manager",
+              "value": "private+manager"
+            },
+            {
+              "label": "Manager only",
+              "value": "manager"
+            }
+          ]
         }
       ],
-      "state": [{"blueprint":"approval","type":"update","value":"rejection","fill_values":["message.ts"]}]
+      "state": [{"blueprint":"hr-review","type":"ephemeral","value":"confirmation"}]
     }
   },
   ephemeral: {},
@@ -43,7 +50,7 @@ module.exports = {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Hi David!* Here's how I can help you:"
+            "text": "*Hi <fakelink.toUser.com|David>!* Here's how I can help you:"
           }
         },
         {
