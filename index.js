@@ -10,11 +10,13 @@ const fs = require('fs')
 const markdown = require('markdown-it')
 const admin = require('firebase-admin')
 
-admin.initializeApp({
-  credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
-  databaseURL: process.env.FIREBASE_DATABASE
-})
-const firestore = admin.firestore()
+if(process.env.FIREBASE_SERVICE_ACCOUNT && process.env.FIREBASE_DATABASE) {
+  admin.initializeApp({
+    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
+    databaseURL: process.env.FIREBASE_DATABASE
+  })
+}
+const firestore = (admin && admin.firestore()) || undefined
 
 const app = express()
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
@@ -252,6 +254,10 @@ ${JSON.stringify(error.body)}`)
     console.error(`An error occurred while handling a Slack event: ${error.message}`)
   }
 })
+
+const getToken = () => {
+  
+}
 
 // Start the express application
 const port = process.env.PORT || 3000;
