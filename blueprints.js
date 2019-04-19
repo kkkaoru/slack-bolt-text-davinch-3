@@ -11,6 +11,8 @@ const template = require('./blueprint-template')
 const slashCommands = require('./slash-commands')
 const help = require('./blueprint-help')
 
+const ios = require('./blueprint-ios')
+
 module.exports = {
   "approval": approval,
   "create-task": createTask,
@@ -22,5 +24,6 @@ module.exports = {
   "search": search,
   "template": template,
   "slashCommands": slashCommands,
-  "help": help
+  "help": help,
+  "ios": ios
 }
