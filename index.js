@@ -53,28 +53,28 @@ app.get('/redirect', (req, res) => {
   }
   let url = helpers.getUrlWithParams('https://slack.com/api/oauth.access', opt)
   
-  return res.send(url)
+  // return res.send(url)
 
-// 	let options = {
-// 		url: url,
-// 		method: 'GET'
-// 	}
+	let options = {
+		url: url,
+		method: 'GET'
+	}
 
-//   return rp(options)
-// 		.then(result => {
-// 			let slackData = JSON.parse(result)
-// 			if(!slackData) throw new Error('no_slack_api_data_received')
-//             if(!slackData.ok) throw new Error(slackData.error)
-//             let teamId = slackData.team_id
-//             return firestore.collection('teams').doc(teamId).set(slackData)
-//         })
-//         .then(result => {
-//             return res.send('App installed.')
-//         })
-// 		.catch(err => {
-// 			console.log(err)
-// 			return res.send({error: err.message})
-// 		})
+  return rp(options)
+		.then(result => {
+			let slackData = JSON.parse(result)
+			if(!slackData) throw new Error('no_slack_api_data_received')
+            if(!slackData.ok) throw new Error(slackData.error)
+            let teamId = slackData.team_id
+            return firestore.collection('teams').doc(teamId).set(slackData)
+        })
+        .then(result => {
+            return res.send('App installed.')
+        })
+		.catch(err => {
+			console.log(err)
+			return res.send({error: err.message})
+		})
 })
 
 app.post('/slack/onCommand', urlencodedParser, (req, res) => {
