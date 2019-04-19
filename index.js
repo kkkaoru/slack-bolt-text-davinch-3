@@ -68,9 +68,10 @@ app.get('/redirect', (req, res) => {
 			if(!slackData) throw new Error('no_slack_api_data_received')
             if(!slackData.ok) throw new Error(slackData.error)
             let teamId = slackData.team_id
-            return firestore.collection('teams').doc(teamId).set(slackData)
+            return firestore && firestore.collection('teams').doc(teamId).set(slackData)
         })
         .then(result => {
+            if(!result) res.send('App can\'t be installed. Firebase is not configured.')
             return res.send('App installed.')
         })
 		.catch(err => {
@@ -106,7 +107,7 @@ app.post('/slack/onCommand', urlencodedParser, (req, res) => {
       value = (setting === 'delete_name' || setting === 'delete_icon') ? null : value
       setting = setting.replace('delete', 'app')
       json[setting] = value
-      firestore.collection('teams').doc(req.body.team_id).set(json, {merge: true})   
+      firestore && firestore.collection('teams').doc(req.body.team_id).set(json, {merge: true})   
       action = blueprints.slashCommands['blueprint-settings-'+(setting.replace('_', '-'))]
     } 
   } else {
@@ -154,9 +155,9 @@ app.post('/slack/options', urlencodedParser, (req, res) => {
 })
 
 slackInteractions.action(/(\w+)/, (payload, respond) => {
-  let team = payload.team.id
+  let teamId = payload.team.id
     
-  return firestore.collection('teams').doc(team).get()
+  return getTokens(teamId)
     .then(doc => {
       switch(payload.type) {
         case 'dialog_submission': 
@@ -223,7 +224,7 @@ const executeCommand = (payload, action, teamId) => {
    
   action = JSON.stringify(action)
     
-  return firestore.collection('teams').doc(teamId).get()
+  return getTokens(teamId)
     .then(doc => executeAction(payload, action, doc.data()))
 }
 
@@ -255,8 +256,18 @@ ${JSON.stringify(error.body)}`)
   }
 })
 
-const getToken = () => {
-  
+const getTokens = (teamId) => {
+  if(firestore) return firestore.collection('teams').doc(teamId).get()
+
+  let tokens = {
+    access_token: process.env.SLACK_USER_TOKEN,
+    bot: {
+      bot_access_token: process.env.SLACK_BOT_TOKEN
+    }
+  }
+  return new Promise((resolve, reject) => {
+    resolve(tokens)
+  })
 }
 
 // Start the express application
