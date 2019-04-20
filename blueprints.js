@@ -1,5 +1,6 @@
 const approval = require('./blueprint-approval')
 const createTask = require('./blueprint-create-task')
+const hrReview = require('./blueprint-hr-review')
 const hrSurvey = require('./blueprint-hr-survey')
 const hrTimeoff = require('./blueprint-hr-timeoff')
 const paging = require('./blueprint-paging')
@@ -16,6 +17,7 @@ const ios = require('./blueprint-ios')
 module.exports = {
   "approval": approval,
   "create-task": createTask,
+  "hr-review": hrReview,
   "hr-survey": hrSurvey,
   "hr-timeoff": hrTimeoff,
   "private-poll": privatePoll,
