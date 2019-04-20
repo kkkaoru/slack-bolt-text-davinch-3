@@ -4,25 +4,26 @@ module.exports = {
     feedback: {
       "callback_id": "dialog:feedback",
       "title": "Give feedback",
-      "submit_label": "Send feedback",
+      "submit_label": "Send",
       "elements": [
         {
           "label": "Select your colleague",
           "type": "select",
-          "name": "reject:reason",
-          "data_source": "users"
+          "name": "colleague",
+          "data_source": "users",
+          "placeholder": "Select colleague"
         },
         {
           "label": "What do you want to share?",
           "name": "feedback",
           "type": "textarea",
-          "placeholder": "Enter your feedback here.",
-          "optional": true
+          "placeholder": "Enter your feedback here."
         },
         {
-          "label": "Choose visibility",
+          "label": "Visibility",
           "name": "visibility",
           "type": "select",
+          "placeholder": "Choose visibility",
           "options": [
             {
               "label": "Private",
