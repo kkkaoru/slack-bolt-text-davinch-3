@@ -164,6 +164,7 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
           executeAction(payload, payload.state, doc.data())
           break
         case 'block_actions':
+          console.log(JSON.stringify(payload.actions[0]))
           executeAction(payload, payload.actions[0].value || (payload.actions[0].selected_option && payload.actions[0].selected_option.value), doc.data())
           break
         case 'message_action':
@@ -174,7 +175,6 @@ slackInteractions.action(/(\w+)/, (payload, respond) => {
 })
 
 const executeAction = (payload, value, tokens) => {
-  console.log(payload)
   try {
     let userToken = (tokens && tokens.access_token) || process.env.SLACK_BOT_TOKEN
     let botToken = (tokens && tokens.bot && tokens.bot.bot_access_token) || process.env.SLACK_USER_TOKEN

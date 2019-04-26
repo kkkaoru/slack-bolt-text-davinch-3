@@ -85,7 +85,6 @@ const fillValues = (message, payload) => {
       if(block.type === 'actions') {
         block.elements = block.elements.map(action => {
           if(action.value && typeof action.value !== 'string') {
-            console.log(action.value)
             action.value = action.value.map(value => {
               if(value.fill_values) console.log('fill_values are not implemented yet for actions', value.fill_values)
               return value
