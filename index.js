@@ -10,12 +10,16 @@ const fs = require('fs')
 const markdown = require('markdown-it')
 const admin = require('firebase-admin')
 
-if(process.env.FIREBASE_SERVICE_ACCOUNT && process.env.FIREBASE_DATABASE) {
+console.log(typeof process.env.FIREBASE_SERVICE_ACCOUNT)
+if(process.env.FIREBASE_SERVICE_ACCOUNT && process.env.FIREBASE_SERVICE_ACCOUNT.length 
+   && process.env.FIREBASE_DATABASE && process.env.FIREBASE_DATABASE.length) {
+  console.log('init admin')
   admin.initializeApp({
     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
     databaseURL: process.env.FIREBASE_DATABASE
   })
 }
+console.log(admin.app())
 const firestore = (admin && admin.firestore()) || undefined
 
 const app = express()

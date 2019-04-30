@@ -1,31 +1,11 @@
-const approval = require('./blueprint-approval')
-const createTask = require('./blueprint-create-task')
-const hrReview = require('./blueprint-hr-review')
-const hrSurvey = require('./blueprint-hr-survey')
-const hrTimeoff = require('./blueprint-hr-timeoff')
-const paging = require('./blueprint-paging')
-const privatePoll = require('./blueprint-private-poll')
-const publicPoll = require('./blueprint-public-poll')
-const search = require('./blueprint-search')
 const template = require('./blueprint-template')
 
 const slashCommands = require('./slash-commands')
 const help = require('./blueprint-help')
 
-const ios = require('./blueprint-ios')
 
 module.exports = {
-  "approval": approval,
-  "create-task": createTask,
-  "hr-review": hrReview,
-  "hr-survey": hrSurvey,
-  "hr-timeoff": hrTimeoff,
-  "private-poll": privatePoll,
-  "public-poll": publicPoll,
-  "paging": paging,
-  "search": search,
   "template": template,
   "slashCommands": slashCommands,
-  "help": help,
-  "ios": ios
+  "help": help
 }
