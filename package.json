@@ -13,10 +13,8 @@
   "dependencies": {
     "@slack/client": "^4.3.1",
     "@slack/events-api": "^2.0.0",
-    "@slack/interactive-messages": "^1.0.2",
+    "@slack/bolt": "*",
     "express": "^4.16.3",
-    "body-parser": "^1.18.3",
-    "firebase-admin": "^7.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "markdown-it": "^v8.4.2"
