@@ -9,18 +9,16 @@ const rp = require('request-promise')
 const fs = require('fs')
 const markdown = require('markdown-it')
 const admin = require('firebase-admin')
+let firestore = undefined
 
-console.log(typeof process.env.FIREBASE_SERVICE_ACCOUNT)
 if(process.env.FIREBASE_SERVICE_ACCOUNT && process.env.FIREBASE_SERVICE_ACCOUNT.length 
    && process.env.FIREBASE_DATABASE && process.env.FIREBASE_DATABASE.length) {
-  console.log('init admin')
   admin.initializeApp({
     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
     databaseURL: process.env.FIREBASE_DATABASE
   })
+  firestore = admin.firestore()
 }
-console.log(admin.app())
-const firestore = (admin && admin.firestore()) || undefined
 
 const app = express()
 const slackEvents = slackEventsApi.createEventAdapter(process.env.SLACK_SIGNING_SECRET)
@@ -229,7 +227,7 @@ const executeCommand = (payload, action, teamId) => {
   action = JSON.stringify(action)
     
   return getTokens(teamId)
-    .then(doc => executeAction(payload, action, doc.data()))
+    .then(tokens => executeAction(payload, action, tokens))
 }
 
 // slackEvents.on('app_mention', (message) => {
@@ -262,6 +260,7 @@ ${JSON.stringify(error.body)}`)
 
 const getTokens = (teamId) => {
   if(firestore) return firestore.collection('teams').doc(teamId).get()
+    .then(doc => doc.data())
 
   let tokens = {
     access_token: process.env.SLACK_USER_TOKEN,

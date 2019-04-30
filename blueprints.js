@@ -1,11 +1,11 @@
-const template = require('./blueprint-template')
+const group = require('./blueprint-group')
 
 const slashCommands = require('./slash-commands')
 const help = require('./blueprint-help')
 
 
 module.exports = {
-  "template": template,
+  "group": group,
   "slashCommands": slashCommands,
   "help": help
 }
