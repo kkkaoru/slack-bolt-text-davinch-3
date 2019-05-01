@@ -30,6 +30,10 @@ app.event('reaction_added', ({ event, say }) => {
   console.log(event)
 })
 
+app.event('member_joined_channel', ({ event, say }) => { 
+  console.log(event)
+})
+
 ;(async () => {
   // Start your app
   await app.start(process.env.PORT || 3000)
