@@ -2,20 +2,19 @@
 let messages = {}
 let users = {}
 
-exports.addMessage = (message) => {
-
+exports.saveMessage = (message) => {
+  console.log(message)
 }
 
 exports.getMessages = () => {
   return messages
 }
 
-exports.addUser = (message) => {
-
+exports.addUser = (user) => {
+  users[user.user] = user
 }
 
 exports.getUser = (id) => {
   return users[id]
 }
 
-exports.users = {}
