@@ -1,4 +1,4 @@
-// this is not a real store
+// This is not a real database or datastore, but it could be if you want to :)
 let messages = {}
 let users = {}
 

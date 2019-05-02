@@ -10,6 +10,14 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 })
 
+/**
+`app_home_opened` event is triggered when a user has entered into the App Home space (= Bot User DM)
+
+https://api.slack.com/events/app_home_opened
+
+We use this event to show the user an interactive help message once they open a DM with our App
+
+**/
 app.event('app_home_opened', ({ event, say }) => {  
   let user = store.getUser(event.user)
   
