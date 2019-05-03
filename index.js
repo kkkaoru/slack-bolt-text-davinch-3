@@ -47,17 +47,29 @@ app.event('reaction_added', async ({ event, context, say }) => {
   if(event.reaction === 'zap') {
     let channel = event.item.channel
     let ts = event.item.ts
-    const result = await app.client.chat.getPermalink({
+    
+    // get a permalink for this message
+    const permalink = await app.client.chat.getPermalink({
       token: context.botToken,
       message_ts: ts,
       channel: channel
     })
-    let permalink = result.permalink
     
+    
+    const user = await app.client.users.info({
+      token: context.botToken,
+      user: event.user
+    })
+    
+    console.log(user)
+    
+    let name = '<@'+user.user.id+'>'
+    
+    // post this message to the configured channel
     await app.client.chat.postMessage({
       token: context.botToken,
-      channel: 'CJE5T16QY',
-      text: 'David wants you to see this message: '+permalink,
+      channel: store.getChannel(),
+      text: name+' wants you to see this message: '+permalink.permalink,
       unfurl_links: true,
       unfurl_media: true
     })
