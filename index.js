@@ -1,8 +1,4 @@
 const { App } = require('@slack/bolt')
-const express = require('express')
-const fs = require('fs')
-const markdown = require('markdown-it')
-
 const store = require('./store')
 
 const app = new App({
