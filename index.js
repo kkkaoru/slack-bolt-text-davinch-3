@@ -43,11 +43,25 @@ app.event('app_home_opened', ({ event, say }) => {
   } 
 })
 
-app.event('reaction_added', ({ event, say }) => { 
-  if(event
-  // eyes
-  // white_check_mark
-  console.log(event)
+app.event('reaction_added', async ({ event, context, say }) => { 
+  if(event.reaction === 'zap') {
+    let channel = event.item.channel
+    let ts = event.item.ts
+    const result = await app.client.chat.getPermalink({
+      token: context.botToken,
+      message_ts: ts,
+      channel: channel
+    })
+    let permalink = result.permalink
+    
+    await app.client.chat.postMessage({
+      token: context.botToken,
+      channel: 'CJE5T16QY',
+      text: 'David wants you to see this message: '+permalink,
+      unfurl_links: true,
+      unfurl_media: true
+    })
+  }
 })
 
 app.event('member_joined_channel', ({ event, say }) => { 
