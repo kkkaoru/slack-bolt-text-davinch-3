@@ -2,7 +2,13 @@ const { App } = require('@slack/bolt')
 const store = require('./store')
 
 const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
+  authorize: () => {
+    // TODO: fill in the user token. you might need to get this from a database or something if you have multiple installers.
+    return Promise.resolve({
+      botToken: process.env.SLACK_BOT_TOKEN,
+      userToken: process.env.SLACK_USER_TOKEN,
+    });
+  },
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   ignoreSelf: false,
   logLevel: 'DEBUG'
