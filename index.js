@@ -44,6 +44,7 @@ app.event('app_home_opened', ({ event, say }) => {
 })
 
 app.event('reaction_added', ({ event, say }) => { 
+  if(event
   // eyes
   // white_check_mark
   console.log(event)
