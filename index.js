@@ -27,13 +27,11 @@ const user = new App({
 https://api.slack.com/events/app_home_opened
 
 We use this event to show the user an interactive help message once they open a DM with our App
-
 **/
 app.event('app_home_opened', ({ event, say }) => {  
   let user = store.getUser(event.user)
   
   if(!user) {
-    console.log("add user")
     user = {
       user: event.user,
       channel: event.channel
@@ -43,7 +41,15 @@ app.event('app_home_opened', ({ event, say }) => {
   } 
 })
 
+/**
+`reaction_added` event is triggered when a user adds a reaction to a message in a channel where the Bot User is part of
+
+https://api.slack.com/events/reaction_added
+
+We use this event to show the user an interactive help message once they open a DM with our App
+**/
 app.event('reaction_added', async ({ event, context, say }) => { 
+  // only react to ⚡ (:zap:) emoji
   if(event.reaction === 'zap') {
     let channel = event.item.channel
     let ts = event.item.ts
@@ -55,13 +61,11 @@ app.event('reaction_added', async ({ event, context, say }) => {
       channel: channel
     })
     
-    
+    // get user info of user who reacted to this message
     const user = await app.client.users.info({
       token: context.botToken,
       user: event.user
     })
-    
-    console.log(user)
     
     let name = '<@'+user.user.id+'>'
     
@@ -76,12 +80,19 @@ app.event('reaction_added', async ({ event, context, say }) => {
   }
 })
 
+/**
+`member_joined_channel` event is triggered when a user joins public or private channels
+
+https://api.slack.com/events/member_joined_channel
+
+We use this event to introduce our App once it's added to a channel
+**/
 app.event('member_joined_channel', ({ event, say }) => { 
   console.log(event)
 })
 
+// Start your app
 ;(async () => {
-  // Start your app
   await app.start(process.env.PORT || 3000)
 
   console.log('⚡️ Bolt app is running!')
