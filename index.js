@@ -1,5 +1,6 @@
 const { App } = require('@slack/bolt')
 const store = require('./store')
+const messages = require('./messages')
 
 const app = new App({
   authorize: () => {
@@ -37,7 +38,7 @@ app.event('app_home_opened', ({ event, say }) => {
       channel: event.channel
     }
     store.addUser(user)
-    say('Hi')
+    say(messages.welcome_app_home)
   } 
 })
 
