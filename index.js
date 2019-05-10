@@ -15,13 +15,6 @@ const app = new App({
   logLevel: 'DEBUG'
 })
 
-const user = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  ignoreSelf: false,
-  logLevel: 'DEBUG'
-})
-
 /**
 `app_home_opened` event is triggered when a user has entered into the App Home space (= Bot User DM)
 
@@ -90,6 +83,12 @@ We use this event to introduce our App once it's added to a channel
 **/
 app.event('member_joined_channel', ({ event, say }) => { 
   console.log(event)
+})
+
+app.action({ action_id: 'configure_channel' }, ({ action, ack }) => {
+  ack()
+  
+  console.log(action)
 })
 
 // Start your app

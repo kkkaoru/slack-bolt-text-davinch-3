@@ -19,6 +19,7 @@ module.exports = {
           "text": "*Pick a channel from the dropdown list*"
         },
         "accessory": {
+          "action_id": "configure_channel",
           "type": "channels_select",
           "placeholder": {
             "type": "plain_text",
