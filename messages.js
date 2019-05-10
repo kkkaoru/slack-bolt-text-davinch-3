@@ -11,22 +11,33 @@ module.exports = {
       },
       {
         "type": "divider"
-      },
+      }
+    ]
+  },
+  welcome_channel: {
+    text: 'Hi there! Bolt is a simple App that forwards messages to another channel by reacting to a message with the :zap: emoji.',
+    blocks: [
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "*Pick a channel from the dropdown list*"
-        },
-        "accessory": {
-          "action_id": "configure_channel",
-          "type": "channels_select",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Select channel",
-            "emoji": true
-          }
+          "text": "Hi there! \n\n Bolt is a simple App that forwards messages from this channel to {{channel}} by reacting to a message with the :zap: emoji."
         }
+      }
+    ]
+  },  
+  invited_to_channel: {
+    text: 'Bolt has been invited to channel',
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": ":white_check_mark: Bolt has been invited to {{channel}}"
+        }
+      },
+      {
+        "type": "divider"
       }
     ]
   }  

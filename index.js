@@ -1,5 +1,6 @@
 const { App } = require('@slack/bolt')
 const store = require('./store')
+const blocks = require('./blocks')
 const messages = require('./messages')
 
 const app = new App({
@@ -31,7 +32,11 @@ app.event('app_home_opened', ({ event, say }) => {
       channel: event.channel
     }
     store.addUser(user)
-    say(messages.welcome_app_home)
+    
+    let message = messages.welcome_app_home
+    message.blocks.push(blocks.configure_channel)
+    
+    say(message)
   } 
 })
 
@@ -86,11 +91,35 @@ app.event('member_joined_channel', ({ event, say }) => {
   console.log(event)
 })
 
-app.action({action_id: 'configure_channel'}, ({ action, ack, say }) => {
+app.action({action_id: 'configure_channel'}, async ({ action, ack, say }) => {
   ack()
   
   let channel = action.selected_channel
   store.setChannel(channel)
+  
+  let ts = action.action_ts
+  
+  let channelInfo = await app.client.channels.info({
+    token: context.botToken,
+    channel: store.getChannel(),
+    text: name+' wants you to see this message: '+permalink.permalink,
+    unfurl_links: true,
+    unfurl_media: true
+  })
+  
+  let message = messages.welcome_app_home
+  let confirmation = blocks.channel_configured.elements[0].text.replace('{{channel}}', )
+  message.blocks.push(blocks.channel_configured)
+  message.blocks.push(blocks.channel_configured)
+  
+  // post this message to the configured channel
+    await app.client.chat.postMessage({
+      token: context.botToken,
+      channel: store.getChannel(),
+      text: name+' wants you to see this message: '+permalink.permalink,
+      unfurl_links: true,
+      unfurl_media: true
+    })
   
   console.log(action)
 })
