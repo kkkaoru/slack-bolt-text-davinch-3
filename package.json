@@ -11,6 +11,6 @@
   "author": "David Pichsenmeister <opensource@slack.com>",
   "license": "MIT",
   "dependencies": {
-    "@slack/bolt": "*"
+    "@slack/bolt": "^1.0.1"
   }
 }

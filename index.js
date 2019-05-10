@@ -85,7 +85,7 @@ app.event('member_joined_channel', ({ event, say }) => {
   console.log(event)
 })
 
-app.action({ action_id: 'configure_channel' }, ({ action, ack }) => {
+app.action({action_id: "configure_channel"}, ({ action, ack }) => {
   ack()
   
   console.log(action)
