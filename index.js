@@ -43,6 +43,7 @@ https://api.slack.com/events/reaction_added
 We use this event to show the user an interactive help message once they open a DM with our App
 **/
 app.event('reaction_added', async ({ event, context, say }) => { 
+  console.log(event)
   // only react to ⚡ (:zap:) emoji
   if(event.reaction === 'zap') {
     let channel = event.item.channel
@@ -85,8 +86,11 @@ app.event('member_joined_channel', ({ event, say }) => {
   console.log(event)
 })
 
-app.action({action_id: "configure_channel"}, ({ action, ack }) => {
+app.action({action_id: 'configure_channel'}, ({ action, ack, say }) => {
   ack()
+  
+  let channel = action.selected_channel
+  store.setChannel(channel)
   
   console.log(action)
 })
