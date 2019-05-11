@@ -90,21 +90,19 @@ We use this event to introduce our App once it's added to a channel
 app.event('member_joined_channel', async ({ context, event, say }) => { 
   console.log(event)
   
-  console.log(context)
+  let channel = event.channel
+  let user = event.user
   
-  let self = context.botUserId
-  
-  console.log(self)
-  
-  
-  
-//   let channel = event.channel
-//   let user = event.user
-  
-//   await app.client.chat.postMessage({
-//     token: context.botToken,
-//     channel: channel
-//   })
+  // check if our Bot user itself is joining the channel
+  if(user === store.getMe()) {
+    console.log('it\'s me!')
+    // await app.client.chat.postMessage({
+    //   token: context.botToken,
+    //   channel: channel
+    // })
+    say(messages.welcome_channel)
+  }
+
 })
 
 app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say }) => {
@@ -141,9 +139,8 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say 
 
   console.log('⚡️ Bolt app is running!')
   
-  let id = await app.client.auth.test({ token: context.botToken })
+  let id = await app.client.auth.test({ token: process.env.SLACK_BOT_TOKEN })
       .then(result => result.user_id)
-  console.log(id)
   store.setMe(id)
 })()
 
