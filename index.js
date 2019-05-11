@@ -87,12 +87,27 @@ https://api.slack.com/events/member_joined_channel
 
 We use this event to introduce our App once it's added to a channel
 **/
-app.event('member_joined_channel', ({ event, say }) => { 
+app.event('member_joined_channel', async ({ context, event, say }) => { 
   console.log(event)
+  
+  console.log(context)
+  
+  let self = context.botUserId
+  console.log(self)
+  
+//   let channel = event.channel
+//   let user = event.user
+  
+//   await app.client.chat.postMessage({
+//     token: context.botToken,
+//     channel: channel
+//   })
 })
 
-app.action({action_id: 'configure_channel'}, async ({ action, ack, say }) => {
+app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say }) => {
   ack()
+  
+  console.log(action)
   
   let channel = action.selected_channel
   store.setChannel(channel)
@@ -101,27 +116,20 @@ app.action({action_id: 'configure_channel'}, async ({ action, ack, say }) => {
   
   let channelInfo = await app.client.channels.info({
     token: context.botToken,
-    channel: store.getChannel(),
-    text: name+' wants you to see this message: '+permalink.permalink,
-    unfurl_links: true,
-    unfurl_media: true
+    channel: channel
   })
   
+  console.log(channelInfo)
+  
   let message = messages.welcome_app_home
-  let confirmation = blocks.channel_configured.elements[0].text.replace('{{channel}}', )
-  message.blocks.push(blocks.channel_configured)
-  message.blocks.push(blocks.channel_configured)
+  let confirmation = blocks.channel_configured.elements[0].text.replace('{{channelId}}', channel).replace('{{channelName}}', channelInfo.channel.name)
+  message.blocks.push(confirmation)
+  message.blocks.push(blocks.invite_channel)
   
-  // post this message to the configured channel
-    await app.client.chat.postMessage({
-      token: context.botToken,
-      channel: store.getChannel(),
-      text: name+' wants you to see this message: '+permalink.permalink,
-      unfurl_links: true,
-      unfurl_media: true
-    })
+  console.log(message)
   
-  console.log(action)
+  
+  
 })
 
 // Start your app

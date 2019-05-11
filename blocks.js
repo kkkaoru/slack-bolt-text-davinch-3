@@ -36,7 +36,7 @@ module.exports = {
 		"elements": [
 			{
 				"type": "mrkdwn",
-				"text": ":white_check_mark: <{{channel}}> is now configured as default channel."
+				"text": ":white_check_mark: <#{{channelId}}|{{channelName}}> is now configured as default channel."
 			}
 		]
   }
