@@ -2,7 +2,7 @@
 let messages = {}
 let users = {}
 let me = undefined
-let defaultChannel = 'CJE5T16QY'
+let defaultChannel = undefined
 
 exports.saveMessage = (message) => {
   console.log(message)

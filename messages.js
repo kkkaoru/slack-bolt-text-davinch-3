@@ -21,7 +21,7 @@ module.exports = {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "Hi there! \n\n Bolt is a simple App that forwards messages from this channel to {{channel}} by reacting to a message with the :zap: emoji."
+          "text": "Hi there! \n\n Bolt is a simple App that forwards messages from this channel to <#{{channelId}}|{{channelName}}> by reacting to a message with the :zap: emoji."
         }
       }
     ]
@@ -33,7 +33,7 @@ module.exports = {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": ":white_check_mark: Bolt has been invited to {{channel}}"
+          "text": ":white_check_mark: Bolt has been invited to {{channelName}}"
         }
       },
       {

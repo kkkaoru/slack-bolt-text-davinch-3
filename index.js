@@ -51,14 +51,14 @@ app.event('reaction_added', async ({ event, context, say }) => {
   console.log(event)
   // only react to ⚡ (:zap:) emoji
   if(event.reaction === 'zap') {
-    let channel = event.item.channel
+    let channelId = event.item.channel
     let ts = event.item.ts
     
     // get a permalink for this message
     const permalink = await app.client.chat.getPermalink({
       token: context.botToken,
       message_ts: ts,
-      channel: channel
+      channel: channelId
     })
     
     // get user info of user who reacted to this message
@@ -68,11 +68,12 @@ app.event('reaction_added', async ({ event, context, say }) => {
     })
     
     let name = '<@'+user.user.id+'>'
+    let channel = store.getChannel()
     
     // post this message to the configured channel
     await app.client.chat.postMessage({
       token: context.botToken,
-      channel: store.getChannel(),
+      channel: channel && channel.id,
       text: name+' wants you to see this message: '+permalink.permalink,
       unfurl_links: true,
       unfurl_media: true
@@ -89,18 +90,17 @@ We use this event to introduce our App once it's added to a channel
 **/
 app.event('member_joined_channel', async ({ context, event, say }) => { 
   console.log(event)
-  
-  let channel = event.channel
+
+  let channel = store.getChannel()
   let user = event.user
   
   // check if our Bot user itself is joining the channel
-  if(user === store.getMe()) {
+  if(user === store.getMe() && channel) {
     console.log('it\'s me!')
-    // await app.client.chat.postMessage({
-    //   token: context.botToken,
-    //   channel: channel
-    // })
-    say(messages.welcome_channel)
+
+    let message = messages.welcome_channel
+    message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
+    say(message)
   }
 
 })
@@ -111,8 +111,6 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say 
   console.log(action)
   
   let channel = action.selected_channel
-  store.setChannel(channel)
-  
   let ts = action.action_ts
   
   let channelInfo = await app.client.channels.info({
@@ -121,6 +119,11 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say 
   })
   
   console.log(channelInfo)
+  
+  store.setChannel({
+    name: channelInfo.channel.name,
+    id: channel
+  })
   
   let message = messages.welcome_app_home
   let confirmation = blocks.channel_configured.elements[0].text.replace('{{channelId}}', channel).replace('{{channelName}}', channelInfo.channel.name)
