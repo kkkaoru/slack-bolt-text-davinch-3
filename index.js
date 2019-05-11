@@ -93,7 +93,10 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
   console.log(context)
   
   let self = context.botUserId
+  
   console.log(self)
+  
+  
   
 //   let channel = event.channel
 //   let user = event.user
@@ -137,5 +140,10 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say 
   await app.start(process.env.PORT || 3000)
 
   console.log('⚡️ Bolt app is running!')
+  
+  let id = await app.client.auth.test({ token: context.botToken })
+      .then(result => result.user_id)
+  console.log(id)
+  store.setMe(id)
 })()
 

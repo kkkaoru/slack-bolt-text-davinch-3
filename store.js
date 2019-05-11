@@ -1,6 +1,7 @@
 // This is not a real datastore, but it can be if you make it one :)
 let messages = {}
 let users = {}
+let me = undefined
 let defaultChannel = 'CJE5T16QY'
 
 exports.saveMessage = (message) => {
@@ -25,5 +26,13 @@ exports.setChannel = (channel) => {
 
 exports.getChannel = () => {
   return defaultChannel
+}
+
+exports.setMe= (id) => {
+  me = id
+}
+
+exports.getMe= () => {
+  return me
 }
 
