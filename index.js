@@ -100,12 +100,13 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
 
     let message = messages.welcome_channel
     message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
+    console.log(message)
     say(message)
   }
 
 })
 
-app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say }) => {
+app.action({action_id: 'configure_channel'}, async ({ context, action, ack, respond }) => {
   ack()
   
   console.log(action)
@@ -130,10 +131,17 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, say 
   message.blocks.push(confirmation)
   message.blocks.push(blocks.invite_channel)
   
-  console.log(message)
+  console.log(JSON.stringify(message))
   
+  // update message instead of sending a new one
+  message.replace_original = true
+  respond(message)
   
-  
+})
+
+app.error((error) => {
+	// Check the details of the error to handle cases where you should retry sending a message or stop the app
+	console.error(error);
 })
 
 // Start your app
