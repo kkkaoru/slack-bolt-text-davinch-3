@@ -1,6 +1,5 @@
 const { App } = require('@slack/bolt')
 const store = require('./store')
-const blocks = require('./blocks')
 const messages = require('./messages')
 
 const app = new App({
@@ -113,7 +112,7 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
   
   let channelInfo = await app.client.channels.info({
     token: context.botToken,
-    channel: channel
+    channel: channelId
   })
     
   store.setChannel({
@@ -121,12 +120,34 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
     id: channelId
   })
   
-  let message = messages.welcome_app_home
-  let confirmation = blocks.channel_configured
+  let message = messages.channel_configured
   // fill placeholders with channel data
-  confirmation.elements[0].text = confirmation.elements[0].text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
-  message.blocks.push(confirmation)
-  message.blocks.push(blocks.invite_channel)
+  message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
+  
+  // update message instead of sending a new one
+  message.replace_original = true
+  respond(message) 
+})
+
+app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, respond }) => {
+  ack()
+    
+  let channelId = action.selected_channel
+  let ts = action.action_ts
+  
+  let channelInfo = await app.client.channels.info({
+    token: context.botToken,
+    channel: channelId
+  })
+    
+  store.setChannel({
+    name: channelInfo.channel.name,
+    id: channelId
+  })
+  
+  let message = messages.channel_configured
+  // fill placeholders with channel data
+  message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
   
   // update message instead of sending a new one
   message.replace_original = true
