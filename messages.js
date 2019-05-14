@@ -42,23 +42,23 @@ module.exports = {
       }
     ]
   },  
-  invited_to_channel: {
+  added_to_channel: {
     text: "Bolt has been invited to channel",
+    replace_original: false,
+    response_type: "ephemeral",
     blocks: [
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": ":white_check_mark: Bolt has been invited to {{channelName}}"
+          "text": ":zap: Bolt has been invited to *<#{{channelId}}|{{channelName}}>*"
         }
-      },
-      {
-        "type": "divider"
       }
     ]
   }, 
   channel_configured: {
     text: "The default channel for Bolt has been configured",
+    replace_original: true,
     blocks: [
       {
         "type": "section",

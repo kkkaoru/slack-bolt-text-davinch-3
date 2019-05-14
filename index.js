@@ -32,10 +32,8 @@ app.event('app_home_opened', ({ event, say }) => {
     }
     store.addUser(user)
     
-    let message = messages.welcome_app_home
-    message.blocks.push(blocks.configure_channel)
     
-    say(message)
+    say(messages.welcome_app_home)
   } 
 })
 
@@ -98,7 +96,8 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
     console.log('it\'s me!')
 
     let message = messages.welcome_channel
-    message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
+    // fill in placeholder values with channel info
+    message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
     say(message)
   }
 
@@ -110,22 +109,21 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
   let channelId = action.selected_channel
   let ts = action.action_ts
   
+  // retrieve channel info
   let channelInfo = await app.client.channels.info({
     token: context.botToken,
     channel: channelId
   })
     
+  // save the configured channel to our store
   store.setChannel({
     name: channelInfo.channel.name,
     id: channelId
   })
   
   let message = messages.channel_configured
-  // fill placeholders with channel data
+  // fill in placeholder values with channel info
   message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
-  
-  // update message instead of sending a new one
-  message.replace_original = true
   respond(message) 
 })
 
@@ -135,22 +133,22 @@ app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, respond
   let channelId = action.selected_channel
   let ts = action.action_ts
   
+  // retrieve channel info
   let channelInfo = await app.client.channels.info({
     token: context.botToken,
     channel: channelId
   })
-    
-  store.setChannel({
-    name: channelInfo.channel.name,
-    id: channelId
+  
+  // invite Bot user to channel
+  await app.client.channels.invite({
+    token: context.userToken,
+    channel: channelId,
+    user: store.getMe()
   })
   
-  let message = messages.channel_configured
-  // fill placeholders with channel data
+  let message = messages.added_to_channel
+  // fill in placeholder values with channel info
   message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
-  
-  // update message instead of sending a new one
-  message.replace_original = true
   respond(message) 
 })
 
