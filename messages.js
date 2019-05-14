@@ -44,8 +44,6 @@ module.exports = {
   },  
   added_to_channel: {
     text: "Bolt has been invited to channel",
-    replace_original: false,
-    response_type: "ephemeral",
     blocks: [
       {
         "type": "section",

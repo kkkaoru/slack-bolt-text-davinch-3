@@ -86,8 +86,6 @@ https://api.slack.com/events/member_joined_channel
 We use this event to introduce our App once it's added to a channel
 **/
 app.event('member_joined_channel', async ({ context, event, say }) => { 
-  console.log(event)
-
   let channel = store.getChannel()
   let user = event.user
   
@@ -107,7 +105,6 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
   ack()
     
   let channelId = action.selected_channel
-  let ts = action.action_ts
   
   // retrieve channel info
   let channelInfo = await app.client.channels.info({
@@ -127,18 +124,18 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
   respond(message) 
 })
 
-app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, respond }) => {
+app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, say }) => {
   ack()
-    
+   
   let channelId = action.selected_channel
-  let ts = action.action_ts
+  console.log(channelId)
   
   // retrieve channel info
   let channelInfo = await app.client.channels.info({
     token: context.botToken,
     channel: channelId
   })
-  
+    
   // invite Bot user to channel
   await app.client.channels.invite({
     token: context.userToken,
@@ -149,7 +146,8 @@ app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, respond
   let message = messages.added_to_channel
   // fill in placeholder values with channel info
   message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
-  respond(message) 
+  console.log(message.blocks[0].text.text )
+  say(message) 
 })
 
 app.error((error) => {
