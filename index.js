@@ -1,6 +1,7 @@
 const { App } = require('@slack/bolt')
 const store = require('./store')
 const messages = require('./messages')
+const helpers = require('./helpers')
 
 const app = new App({
   authorize: () => {
@@ -93,7 +94,7 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
   if(user === store.getMe() && channel) {
     console.log('it\'s me!')
 
-    let message = messages.welcome_channel
+    let message = helpers.copy(messages.welcome_channel)
     // fill in placeholder values with channel info
     message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
     say(message)
@@ -118,7 +119,7 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
     id: channelId
   })
   
-  let message = messages.channel_configured
+  let message = helpers.copy(messages.channel_configured)
   // fill in placeholder values with channel info
   message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
   respond(message) 
@@ -143,7 +144,7 @@ app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, say }) 
     user: store.getMe()
   })
   
-  let message = messages.added_to_channel
+  let message = helpers.copy(messages.added_to_channel)
   // fill in placeholder values with channel info
   message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
   console.log(message.blocks[0].text.text )
@@ -154,6 +155,8 @@ app.error((error) => {
 	// Check the details of the error to handle cases where you should retry sending a message or stop the app
 	console.error(error);
 })
+
+
 
 // Start your app
 ;(async () => {
