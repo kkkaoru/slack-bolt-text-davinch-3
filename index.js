@@ -100,7 +100,6 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
 
     let message = messages.welcome_channel
     message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
-    console.log(message)
     say(message)
   }
 
@@ -108,35 +107,30 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
 
 app.action({action_id: 'configure_channel'}, async ({ context, action, ack, respond }) => {
   ack()
-  
-  console.log(action)
-  
-  let channel = action.selected_channel
+    
+  let channelId = action.selected_channel
   let ts = action.action_ts
   
   let channelInfo = await app.client.channels.info({
     token: context.botToken,
     channel: channel
   })
-  
-  console.log(channelInfo)
-  
+    
   store.setChannel({
     name: channelInfo.channel.name,
-    id: channel
+    id: channelId
   })
   
   let message = messages.welcome_app_home
-  let confirmation = blocks.channel_configured.elements[0].text.replace('{{channelId}}', channel).replace('{{channelName}}', channelInfo.channel.name)
+  let confirmation = blocks.channel_configured
+  // fill placeholders with channel data
+  confirmation.elements[0].text = confirmation.elements[0].text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
   message.blocks.push(confirmation)
   message.blocks.push(blocks.invite_channel)
   
-  console.log(JSON.stringify(message))
-  
   // update message instead of sending a new one
   message.replace_original = true
-  respond(message)
-  
+  respond(message) 
 })
 
 app.error((error) => {
