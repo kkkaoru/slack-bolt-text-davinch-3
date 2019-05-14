@@ -4,10 +4,6 @@ let users = {}
 let me = undefined
 let defaultChannel = undefined
 
-exports.saveMessage = (message) => {
-  console.log(message)
-}
-
 exports.getMessages = () => {
   return messages
 }
