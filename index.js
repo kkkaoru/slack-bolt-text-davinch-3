@@ -4,19 +4,24 @@ const messages = require('./messages')
 const helpers = require('./helpers')
 
 const app = new App({
+  // using the `authorize` function instead of the `token` property
+  // to make use of both user and bot tokens
   authorize: () => {
-    // TODO: fill in the user token. you might need to get this from a database or something if you have multiple installers.
     return Promise.resolve({
       botToken: process.env.SLACK_BOT_TOKEN,
       userToken: process.env.SLACK_USER_TOKEN,
     });
   },
   signingSecret: process.env.SLACK_SIGNING_SECRET,
+  // setting `ignoreSelf` to `false` to also retrieve events from our Bot user
+  // e.g. we want to know when our Bot users is added to a channel through the
+  // `member_joined_channel` event
   ignoreSelf: false,
   logLevel: 'DEBUG'
 })
 
 /**
+
 `app_home_opened` event is triggered when a user has entered into the App Home space (= Bot User DM)
 
 https://api.slack.com/events/app_home_opened
@@ -40,12 +45,14 @@ app.event('app_home_opened', ({ event, say }) => {
 })
 
 /**
+
 `reaction_added` event is triggered when a user adds a reaction to a message in a channel where the Bot User is part of
 
 https://api.slack.com/events/reaction_added
 
 We use this event to check if the added emoji (reactji) is a ⚡ (:zap:) emoji. If that's the case,
 a link to this message will be posted to the configured channel
+
 **/
 app.event('reaction_added', async ({ event, context, say }) => { 
   // only react to ⚡ (:zap:) emoji
@@ -82,11 +89,13 @@ app.event('reaction_added', async ({ event, context, say }) => {
 })
 
 /**
+
 `member_joined_channel` event is triggered when a user joins public or private channels
 
 https://api.slack.com/events/member_joined_channel
 
 We use this event to introduce our App once it's added to a channel
+
 **/
 app.event('member_joined_channel', async ({ context, event, say }) => { 
   let channel = store.getChannel()
@@ -103,7 +112,9 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
 })
 
 /**
+
 The action_id `configure_channel` is triggered when a user interacts with the welcome_app_home message (in messages.js) 
+
 **/
 app.action({action_id: 'configure_channel'}, async ({ context, action, ack, respond }) => {
   ack()
@@ -129,7 +140,9 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
 })
 
 /**
+
 The action_id `add_to_channel` is triggered when a user interacts with the channel_configured message (in messages.js) 
+
 **/
 app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, say }) => {
   ack()
@@ -160,14 +173,15 @@ app.error((error) => {
 	console.error(error)
 })
 
-
-
 // Start your app
 ;(async () => {
   await app.start(process.env.PORT || 3000)
 
   console.log('⚡️ Bolt app is running!')
   
+  // after the app is started we are going to retrieve our Bot's user id through
+  // the `auth.test` endpoint (https://api.slack.com/methods/auth.test)
+  // and store it for future reference
   let id = await app.client.auth.test({ token: process.env.SLACK_BOT_TOKEN })
       .then(result => result.user_id)
   store.setMe(id)
