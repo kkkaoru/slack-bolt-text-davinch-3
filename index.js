@@ -21,7 +21,9 @@ const app = new App({
 
 https://api.slack.com/events/app_home_opened
 
-We use this event to show the user an interactive help message once they open a DM with our App
+We use this event to show the user an interactive welcome message once they open a DM with our App
+to let them configure our App and let them choose a default channel to post messages to
+
 **/
 app.event('app_home_opened', ({ event, say }) => {  
   let user = store.getUser(event.user)
@@ -33,7 +35,6 @@ app.event('app_home_opened', ({ event, say }) => {
     }
     store.addUser(user)
     
-    
     say(messages.welcome_app_home)
   } 
 })
@@ -43,10 +44,10 @@ app.event('app_home_opened', ({ event, say }) => {
 
 https://api.slack.com/events/reaction_added
 
-We use this event to show the user an interactive help message once they open a DM with our App
+We use this event to check if the added emoji (reactji) is a ⚡ (:zap:) emoji. If that's the case,
+a link to this message will be posted to the configured channel
 **/
 app.event('reaction_added', async ({ event, context, say }) => { 
-  console.log(event)
   // only react to ⚡ (:zap:) emoji
   if(event.reaction === 'zap') {
     let channelId = event.item.channel
@@ -65,6 +66,7 @@ app.event('reaction_added', async ({ event, context, say }) => {
       user: event.user
     })
     
+    // formatting the user's name to mention that user in the message (see: https://api.slack.com/messaging/composing/formatting)
     let name = '<@'+user.user.id+'>'
     let channel = store.getChannel()
     
@@ -92,8 +94,6 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
   
   // check if our Bot user itself is joining the channel
   if(user === store.getMe() && channel) {
-    console.log('it\'s me!')
-
     let message = helpers.copy(messages.welcome_channel)
     // fill in placeholder values with channel info
     message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelName}}', channel.name).replace('{{channelId}}', channel.id)
@@ -102,6 +102,9 @@ app.event('member_joined_channel', async ({ context, event, say }) => {
 
 })
 
+/**
+The action_id `configure_channel` is triggered when a user interacts with the welcome_app_home message (in messages.js) 
+**/
 app.action({action_id: 'configure_channel'}, async ({ context, action, ack, respond }) => {
   ack()
     
@@ -125,11 +128,13 @@ app.action({action_id: 'configure_channel'}, async ({ context, action, ack, resp
   respond(message) 
 })
 
+/**
+The action_id `add_to_channel` is triggered when a user interacts with the channel_configured message (in messages.js) 
+**/
 app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, say }) => {
   ack()
    
   let channelId = action.selected_channel
-  console.log(channelId)
   
   // retrieve channel info
   let channelInfo = await app.client.channels.info({
@@ -147,13 +152,12 @@ app.action({action_id: 'add_to_channel'}, async ({ context, action, ack, say }) 
   let message = helpers.copy(messages.added_to_channel)
   // fill in placeholder values with channel info
   message.blocks[0].text.text = message.blocks[0].text.text.replace('{{channelId}}', channelId).replace('{{channelName}}', channelInfo.channel.name)
-  console.log(message.blocks[0].text.text )
   say(message) 
 })
 
 app.error((error) => {
 	// Check the details of the error to handle cases where you should retry sending a message or stop the app
-	console.error(error);
+	console.error(error)
 })
 
 
