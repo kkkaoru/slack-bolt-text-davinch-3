@@ -26,8 +26,10 @@ app.event('app_home_opened', ({ event, say }) => {
     };
     store.addUser(user);
     
-    say(messages.welcome_app_home)
-  } 
+    say(`Hello world, <@${event.user}>`);
+  } else {
+    say('Hi again!');
+  }
 });
 
 

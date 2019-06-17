@@ -7,7 +7,7 @@ Our App responds back the user, who DMs the bot.
 ### Slack API & features used in the app
 
 * Triggers the events, [`app_home_opened`](https://api.slack.com/events/app_home_opened) when a user DMs the bot
-* The bot sends back a message using the `chat.posMessage` method
+* TUse the Bolt's `say` method to send a DM message back to the user
 
 ### Requirements
 
