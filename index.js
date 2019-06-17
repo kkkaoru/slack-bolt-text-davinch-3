@@ -12,7 +12,7 @@ const app = new App({
 
 https://api.slack.com/events/app_home_opened
 
-We use this event to show the user an interactive welcome message once they open a DM with our App
+We use this event to show the user a welcome message once they open a DM with our App
 
 **/
 app.event('app_home_opened', ({ event, say }) => {  
@@ -26,7 +26,7 @@ app.event('app_home_opened', ({ event, say }) => {
     };
     store.addUser(user);
     
-    say(`Hello world, <@${event.user}>!`);
+    say(`Hello world, and welcome <@${event.user}>!`);
   } else {
     say('Hi again!');
   }
