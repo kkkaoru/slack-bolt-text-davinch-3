@@ -26,7 +26,7 @@ app.event('app_home_opened', ({ event, say }) => {
     };
     store.addUser(user);
     
-    say(`Hello world, <@${event.user}>`);
+    say(`Hello world, <@${event.user}>!`);
   } else {
     say('Hi again!');
   }
