@@ -24,6 +24,3 @@ Our App shows a welcome message when a user opens the "app home".
 #### Workspace events
 * [`app_home_opened`](https://api.slack.com/events/app_home_opened)
 
-#### Bot events
-* [`member_joined_channel`](https://api.slack.com/events/member_joined_channel)
-* [`reaction_added`](https://api.slack.com/events/reaction_added)
