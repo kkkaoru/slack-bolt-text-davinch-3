@@ -6,15 +6,7 @@ const app = new App({
   token: process.env.SLACK_BOT_TOKEN
 });
 
-/**
 
-`app_home_opened` event is triggered when a user has entered into the App Home space (= Bot User DM)
-
-https://api.slack.com/events/app_home_opened
-
-We use this event to show the user a welcome message once they open a DM with our App
-
-**/
 app.event('app_home_opened', ({ event, say }) => {  
   // Look up the user from DB
   let user = store.getUser(event.user);
