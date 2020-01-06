@@ -1,4 +1,5 @@
 // This is not a real datastore, but it can be if you make it one :)
+
 let messages = {}
 let users = {}
 let me = undefined

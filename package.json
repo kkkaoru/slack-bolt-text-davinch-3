@@ -1,6 +1,6 @@
 {
   "name": "@slack/slack-bolt-sdk-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "A basic example of using the Slack Bolt ⚡️ SDK",
   "main": "index.js",
@@ -11,6 +11,6 @@
   "author": "Tomomi Imura <opensource@slack.com>",
   "license": "MIT",
   "dependencies": {
-    "@slack/bolt": "^1.0.1"
+    "@slack/bolt": "^1.5.0"
   }
 }

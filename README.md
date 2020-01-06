@@ -17,7 +17,7 @@ Our App shows a welcome message when a user opens the "app home".
 
 ### Scopes
 
-* [`bot`](https://api.slack.com/scopes/bot)
+* [`chat:write`](https://api.slack.com/scopes/chat:write)
 
 ### Events
 
