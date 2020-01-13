@@ -1,5 +1,11 @@
 # Slack Bolt - Hello World
 
+Read the tutorial at:
+[https://api.slack.com/tutorials/hello-world-bolt](https://api.slack.com/tutorials/hello-world-bolt)
+
+
+---
+
 This is a simple example App built with [Slack's Bolt Framework](https://slack.dev/bolt/tutorial/getting-started) for node.js.
 
 Our App shows a welcome message when a user opens the "app home".
