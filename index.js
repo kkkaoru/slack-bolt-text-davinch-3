@@ -7,20 +7,20 @@ const app = new App({
 });
 
 
-app.event('app_home_opened', ({ event, say }) => {  
+app.event('app_home_opened', async ({ event, say }) => {
   // Look up the user from DB
   let user = store.getUser(event.user);
-  
-  if(!user) {
+
+  if (!user) {
     user = {
       user: event.user,
       channel: event.channel
     };
     store.addUser(user);
-    
-    say(`Hello world, and welcome <@${event.user}>!`);
+
+    await say(`Hello world, and welcome <@${user}>!`);
   } else {
-    say('Hi again!');
+    await say('Hi again!');
   }
 });
 

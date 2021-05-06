@@ -6,7 +6,7 @@ Read the tutorial at:
 
 ---
 
-This is a simple example App built with [Slack's Bolt Framework](https://slack.dev/bolt/tutorial/getting-started) for node.js.
+This is a simple example App built with [Slack's Bolt Framework](https://slack.dev/bolt-js/tutorial/getting-started) for Node.js.
 
 Our App shows a welcome message when a user opens the "app home".
 
