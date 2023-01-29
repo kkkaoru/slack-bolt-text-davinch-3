@@ -9,3 +9,7 @@ Require **app_mentions:read**
 ## Environments
 
 Require slack and openai values
+
+## Remix on Glitch
+
+https://glitch.com/edit/#!/remix/night-paper-shallot
