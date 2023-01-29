@@ -10,11 +10,13 @@ const completionTemparture = Number.isNaN(process.env.OPENAI_COMPLETION_TEMPERTU
   ? Number(process.env.OPENAI_COMPLETION_TEMPERTURE)
   : 0.8;
 
+const defgaultPromt = process.env.OPENAI_COMPLETION_DEFAULT_PROMPT || 'ChatGPTについて教えてください。';
+
 async function fetchTextDavinci003(prompt){
   const openai = new OpenAIApi(configuration);
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt,
+    prompt: prompt || defgaultPromt,
     max_tokens: completionMaxTokens,
     temperature: completionTemparture,
   });
