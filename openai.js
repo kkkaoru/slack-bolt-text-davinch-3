@@ -6,19 +6,19 @@ const configuration = new Configuration({
 const completionMaxTokens = Number.isNaN(process.env.OPENAI_COMPLETION_MAX_TOKENS)
   ? Number(process.env.OPENAI_COMPLETION_MAX_TOKENS)
   : 2048;
-const completionTemparture = Number.isNaN(process.env.OPENAI_COMPLETION_TEMPERTURE)
-  ? Number(process.env.OPENAI_COMPLETION_TEMPERTURE)
+const completionTemperature = Number.isNaN(process.env.OPENAI_COMPLETION_TEMPERATURE)
+  ? Number(process.env.OPENAI_COMPLETION_TEMPERATURE)
   : 0.8;
 
-const defgaultPromt = process.env.OPENAI_COMPLETION_DEFAULT_PROMPT || 'ChatGPTについて教えてください。';
+const defaultPrompt = process.env.OPENAI_COMPLETION_DEFAULT_PROMPT || 'Please tell me about ChatGPT.';
 
 async function fetchTextDavinci003(prompt){
   const openai = new OpenAIApi(configuration);
   const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: prompt || defgaultPromt,
+    model: 'text-davinci-003',
+    prompt: prompt || defaultPrompt,
     max_tokens: completionMaxTokens,
-    temperature: completionTemparture,
+    temperature: completionTemperature,
   });
   return response.data;
 }
