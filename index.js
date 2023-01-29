@@ -7,11 +7,13 @@ const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
 });
 
+// 
 app.event('app_mention', async ({ event, context, client, say }) => {
-  const message = trimMentions(event.text);
+  const trimedText = trimMentions(event.text);
   try {
-    const response = await fetchTextDavinci003(message);
-    const message = 
+    const fetchedData = await fetchTextDavinci003(trimedText);
+    console.log(fetchedData);
+    const message = findChoicesText(fetchedData.choices);
     await say(`<@${event.user}> ${message}`);
   }
   catch (error) {
@@ -20,7 +22,6 @@ app.event('app_mention', async ({ event, context, client, say }) => {
   }
 });
 
-//アプリが起動時に呼ばれるメソッド
 (async () => {
   await app.start(process.env.PORT || 3000);
   console.log("⚡️ Bolt app is running!");

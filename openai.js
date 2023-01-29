@@ -10,14 +10,15 @@ const completionTemparture = Number.isNaN(process.env.OPENAI_COMPLETION_TEMPERTU
   ? Number(process.env.OPENAI_COMPLETION_TEMPERTURE)
   : 0.8;
 
-function fetchTextDavinci003(prompt){
-    const openai = new OpenAIApi(configuration);
-    return openai.createCompletion({
-      model: "text-davinci-003",
-      prompt,
-      max_tokens: completionMaxTokens,
-      temperature: completionTemparture,
-    });      
+async function fetchTextDavinci003(prompt){
+  const openai = new OpenAIApi(configuration);
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt,
+    max_tokens: completionMaxTokens,
+    temperature: completionTemparture,
+  });
+  return response.data;
 }
 
 function findChoicesText(choices) {
