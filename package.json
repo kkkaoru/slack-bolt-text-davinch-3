@@ -1,7 +1,6 @@
 {
   "name": "slack-bolt-mention-bot-text-davinch3",
   "version": "1.0.0",
-  "private": "MIT",
   "description": "A slack bot with text davinch3",
   "main": "index.js",
   "scripts": {
