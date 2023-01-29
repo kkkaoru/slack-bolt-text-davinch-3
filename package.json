@@ -6,9 +6,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  "engines": {
-    "node": "14.x"
-  },
   "author": "https://github.com/kkkaoru/",
   "license": "MIT",
   "dependencies": {
