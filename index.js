@@ -11,10 +11,10 @@ const app = new App({
 // Require app_mentions:read
 app.event('app_mention', async ({ event, context, client, say }) => {
   appLog(event);
-  const trimedText = trimMentions(event.text);
+  const trimmedText = trimMentions(event.text);
   try {
     appLog('try fetch openai');
-    const fetchedData = await fetchTextDavinci003(trimedText);
+    const fetchedData = await fetchTextDavinci003(trimmedText);
     appLog(fetchedData);
     appLog('finished fetch openai');
     const message = findChoicesText(fetchedData.choices);
