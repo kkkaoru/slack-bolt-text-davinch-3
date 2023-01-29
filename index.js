@@ -9,7 +9,7 @@ const app = new App({
 });
 
 // Require app_mentions:read
-app.event('app_mention', async ({ event, context, client, say }) => {
+app.event('app_mention', async ({ event, say }) => {
   appLog(event);
   const trimmedText = trimMentions(event.text);
   try {
