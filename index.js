@@ -1,4 +1,6 @@
 const { App } = require("@slack/bolt");
+const { trimMentions } = require('./trim');
+
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   token: process.env.SLACK_BOT_TOKEN,
@@ -16,8 +18,7 @@ app.event('app_mention', async ({ event, context, client, say }) => {
   console.log(event);
   console.log('--');
   console.log(context);
-  console.log('--');
-  console.log(client)
+  console.log(trimMentions(event.text));
   console.log('mention log end');
   try {
     await say({"blocks": [
