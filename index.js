@@ -10,6 +10,7 @@ const app = new App({
 
 // Require app_mentions:read
 app.event('app_mention', async ({ event, context, client, say }) => {
+  appLog(event);
   const trimedText = trimMentions(event.text);
   try {
     appLog('try fetch openai');

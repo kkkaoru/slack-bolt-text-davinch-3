@@ -1,5 +1,5 @@
 module.exports = {
   trimMentions: (text)=>{
-    return text.replace(/(<@.*?> )/g, '');
+    return text.replace(/(<@.*?>\s?)/g, '');
   }
 }

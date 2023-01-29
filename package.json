@@ -1,8 +1,8 @@
 {
-  "name": "@slack/slack-bolt-sdk-example",
-  "version": "1.1.0",
-  "private": true,
-  "description": "A basic example of using the Slack Bolt ⚡️ SDK",
+  "name": "slack-bolt-mention-bot-text-davinch3",
+  "version": "1.0.0",
+  "private": "MIT",
+  "description": "A slack bot with text davinch3",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
   "engines": {
     "node": "14.x"
   },
-  "author": "Slack Technologies, LLC",
+  "author": "https://github.com/kkkaoru/",
   "license": "MIT",
   "dependencies": {
     "@slack/bolt": "3.12.2",
