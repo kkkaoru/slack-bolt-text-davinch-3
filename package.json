@@ -8,6 +8,9 @@
   },
   "author": "https://github.com/kkkaoru/",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@slack/bolt": "3.12.2",
     "openai": "3.1.0"
