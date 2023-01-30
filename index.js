@@ -28,6 +28,28 @@ app.event('app_mention', async ({ event, say }) => {
   }
 });
 
+app.command('/chatgpt', async ({ command, say, ack }) => {
+  try {
+    appLog('try ack');
+    await ack({
+      text: '',
+      response_type: 'in_channel',
+    });
+    const trimmedText = trimMentions(command.text);
+    appLog('try fetch openai');
+    const fetchedData = await fetchTextDavinci003(trimmedText);
+    appLog(fetchedData);
+    appLog('finished fetch openai');
+    const message = findChoicesText(fetchedData.choices);
+    appLog('try say slack');
+    await say(message);
+    appLog('said slack');
+  } catch (error) {
+    errorLog(error);
+    await say(`Error: ${error.toString()}`);
+  }
+});
+
 (async () => {
   await app.start(process.env.PORT || 3000);
   appLog("⚡️ Bolt app is running!");
