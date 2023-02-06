@@ -2,7 +2,7 @@ const { App } = require("@slack/bolt");
 const { trimMentions } = require('./trim');
 const { fetchTextDavinci003, findChoicesText } = require('./openai');
 const { appLog, errorLog } = require('./logger');
-const { saveCache, searchCache, SlackCache } = require('./cache');
+const { generateCacheKey, saveCache, searchCache, SlackCache } = require('./cache');
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -15,20 +15,21 @@ app.event('app_mention', async ({ event, say }) => {
   const trimmedText = trimMentions(event.text);
   try {
     appLog('try fetch openai');
-    const cacheFetchedData = searchCache(event.client_msg_id)?.fetched;
+    const cacheKey = generateCacheKey(trimmedText);
+    const cacheFetchedData = searchCache(cacheKey)?.fetched;
     const fetchedData = cacheFetchedData ?? (await fetchTextDavinci003(trimmedText));
-    saveCache(event.client_msg_id, new SlackCache(fetchedData, false));
+    saveCache(cacheKey, new SlackCache(fetchedData, false));
     appLog(fetchedData);
     appLog('finished fetch openai');
     const message = findChoicesText(fetchedData.choices);
     appLog('try say slack');
-    const cacheSaid = searchCache(event.client_msg_id)?.said;
+    const cacheSaid = searchCache(cacheKey)?.said;
     if (cacheSaid === true) {
-      appLog(`said ${event.client_msg_id}`);
+      appLog(`said ${cacheKey}`);
       return;
     }
     await say(`<@${event.user}> ${message}`);
-    saveCache(event.client_msg_id, new SlackCache(fetchedData, true));
+    saveCache(cacheKey, new SlackCache(fetchedData, true));
     appLog('said slack');
   } catch (error) {
     errorLog(error);
@@ -45,20 +46,21 @@ app.command('/chatgpt', async ({ command, say, ack }) => {
       response_type: 'in_channel',
     });
     const trimmedText = trimMentions(command.text);
+    const cacheKey = generateCacheKey(trimmedText);
     appLog('try fetch openai');
-    const cacheFetchedData = searchCache(command.trigger_id)?.fetched;
+    const cacheFetchedData = searchCache(cacheKey)?.fetched;
     const fetchedData = cacheFetchedData ?? await fetchTextDavinci003(trimmedText);
     appLog(fetchedData);
     appLog('finished fetch openai');
     const message = findChoicesText(fetchedData.choices);
-    const cacheSaid = searchCache(command.trigger_id)?.said;
+    const cacheSaid = searchCache(cacheKey)?.said;
     if (cacheSaid === true) {
-      appLog(`said ${command.trigger_id}`);
+      appLog(`said ${cacheKey}`);
       return;
     }
     appLog('try say slack');
     await say(message);
-    saveCache(command.trigger_id, new SlackCache(fetchedData, true));
+    saveCache(cacheKey, new SlackCache(fetchedData, true));
     appLog('said slack');
   } catch (error) {
     errorLog(error);

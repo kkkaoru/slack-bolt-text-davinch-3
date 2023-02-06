@@ -1,4 +1,6 @@
+const { createHash } = require('crypto');
 const NodeCache = require('node-cache');
+
 const botCache = new NodeCache();
 
 class SlackCache {
@@ -13,22 +15,31 @@ class SlackCache {
 }
 
 /**
- * @param {string} eventId
- * @param {SlackCache} slackCache
+ * @param {string} text
+ * @returns {string}
  */
-function saveCache(eventId, slackCache){
-  botCache.set(eventId, slackCache);
+function generateCacheKey(text) {
+  return createHash('md5').update(text).digest('hex');
 }
 
 /**
- * @param {string} eventId
+ * @param {string} cacheKey
+ * @param {SlackCache} slackCache
+ */
+function saveCache(cacheKey, slackCache) {
+  botCache.set(cacheKey, slackCache);
+}
+
+/**
+ * @param {string} cacheKey
  * @returns {SlackCache | undefined}
  */
-function searchCache(eventId) {
-  return botCache.get(eventId);
+function searchCache(cacheKey) {
+  return botCache.get(cacheKey);
 }
 
 module.exports = {
+  generateCacheKey,
   saveCache,
   searchCache,
   SlackCache,
