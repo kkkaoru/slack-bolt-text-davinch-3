@@ -2,9 +2,16 @@
 
 This is a slack bot with using text davinch 3
 
-## Scopes
+## Permissions
+### Bot Token Scopes
 
-Require **app_mentions:read**
+- app_mentions:read
+- chat:write
+- commands
+
+### Subscribe to bot events
+
+- app_mentions:read
 
 ## Environments
 
